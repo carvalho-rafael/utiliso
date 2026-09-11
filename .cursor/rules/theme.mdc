@@ -1,0 +1,27 @@
+---
+description: Tokens de tema, cores azul/âmbar e toggle claro/escuro
+alwaysApply: true
+---
+
+# Tema Utiliso
+
+Claro e escuro com toggle no header. Preferência em `localStorage.theme` (`light` | `dark`). Sem `prefers-color-scheme` no CSS — só no script inicial e no primeiro acesso.
+
+## Tokens (usar classes Tailwind, não hex)
+
+| Token | Uso |
+|---|---|
+| `background` / `foreground` | página e texto principal |
+| `muted` | subtítulos, placeholders |
+| `surface` | cards, header |
+| `border` | bordas de cards e inputs |
+| `accent` (azul) | links, foco, nav ativa |
+| `highlight` (âmbar) | CTA, ênfase, seções populares |
+| `danger` | alertas, justa causa |
+
+## Regras
+
+- Não usar cores hex direto nos componentes — só tokens semânticos.
+- `dark:` funciona via classe `.dark` no `<html>`.
+- Geist (`font-sans`) é a fonte padrão.
+- Botões e controles clicáveis usam `cursor-pointer`. Select/botão desabilitado usa `cursor-not-allowed`.

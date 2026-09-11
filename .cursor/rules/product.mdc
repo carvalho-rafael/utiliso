@@ -1,0 +1,32 @@
+---
+description: Identidade do Utiliso, MVP e decisões de produto
+alwaysApply: true
+---
+
+# Utiliso
+
+Portal brasileiro de ferramentas de utilitários e guias. Idioma da UI e do conteúdo: **pt-BR**.
+
+## MVP
+
+Cinco calculadoras trabalhistas (CLT), mesmo assunto, mais guias editoriais:
+
+**Calculadoras:**
+
+- Rescisão trabalhista
+- Salário líquido
+- Férias
+- 13º salário
+- Hora extra
+
+**Guias** (primeiro: seguro-desemprego em `/guias/seguro-desemprego`).
+
+Público: **todos** (empregado, empregador, RH). Sem login no MVP. Cálculo no cliente.
+
+## Monetização
+
+Google AdSense. Sem paywall, sem conta, sem backend de pagamento no MVP.
+
+## Fora do MVP
+
+Calculadora de seguro-desemprego, calculadoras PJ/MEI, autenticação, área logada.

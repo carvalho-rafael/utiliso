@@ -1,0 +1,31 @@
+---
+description: URLs indexáveis, conteúdo SEO, AdSense e LGPD
+alwaysApply: true
+---
+
+# SEO, AdSense e LGPD
+
+Uma URL própria por ferramenta e por guia, para indexação no Google:
+
+**Calculadoras:**
+
+- `/rescisao`
+- `/salario-liquido`
+- `/ferias`
+- `/decimo-terceiro`
+- `/hora-extra`
+
+**Guias:**
+
+- `/guias` (índice)
+- `/guias/seguro-desemprego`
+
+Cada página tem título, meta description, H1 e texto único (como funciona, FAQ). Não publicar só o formulário — thin content não indexa.
+
+A home lista calculadoras e guias. Nav: `Calculadoras | Guias | Sobre`.
+
+## Anúncios
+
+Espaços de AdSense no layout (topo, meio ou final), sem prejudicar o uso da calculadora.
+
+AdSense personalizado usa cookies: banner de consentimento **LGPD**, política de privacidade, e anúncios não personalizados até o consentimento. Não carregar tags de anúncio antes da escolha do usuário, salvo o que o Consent Mode exigir.

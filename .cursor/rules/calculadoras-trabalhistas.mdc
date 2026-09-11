@@ -1,0 +1,33 @@
+---
+description: Regras de domínio e fidelidade das calculadoras CLT
+alwaysApply: true
+---
+
+# Calculadoras trabalhistas
+
+Resultados o mais fiéis possível à CLT e às tabelas vigentes (INSS, IRRF, FGTS, adicional de H.E., etc.). Tabelas e alíquotas devem ser fáceis de atualizar quando o ano/calendário mudar.
+
+## Rescisão
+
+Tipos de rescisão:
+
+- Pedido de demissão
+- Dispensa sem justa causa
+- Dispensa com justa causa
+- Acordo rescisório (art. 484-A): mesmas verbas da sem justa causa; aviso indenizado 50%; multa FGTS 20%; saque de até 80% do FGTS; sem seguro-desemprego
+
+Exibir o breakdown (verbas, descontos, líquido). Não inventar verbas que a lei não prevê para aquele tipo.
+
+Callout de **seguro-desemprego** no resultado: mensagem por motivo; sem justa causa → calculadora (`/seguro-desemprego`); demais → guia (`/guias/seguro-desemprego`). O benefício não entra no líquido.
+
+## Transparência
+
+Toda calculadora mostra:
+
+- Aviso de que o resultado é estimativa e não substitui contador, advogado ou o DP
+- Referência às regras/tabelas usadas (ex.: ano da tabela INSS/IRRF)
+
+## UI das calculadoras
+
+- Botão de calcular e demais CTAs: `cursor-pointer`.
+- Qualquer mudança de campo (radio, select, input) apaga o resultado e o erro. O usuário precisa clicar em calcular de novo — não deixar breakdown de um cenário misturado com outro.

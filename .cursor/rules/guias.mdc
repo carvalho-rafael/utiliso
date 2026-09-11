@@ -1,0 +1,28 @@
+---
+description: Guias editoriais do Utiliso (conteúdo CLT, SEO)
+alwaysApply: true
+---
+
+# Guias
+
+Conteúdo em **pt-BR**, uma URL por guia (`/guias/<slug>`). Índice em `/guias`.
+
+## Conteúdo
+
+- H1, meta description e texto único (não thin content): explicação, requisitos, FAQ.
+- Aviso de que não substitui contador, advogado ou departamento pessoal.
+- Links para calculadoras relacionadas quando fizer sentido.
+
+## Seguro-desemprego (primeiro guia)
+
+- Rota: `/guias/seguro-desemprego`
+- Direito na dispensa **sem justa causa** (requisitos de vínculo e renda).
+- Sem direito: pedido de demissão, justa causa, acordo (art. 484-A).
+- Benefício **não entra no líquido** da rescisão.
+
+## CTA na calculadora de rescisão
+
+Callout no resultado, por motivo:
+
+- **Sem justa causa:** “Calcular seguro-desemprego” → `/seguro-desemprego` (calculadora; fora do MVP até existir).
+- **Demais motivos:** “Entenda o seguro-desemprego” → `/guias/seguro-desemprego`.
