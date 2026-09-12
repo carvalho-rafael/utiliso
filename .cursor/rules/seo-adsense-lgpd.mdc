@@ -22,10 +22,16 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 
 Cada página tem título, meta description, H1 e texto único (como funciona, FAQ). Não publicar só o formulário — thin content não indexa.
 
-A home lista calculadoras e guias. Nav: `Calculadoras | Guias | Sobre`.
+A home lista calculadoras e guias. Nav: `Calculadoras | Guias | Sobre`. Rodapé: link para `/privacidade` e reabrir preferências de cookies.
+
+## Analytics (GA4)
+
+Google Analytics 4 com **Consent Mode avançado**: script pode carregar com `analytics_storage: denied`; cookie de medição **só** após o usuário aceitar no banner. Recusar = sem cookie `_ga`; pings agregados conforme o Google. Não enviar dados de formulário (salário, datas) ao Analytics.
+
+ID em `NEXT_PUBLIC_GA_MEASUREMENT_ID`. Política em `/privacidade`.
 
 ## Anúncios
 
 Espaços de AdSense no layout (topo, meio ou final), sem prejudicar o uso da calculadora.
 
-AdSense personalizado usa cookies: banner de consentimento **LGPD**, política de privacidade, e anúncios não personalizados até o consentimento. Não carregar tags de anúncio antes da escolha do usuário, salvo o que o Consent Mode exigir.
+AdSense personalizado usa cookies: banner de consentimento **LGPD**, política de privacidade, e anúncios não personalizados até o consentimento. `ad_storage` e afins permanecem `denied` até consentimento de anúncios. Não carregar tags de anúncio antes da escolha do usuário, salvo o que o Consent Mode exigir.

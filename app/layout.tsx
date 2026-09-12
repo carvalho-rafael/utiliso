@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Geist, Geist_Mono } from "next/font/google";
+import { CookieConsent } from "./components/cookie-consent";
+import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
+import { GA_MEASUREMENT_ID } from "./lib/analytics";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,6 +34,26 @@ const themeScript = `
 })();
 `;
 
+const consentScript = `
+(function () {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+  gtag('consent', 'default', {
+    analytics_storage: 'denied',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500
+  });
+  try {
+    if (localStorage.getItem('cookie-consent') === 'accepted') {
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+    }
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -39,10 +63,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: consentScript }} />
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         <SiteHeader />
         {children}
+        <SiteFooter />
+        <CookieConsent />
+        {GA_MEASUREMENT_ID ? (
+          <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
+        ) : null}
       </body>
     </html>
   );
