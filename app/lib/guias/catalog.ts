@@ -19,6 +19,15 @@ export const guias: Guia[] = [
       "Guia de seguro-desemprego: requisitos, parcelas, valores, prazos e como pedir o benefício após a demissão sem justa causa.",
     icon: "book",
   },
+  {
+    slug: "calculo-inss",
+    href: "/guias/calculo-inss",
+    title: "Cálculo do INSS",
+    description: "Tabela progressiva e como calcular o desconto",
+    metaDescription:
+      "Guia do cálculo do INSS na folha: tabela progressiva 2026, alíquotas de 7,5% a 14%, teto e exemplo passo a passo.",
+    icon: "book",
+  },
 ];
 
 export function getGuiaBySlug(slug: string): Guia | undefined {

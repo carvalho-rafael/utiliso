@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import {
   formatarMoeda,
@@ -249,6 +250,26 @@ export function SalarioLiquidoForm() {
               </span>
             </div>
           </div>
+
+          <aside
+            aria-label="Guia de cálculo do INSS"
+            className="rounded-lg border border-border bg-background p-4"
+          >
+            <h3 className="text-sm font-medium text-foreground">
+              Como o INSS é calculado?
+            </h3>
+            <p className="mt-2 text-sm text-muted">
+              O desconto segue a tabela progressiva de {resultado.tabelasAno}:
+              cada faixa salarial tem sua alíquota, aplicada só sobre a parcela
+              do salário dentro da faixa.
+            </p>
+            <Link
+              href="/guias/calculo-inss"
+              className="mt-3 inline-block cursor-pointer text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              Ver guia do cálculo do INSS
+            </Link>
+          </aside>
         </section>
       )}
     </div>

@@ -1,11 +1,33 @@
 /** Tabelas INSS e IRRF vigentes a partir de janeiro/2026. */
 
-const INSS_FAIXAS = [
+/** Portaria Interministerial MPS/MF nº 13/2026 — empregado, doméstico e avulso. */
+export const INSS_FAIXAS_EMPREGADO = [
   { limite: 1621, aliquota: 0.075 },
   { limite: 2902.84, aliquota: 0.09 },
   { limite: 4354.27, aliquota: 0.12 },
   { limite: 8475.55, aliquota: 0.14 },
 ] as const;
+
+export const INSS_TETO_EMPREGADO = 8475.55;
+
+const INSS_FAIXAS = INSS_FAIXAS_EMPREGADO;
+
+export type FaixaINSSTabela = {
+  de: number;
+  ate: number;
+  aliquota: number;
+};
+
+/** Faixas formatadas para exibição em tabelas e guias. */
+export function listarFaixasINSSTabela(): FaixaINSSTabela[] {
+  let anterior = 0;
+  return INSS_FAIXAS_EMPREGADO.map((faixa) => {
+    const de = anterior === 0 ? 0 : round2(anterior + 0.01);
+    const row = { de, ate: faixa.limite, aliquota: faixa.aliquota };
+    anterior = faixa.limite;
+    return row;
+  });
+}
 
 const IRRF_FAIXAS = [
   { limite: 2428.8, aliquota: 0, deducao: 0 },
