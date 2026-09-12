@@ -3,7 +3,8 @@ export type CalculatorIcon =
   | "money"
   | "beach"
   | "calendar"
-  | "clock";
+  | "clock"
+  | "umbrella";
 
 export const CALCULADORAS_BASE = "/calculadoras";
 
@@ -71,6 +72,16 @@ export const calculadoras: Calculadora[] = [
       "Calculadora de hora extra com adicional de 50% e 100%.",
     popular: false,
     icon: "clock",
+  },
+  {
+    slug: "seguro-desemprego",
+    href: calculadoraHref("seguro-desemprego"),
+    title: "Seguro-desemprego",
+    description: "Estime parcelas e valor do benefício",
+    metaDescription:
+      "Calculadora de seguro-desemprego: parcelas e valor após demissão sem justa causa, com tabela MTE 2026.",
+    popular: false,
+    icon: "umbrella",
   },
 ];
 

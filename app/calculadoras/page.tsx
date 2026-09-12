@@ -5,7 +5,7 @@ import { calculadoras } from "../lib/calculadoras/catalog";
 export const metadata: Metadata = {
   title: "Calculadoras trabalhistas — Utiliso",
   description:
-    "Calculadoras gratuitas de rescisão, salário líquido, férias, 13º salário e hora extra.",
+    "Calculadoras gratuitas de rescisão, salário líquido, férias, 13º salário, hora extra e seguro-desemprego.",
 };
 
 export default function CalculadorasPage() {

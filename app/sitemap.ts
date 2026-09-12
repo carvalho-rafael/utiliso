@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     CALCULADORAS_BASE,
     ...calculadoras.map((calculadora) => calculadora.href),
-    "/calculadoras/seguro-desemprego",
     "/guias",
     "/sobre",
     "/privacidade",
