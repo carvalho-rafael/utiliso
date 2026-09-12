@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacidade",
     "/rescisao",
     "/salario-liquido",
+    "/ferias",
     ...guias.map((guia) => guia.href),
   ];
 

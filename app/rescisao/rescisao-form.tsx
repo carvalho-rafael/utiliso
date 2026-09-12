@@ -433,13 +433,12 @@ export function RescisaoForm() {
               {resultado.origemPrazoPagamento === "fim_aviso_trabalhado"
                 ? `Dez dias corridos após o último dia do aviso trabalhado (${formatarDataExibicao(resultado.dataInicioPrazoPagamento)}), conforme o art. 477, § 6º da CLT.`
                 : `Dez dias corridos após a data da comunicação (${formatarDataExibicao(resultado.dataInicioPrazoPagamento)}), conforme o art. 477, § 6º da CLT.`}
+              Se a data cair em sábado, domingo ou feriado, o pagamento costuma
+              ser no próximo dia útil.
               {resultado.avisoProjetaContrato &&
               resultado.origemPrazoPagamento === "data_comunicacao"
                 ? " O aviso indenizado projeta o contrato para 13º, férias e FGTS, mas o pagamento não espera esses dias."
                 : ""}{" "}
-              Se a data cair em sábado, domingo ou feriado, o pagamento costuma
-              ser no próximo dia útil. Atraso pode gerar multa de um salário ao
-              empregado (art. 477, § 8º).
             </p>
             <p className="mt-2 text-sm text-foreground">
               Fim do contrato: {formatarDataExibicao(resultado.dataFimContrato)}
