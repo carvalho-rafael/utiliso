@@ -16,6 +16,7 @@ const IRRF_FAIXAS = [
 ] as const;
 
 export const DESCONTO_SIMPLIFICADO_IRRF = 607.2;
+export const DEDUCAO_DEPENDENTE_IRRF = 189.59;
 
 export function calcularINSS(base: number): number {
   if (base <= 0) return 0;
@@ -39,12 +40,18 @@ export function calcularINSS(base: number): number {
  * IRRF mensal (ou exclusivo do 13º).
  * `rendimentoTributavel` = bruto da verba (redutor Lei 15.270).
  * `inss` = INSS já calculado sobre essa mesma verba.
+ * Usa o maior entre deduções legais (INSS + dependentes) e o desconto simplificado.
  */
-export function calcularIRRF(rendimentoTributavel: number, inss = 0): number {
+export function calcularIRRF(
+  rendimentoTributavel: number,
+  inss = 0,
+  dependentes = 0,
+): number {
   if (rendimentoTributavel <= 0) return 0;
 
-  const baseCalculo = Math.max(0, rendimentoTributavel - inss);
-  const base = Math.max(0, baseCalculo - DESCONTO_SIMPLIFICADO_IRRF);
+  const deducoesLegais = inss + dependentes * DEDUCAO_DEPENDENTE_IRRF;
+  const deducaoEfetiva = Math.max(deducoesLegais, DESCONTO_SIMPLIFICADO_IRRF);
+  const base = Math.max(0, rendimentoTributavel - deducaoEfetiva);
   if (base <= IRRF_FAIXAS[0].limite) return 0;
 
   let imposto = 0;

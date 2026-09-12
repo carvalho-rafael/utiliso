@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
+  formatarMoeda,
+  formatarMoedaInput,
+  parseMoeda,
+} from "../lib/calculadoras/format";
+import {
   calcularDiasAviso,
   calcularRescisao,
   formatarDataExibicao,
   formatarDataInput,
   formatarIntervaloPeriodo,
-  formatarMoeda,
-  formatarMoedaInput,
   getSeguroDesempregoInfo,
   listarPeriodosAquisitivos,
   parseDataInput,
-  parseMoeda,
   resolverDataFimContrato,
   type AvisoPrevio,
   type MotivoRescisao,
