@@ -252,20 +252,44 @@ export function RescisaoForm() {
               Estimativa com tabelas INSS/IRRF {resultado.tabelasAno}. Não
               substitui contador, advogado ou departamento pessoal.
             </p>
+          </div>
+
+          <aside
+            aria-label="Prazo para pagamento das verbas rescisórias"
+            className="rounded-lg border border-highlight bg-highlight/10 p-4"
+          >
+            <h3 className="text-sm font-semibold text-highlight">
+              Prazo para pagamento
+            </h3>
+            <p className="mt-1 text-2xl font-semibold tracking-tight text-foreground">
+              Até {formatarDataExibicao(resultado.dataLimitePagamento)}
+            </p>
+            <p className="mt-2 text-sm text-muted">
+              {resultado.origemPrazoPagamento === "fim_aviso_trabalhado"
+                ? `Dez dias corridos após o último dia do aviso trabalhado (${formatarDataExibicao(resultado.dataInicioPrazoPagamento)}), conforme o art. 477, § 6º da CLT.`
+                : `Dez dias corridos após a data da comunicação (${formatarDataExibicao(resultado.dataInicioPrazoPagamento)}), conforme o art. 477, § 6º da CLT.`}
+              {resultado.avisoProjetaContrato &&
+              resultado.origemPrazoPagamento === "data_comunicacao"
+                ? " O aviso indenizado projeta o contrato para 13º, férias e FGTS, mas o pagamento não espera esses dias."
+                : ""}{" "}
+              Se a data cair em sábado, domingo ou feriado, o pagamento costuma
+              ser no próximo dia útil. Atraso pode gerar multa de um salário ao
+              empregado (art. 477, § 8º).
+            </p>
             <p className="mt-2 text-sm text-foreground">
               Fim do contrato: {formatarDataExibicao(resultado.dataFimContrato)}
               {resultado.avisoProjetaContrato
                 ? ` (aviso de ${resultado.diasAviso} dias)`
                 : ""}
             </p>
-            {resultado.avisoProjetaContrato && avisoPrevio === "trabalhado" && (
+            {resultado.origemPrazoPagamento === "fim_aviso_trabalhado" && (
               <p className="mt-2 text-xs text-muted">
                 Aviso trabalhado: o salário dos dias de aviso é pago mês a mês
                 no holerite. O saldo de salário refere-se aos dias do último
                 mês trabalhado.
               </p>
             )}
-          </div>
+          </aside>
 
           <BreakdownGroup title="Verbas" linhas={resultado.verbas} />
           <BreakdownGroup

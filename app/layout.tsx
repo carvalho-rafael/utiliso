@@ -5,6 +5,7 @@ import { CookieConsent } from "./components/cookie-consent";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 import { GA_MEASUREMENT_ID } from "./lib/analytics";
+import { SITE_URL } from "./lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Utiliso — Calculadoras gratuitas",
   description:
     "Calculadoras trabalhistas gratuitas para ajudar nas contas importantes do dia a dia.",

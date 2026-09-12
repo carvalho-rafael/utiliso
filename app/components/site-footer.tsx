@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { OPEN_COOKIE_SETTINGS_EVENT } from "../lib/analytics";
+import { CONTACT_MAILTO } from "../lib/site";
 
 export function SiteFooter() {
   function openCookieSettings() {
@@ -11,6 +12,13 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-border bg-surface">
       <div className="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 py-6 text-sm text-muted">
+        <a
+          href={CONTACT_MAILTO}
+          className="cursor-pointer font-medium text-accent hover:underline"
+        >
+          Contato
+        </a>
+        <span aria-hidden="true">·</span>
         <Link
           href="/privacidade"
           className="cursor-pointer font-medium text-accent hover:underline"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CONTACT_EMAIL, CONTACT_MAILTO } from "../lib/site";
 
 export const metadata: Metadata = {
   title: "Política de privacidade — Utiliso",
@@ -92,8 +93,15 @@ export default function PrivacidadePage() {
 
         <h2 className="text-base font-medium text-foreground">Contato</h2>
         <p>
-          Dúvidas sobre esta política podem ser enviadas pelo canal de contato
-          indicado no site Utiliso quando disponível.
+          Dúvidas sobre esta política ou para exercer seus direitos (LGPD)
+          podem ser enviadas para{" "}
+          <a
+            href={CONTACT_MAILTO}
+            className="cursor-pointer font-medium text-accent hover:underline"
+          >
+            {CONTACT_EMAIL}
+          </a>
+          .
         </p>
       </section>
 

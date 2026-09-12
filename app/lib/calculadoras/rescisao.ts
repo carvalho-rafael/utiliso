@@ -28,6 +28,10 @@ export type LinhaBreakdown = {
   tipo: "verba" | "desconto" | "info";
 };
 
+export type OrigemPrazoPagamento =
+  | "fim_aviso_trabalhado"
+  | "data_comunicacao";
+
 export type RescisaoResultado = {
   verbas: LinhaBreakdown[];
   descontos: LinhaBreakdown[];
@@ -39,7 +43,13 @@ export type RescisaoResultado = {
   dataFimContrato: Date;
   diasAviso: number;
   avisoProjetaContrato: boolean;
+  dataInicioPrazoPagamento: Date;
+  dataLimitePagamento: Date;
+  origemPrazoPagamento: OrigemPrazoPagamento;
 };
+
+/** CLT art. 477, § 6º: pagamento em até 10 dias corridos após o término do contrato. */
+export const PRAZO_PAGAMENTO_RESCISAO_DIAS = 10;
 
 function diasNoMes(date: Date): number {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -153,6 +163,10 @@ function valorAvisoPrevio(salario: number, dias: number): number {
   return round2((salario / 30) * dias);
 }
 
+function dataLimitePagamentoRescisao(dataTermino: Date): Date {
+  return addDays(startOfDay(dataTermino), PRAZO_PAGAMENTO_RESCISAO_DIAS);
+}
+
 function mesesContrato(admissao: Date, fim: Date): number {
   const start = startOfDay(admissao);
   const end = startOfDay(fim);
@@ -197,6 +211,15 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
 
   const avisoTrabalhadoAtivo =
     motivo !== "com_justa_causa" && avisoPrevio === "trabalhado";
+  const origemPrazoPagamento: OrigemPrazoPagamento = avisoTrabalhadoAtivo
+    ? "fim_aviso_trabalhado"
+    : "data_comunicacao";
+  const dataInicioPrazoPagamento = avisoTrabalhadoAtivo
+    ? dataFimContrato
+    : dataComunicacao;
+  const dataLimitePagamento = dataLimitePagamentoRescisao(
+    dataInicioPrazoPagamento,
+  );
   const dataSaldo = avisoTrabalhadoAtivo ? dataFimContrato : dataComunicacao;
   const diasSaldo = dataSaldo.getDate();
   const saldo = saldoSalario(salarioBruto, dataSaldo);
@@ -376,6 +399,9 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
     dataFimContrato,
     diasAviso,
     avisoProjetaContrato,
+    dataInicioPrazoPagamento,
+    dataLimitePagamento,
+    origemPrazoPagamento,
   };
 }
 

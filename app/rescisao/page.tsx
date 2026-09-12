@@ -40,7 +40,10 @@ export default function RescisaoPage() {
           causa. IRRF incide só sobre o
           saldo de salário e o 13º (cálculos separados). Férias indenizadas,
           aviso indenizado e FGTS são isentos. A multa do FGTS é depositada na
-          conta do trabalhador e não entra no líquido da rescisão.
+          conta do trabalhador e não entra no líquido da rescisão. O pagamento
+          das verbas deve ocorrer em até 10 dias corridos após o fim do
+          contrato (CLT art. 477, § 6º); a calculadora destaca essa data no
+          resultado.
         </p>
 
         <h2 className="text-base font-medium text-foreground">
@@ -93,6 +96,19 @@ export default function RescisaoPage() {
               indenizado e a multa do FGTS são isentos. O redutor de 2026 zera
               o imposto quando o rendimento tributável de cada base fica até R$
               5.000.
+            </dd>
+          </div>
+          <div>
+            <dt className="font-medium text-foreground">
+              Qual o prazo para pagar a rescisão?
+            </dt>
+            <dd>
+              Até 10 dias corridos após o término do contrato (CLT art. 477, §
+              6º). No aviso trabalhado, o prazo conta do último dia de
+              trabalho. No aviso indenizado ou na justa causa, conta da data da
+              comunicação. Se o dia cair em fim de semana ou feriado, o
+              pagamento costuma ser no próximo dia útil. Atraso pode gerar
+              multa de um salário ao empregado (art. 477, § 8º).
             </dd>
           </div>
           <div>

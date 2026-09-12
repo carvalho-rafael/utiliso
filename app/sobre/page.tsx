@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CONTACT_EMAIL, CONTACT_MAILTO } from "../lib/site";
 
 export const metadata: Metadata = {
   title: "Sobre — Utiliso",
@@ -28,6 +29,15 @@ export default function SobrePage() {
         <p>
           Os resultados são estimativas e não substituem orientação de contador,
           advogado ou departamento pessoal.
+        </p>
+        <p>
+          Contato:{" "}
+          <a
+            href={CONTACT_MAILTO}
+            className="cursor-pointer font-medium text-accent hover:underline"
+          >
+            {CONTACT_EMAIL}
+          </a>
         </p>
       </div>
 
