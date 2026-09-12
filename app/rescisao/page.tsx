@@ -26,27 +26,6 @@ export default function RescisaoPage() {
 
       <section className="flex flex-col gap-4 text-sm text-muted">
         <h2 className="text-base font-medium text-foreground">
-          O que entra no cálculo?
-        </h2>
-        <p>
-          Saldo de salário, 13º proporcional, férias proporcionais e vencidas
-          (com 1/3 constitucional), aviso prévio indenizado (quando aplicável),
-          descontos de INSS e IRRF, multa de 40% do FGTS na demissão sem justa
-          causa e de 20% no acordo rescisório (art. 484-A). A data da
-          comunicação é o dia em que a rescisão foi avisada; no aviso
-          trabalhado, o salário do
-          período é pago no holerite e o saldo refere-se ao último mês
-          trabalhado. O aviso soma os dias no fim do contrato, salvo justa
-          causa. IRRF incide só sobre o
-          saldo de salário e o 13º (cálculos separados). Férias indenizadas,
-          aviso indenizado e FGTS são isentos. A multa do FGTS é depositada na
-          conta do trabalhador e não entra no líquido da rescisão. O pagamento
-          das verbas deve ocorrer em até 10 dias corridos após o fim do
-          contrato (CLT art. 477, § 6º); a calculadora destaca essa data no
-          resultado.
-        </p>
-
-        <h2 className="text-base font-medium text-foreground">
           Diferença entre os motivos
         </h2>
         <ul className="list-disc space-y-2 pl-5">
@@ -77,15 +56,6 @@ export default function RescisaoPage() {
 
         <h2 className="text-base font-medium text-foreground">Perguntas frequentes</h2>
         <dl className="space-y-3">
-          <div>
-            <dt className="font-medium text-foreground">
-              Como informar férias vencidas?
-            </dt>
-            <dd>
-              Informe quantos períodos aquisitivos completos você não gozou. O
-              período atual é calculado automaticamente pela data de admissão.
-            </dd>
-          </div>
           <div>
             <dt className="font-medium text-foreground">
               Quais verbas têm IRRF?

@@ -13,13 +13,23 @@ export type MotivoRescisao =
 
 export type AvisoPrevio = "trabalhado" | "indenizado";
 
+export type PeriodoAquisitivo = {
+  indice: number;
+  inicio: Date;
+  fim: Date;
+  limiteConcessao: Date;
+  emDobro: boolean;
+};
+
 export type RescisaoInput = {
   motivo: MotivoRescisao;
   salarioBruto: number;
   dataAdmissao: Date;
   dataComunicacao: Date;
-  feriasVencidasPeriodos: number;
+  feriasNaoGozadasIndices: number[];
   avisoPrevio: AvisoPrevio;
+  /** Aviso trabalhado: null = todos os dias; caso contrário, dias efetivamente trabalhados. */
+  diasAvisoTrabalhados: number | null;
 };
 
 export type LinhaBreakdown = {
@@ -61,6 +71,10 @@ function addDays(date: Date, days: number): Date {
   return result;
 }
 
+function addMonths(date: Date, months: number): Date {
+  return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
+}
+
 function startOfDay(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
@@ -82,6 +96,17 @@ function diasAvisoEmpregador(anos: number): number {
 
 function diasAvisoPedido(): number {
   return 30;
+}
+
+export function calcularDiasAviso(
+  motivo: MotivoRescisao,
+  dataAdmissao: Date,
+  dataComunicacao: Date,
+): number {
+  const anos = anosCompletos(dataAdmissao, dataComunicacao);
+  return motivo === "pedido_demissao"
+    ? diasAvisoPedido()
+    : diasAvisoEmpregador(anos);
 }
 
 function ultimoAniversarioAdmissao(admissao: Date, referencia: Date): Date {
@@ -152,11 +177,92 @@ function feriasProporcionais(
   return { base, terco, total: round2(base + terco), avos };
 }
 
-function feriasVencidas(salario: number, periodos: number) {
-  if (periodos <= 0) return { base: 0, terco: 0, total: 0 };
-  const base = round2(salario * periodos);
-  const terco = round2(base / 3);
-  return { base, terco, total: round2(base + terco) };
+/** CLT art. 137: concessão após o prazo → pagamento em dobro. */
+function concessaoVencida(fimContrato: Date, limiteConcessao: Date): boolean {
+  return startOfDay(fimContrato) > startOfDay(limiteConcessao);
+}
+
+export function listarPeriodosAquisitivos(
+  admissao: Date,
+  fimContrato: Date,
+): PeriodoAquisitivo[] {
+  const periodos: PeriodoAquisitivo[] = [];
+  let indice = 1;
+
+  while (true) {
+    const dataAquisicao = addMonths(admissao, 12 * indice);
+    if (startOfDay(fimContrato) < startOfDay(dataAquisicao)) break;
+
+    const inicio = addMonths(admissao, 12 * (indice - 1));
+    const fim = addDays(dataAquisicao, -1);
+    const limiteConcessao = addDays(addMonths(dataAquisicao, 12), -1);
+
+    periodos.push({
+      indice,
+      inicio,
+      fim,
+      limiteConcessao,
+      emDobro: concessaoVencida(fimContrato, limiteConcessao),
+    });
+    indice += 1;
+  }
+
+  return periodos;
+}
+
+export function resolverDataFimContrato(params: {
+  motivo: MotivoRescisao;
+  dataAdmissao: Date;
+  dataComunicacao: Date;
+  avisoPrevio: AvisoPrevio;
+}): Date {
+  const { motivo, dataAdmissao, dataComunicacao, avisoPrevio } = params;
+  const diasAviso = calcularDiasAviso(motivo, dataAdmissao, dataComunicacao);
+
+  const dispensadoPeloEmpregador =
+    motivo === "sem_justa_causa" || motivo === "acordo";
+
+  const avisoProjetaContrato =
+    motivo !== "com_justa_causa" &&
+    (avisoPrevio === "trabalhado" ||
+      (dispensadoPeloEmpregador && avisoPrevio === "indenizado"));
+
+  return avisoProjetaContrato
+    ? addDays(dataComunicacao, diasAviso)
+    : dataComunicacao;
+}
+
+function aplicarFeriasNaoGozadas(
+  verbas: LinhaBreakdown[],
+  salario: number,
+  periodos: PeriodoAquisitivo[],
+  indicesSelecionados: number[],
+): void {
+  const selecionados = new Set(indicesSelecionados);
+  let totalTerco = 0;
+
+  for (const periodo of periodos) {
+    if (!selecionados.has(periodo.indice)) continue;
+
+    const multiplicador = periodo.emDobro ? 2 : 1;
+    const base = round2(salario * multiplicador);
+    const terco = round2(base / 3);
+    totalTerco += terco;
+
+    verbas.push({
+      label: `Férias não gozadas — período ${periodo.indice}${periodo.emDobro ? " (em dobro)" : ""}`,
+      valor: base,
+      tipo: "verba",
+    });
+  }
+
+  if (totalTerco > 0) {
+    verbas.push({
+      label: "1/3 constitucional (férias não gozadas)",
+      valor: round2(totalTerco),
+      tipo: "verba",
+    });
+  }
 }
 
 function valorAvisoPrevio(salario: number, dias: number): number {
@@ -183,44 +289,52 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
     salarioBruto,
     dataAdmissao,
     dataComunicacao,
-    feriasVencidasPeriodos,
+    feriasNaoGozadasIndices,
     avisoPrevio,
+    diasAvisoTrabalhados,
   } = input;
 
   const verbas: LinhaBreakdown[] = [];
   const descontos: LinhaBreakdown[] = [];
   const fgts: LinhaBreakdown[] = [];
 
-  const anos = anosCompletos(dataAdmissao, dataComunicacao);
-  const diasAviso =
-    motivo === "pedido_demissao"
-      ? diasAvisoPedido()
-      : diasAvisoEmpregador(anos);
+  const diasAviso = calcularDiasAviso(motivo, dataAdmissao, dataComunicacao);
 
   const dispensadoPeloEmpregador =
     motivo === "sem_justa_causa" || motivo === "acordo";
+
+  const dataFimContrato = resolverDataFimContrato({
+    motivo,
+    dataAdmissao,
+    dataComunicacao,
+    avisoPrevio,
+  });
 
   const avisoProjetaContrato =
     motivo !== "com_justa_causa" &&
     (avisoPrevio === "trabalhado" ||
       (dispensadoPeloEmpregador && avisoPrevio === "indenizado"));
 
-  const dataFimContrato = avisoProjetaContrato
-    ? addDays(dataComunicacao, diasAviso)
-    : dataComunicacao;
-
   const avisoTrabalhadoAtivo =
     motivo !== "com_justa_causa" && avisoPrevio === "trabalhado";
+  const diasTrabalhadosEfetivos = avisoTrabalhadoAtivo
+    ? (diasAvisoTrabalhados ?? diasAviso)
+    : 0;
+  const dataUltimoDiaTrabalhado = avisoTrabalhadoAtivo
+    ? addDays(dataComunicacao, diasTrabalhadosEfetivos)
+    : dataComunicacao;
   const origemPrazoPagamento: OrigemPrazoPagamento = avisoTrabalhadoAtivo
     ? "fim_aviso_trabalhado"
     : "data_comunicacao";
   const dataInicioPrazoPagamento = avisoTrabalhadoAtivo
-    ? dataFimContrato
+    ? dataUltimoDiaTrabalhado
     : dataComunicacao;
   const dataLimitePagamento = dataLimitePagamentoRescisao(
     dataInicioPrazoPagamento,
   );
-  const dataSaldo = avisoTrabalhadoAtivo ? dataFimContrato : dataComunicacao;
+  const dataSaldo = avisoTrabalhadoAtivo
+    ? dataUltimoDiaTrabalhado
+    : dataComunicacao;
   const diasSaldo = dataSaldo.getDate();
   const saldo = saldoSalario(salarioBruto, dataSaldo);
   verbas.push({
@@ -229,19 +343,22 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
     tipo: "verba",
   });
 
-  const vencidas = feriasVencidas(salarioBruto, feriasVencidasPeriodos);
-  if (vencidas.total > 0) {
-    verbas.push({
-      label: `Férias vencidas (${feriasVencidasPeriodos} período${feriasVencidasPeriodos > 1 ? "s" : ""})`,
-      valor: vencidas.base,
-      tipo: "verba",
-    });
-    verbas.push({
-      label: "1/3 constitucional (férias vencidas)",
-      valor: vencidas.terco,
-      tipo: "verba",
-    });
-  }
+  const periodosAquisitivos = listarPeriodosAquisitivos(
+    dataAdmissao,
+    dataFimContrato,
+  );
+  const indicesValidos = new Set(
+    periodosAquisitivos.map((periodo) => periodo.indice),
+  );
+  const feriasSelecionadas = feriasNaoGozadasIndices.filter((indice) =>
+    indicesValidos.has(indice),
+  );
+  aplicarFeriasNaoGozadas(
+    verbas,
+    salarioBruto,
+    periodosAquisitivos,
+    feriasSelecionadas,
+  );
 
   let decimo = 0;
   let feriasProp = { base: 0, terco: 0, total: 0, avos: 0 };
@@ -290,6 +407,25 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
       valor: avisoIndenizado,
       tipo: "verba",
     });
+  }
+
+  if (avisoTrabalhadoAtivo && dispensadoPeloEmpregador) {
+    const diasIndenizados = diasAviso - diasTrabalhadosEfetivos;
+    if (diasIndenizados > 0) {
+      const fatorAviso = motivo === "acordo" ? 0.5 : 1;
+      avisoIndenizado = round2(
+        valorAvisoPrevio(salarioBruto, diasIndenizados) * fatorAviso,
+      );
+      const labelAviso =
+        motivo === "acordo"
+          ? `Aviso prévio indenizado (50% — ${diasIndenizados} dias)`
+          : `Aviso prévio indenizado (${diasIndenizados} dias)`;
+      verbas.push({
+        label: labelAviso,
+        valor: avisoIndenizado,
+        tipo: "verba",
+      });
+    }
   }
 
   if (motivo === "pedido_demissao" && avisoPrevio === "indenizado") {
@@ -505,4 +641,8 @@ export function formatarDataInput(value: string): string {
 
 export function formatarDataExibicao(date: Date): string {
   return date.toLocaleDateString("pt-BR");
+}
+
+export function formatarIntervaloPeriodo(inicio: Date, fim: Date): string {
+  return `${formatarDataExibicao(inicio)} – ${formatarDataExibicao(fim)}`;
 }

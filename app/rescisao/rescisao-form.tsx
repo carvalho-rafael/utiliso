@@ -1,16 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
+  calcularDiasAviso,
   calcularRescisao,
   formatarDataExibicao,
   formatarDataInput,
+  formatarIntervaloPeriodo,
   formatarMoeda,
   formatarMoedaInput,
   getSeguroDesempregoInfo,
+  listarPeriodosAquisitivos,
   parseDataInput,
   parseMoeda,
+  resolverDataFimContrato,
   type AvisoPrevio,
   type MotivoRescisao,
   type RescisaoResultado,
@@ -23,59 +27,142 @@ const MOTIVOS: { value: MotivoRescisao; label: string }[] = [
   { value: "acordo", label: "Acordo entre empregado e empregador" },
 ];
 
-const fieldClass =
+const fieldClassBase =
   "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+
+type CampoFormulario =
+  | "salarioBruto"
+  | "dataAdmissao"
+  | "dataComunicacao"
+  | "diasAvisoParcial";
+
+function classeCampo(comErro: boolean) {
+  return comErro
+    ? `${fieldClassBase} border-danger ring-2 ring-danger/25 focus-visible:ring-danger`
+    : fieldClassBase;
+}
 
 export function RescisaoForm() {
   const [motivo, setMotivo] = useState<MotivoRescisao>("sem_justa_causa");
   const [salarioBruto, setSalarioBruto] = useState("R$ 3.000,00");
-  const [dataAdmissao, setDataAdmissao] = useState("09/06/2021");
-  const [dataComunicacao, setDataComunicacao] = useState("01/10/2026");
-  const [feriasVencidas, setFeriasVencidas] = useState("0");
+  const [dataAdmissao, setDataAdmissao] = useState("");
+  const [dataComunicacao, setDataComunicacao] = useState("");
+  const [periodosMarcados, setPeriodosMarcados] = useState<number[]>([]);
   const [avisoPrevio, setAvisoPrevio] = useState<AvisoPrevio>("trabalhado");
+  const [avisoTodosDias, setAvisoTodosDias] = useState(true);
+  const [diasAvisoParcial, setDiasAvisoParcial] = useState("");
   const [erro, setErro] = useState<string | null>(null);
+  const [camposErro, setCamposErro] = useState<CampoFormulario[]>([]);
   const [resultado, setResultado] = useState<RescisaoResultado | null>(null);
 
+  function campoComErro(campo: CampoFormulario) {
+    return camposErro.includes(campo);
+  }
+
+  function reportarErro(mensagem: string, campos: CampoFormulario[]) {
+    setErro(mensagem);
+    setCamposErro(campos);
+    setResultado(null);
+  }
+
   const avisoDesabilitado = motivo === "com_justa_causa";
+  const avisoAtivo = avisoDesabilitado ? "trabalhado" : avisoPrevio;
+
+  const periodosAquisitivos = useMemo(() => {
+    const admissao = parseDataInput(dataAdmissao);
+    const comunicacao = parseDataInput(dataComunicacao);
+    if (!admissao || !comunicacao || comunicacao < admissao) return [];
+
+    const fimContrato = resolverDataFimContrato({
+      motivo,
+      dataAdmissao: admissao,
+      dataComunicacao: comunicacao,
+      avisoPrevio: avisoAtivo,
+    });
+
+    return listarPeriodosAquisitivos(admissao, fimContrato);
+  }, [dataAdmissao, dataComunicacao, motivo, avisoAtivo]);
+
+  const feriasNaoGozadas = useMemo(() => {
+    const indices = periodosAquisitivos.map((periodo) => periodo.indice);
+    return periodosMarcados.filter((indice) => indices.includes(indice));
+  }, [periodosAquisitivos, periodosMarcados]);
+
+  const diasAvisoPrevisto = useMemo(() => {
+    const admissao = parseDataInput(dataAdmissao);
+    const comunicacao = parseDataInput(dataComunicacao);
+    if (!admissao || !comunicacao || comunicacao < admissao) return 30;
+    return calcularDiasAviso(motivo, admissao, comunicacao);
+  }, [dataAdmissao, dataComunicacao, motivo]);
+
+  const avisoTrabalhadoVisivel =
+    !avisoDesabilitado && avisoPrevio === "trabalhado";
+
+  function alternarPeriodoNaoGozado(indice: number) {
+    setPeriodosMarcados((atual) =>
+      atual.includes(indice)
+        ? atual.filter((item) => item !== indice)
+        : [...atual, indice],
+    );
+    limparResultado();
+  }
 
   function limparResultado() {
     setResultado(null);
     setErro(null);
+    setCamposErro([]);
   }
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setErro(null);
+    setCamposErro([]);
 
     const salario = parseMoeda(salarioBruto);
     const admissao = parseDataInput(dataAdmissao);
     const comunicacao = parseDataInput(dataComunicacao);
-    const periodosVencidos = Number.parseInt(feriasVencidas, 10);
-
     if (salario <= 0) {
-      setErro("Informe um salário bruto válido.");
-      setResultado(null);
+      reportarErro("Informe um salário bruto válido.", ["salarioBruto"]);
       return;
     }
     if (!admissao) {
-      setErro("Data de admissão inválida. Use DD/MM/AAAA.");
-      setResultado(null);
+      reportarErro("Data de admissão inválida. Use DD/MM/AAAA.", [
+        "dataAdmissao",
+      ]);
       return;
     }
     if (!comunicacao) {
-      setErro("Data da comunicação inválida. Use DD/MM/AAAA.");
-      setResultado(null);
+      reportarErro("Data da comunicação inválida. Use DD/MM/AAAA.", [
+        "dataComunicacao",
+      ]);
       return;
     }
     if (comunicacao < admissao) {
-      setErro("A data da comunicação deve ser igual ou posterior à admissão.");
-      setResultado(null);
+      reportarErro(
+        "A data da comunicação deve ser igual ou posterior à admissão.",
+        ["dataAdmissao", "dataComunicacao"],
+      );
       return;
     }
-    if (Number.isNaN(periodosVencidos) || periodosVencidos < 0) {
-      setErro("Informe um número válido de períodos de férias vencidas.");
-      setResultado(null);
-      return;
+
+    const diasAviso = calcularDiasAviso(motivo, admissao, comunicacao);
+    let diasAvisoTrabalhados: number | null = null;
+
+    if (!avisoDesabilitado && avisoPrevio === "trabalhado" && !avisoTodosDias) {
+      const dias = Number.parseInt(diasAvisoParcial, 10);
+      const maximoParcial = diasAviso - 1;
+      if (
+        Number.isNaN(dias) ||
+        dias < 1 ||
+        dias > maximoParcial
+      ) {
+        reportarErro(
+          `Informe entre 1 e ${maximoParcial} dias de aviso a trabalhar.`,
+          ["diasAvisoParcial"],
+        );
+        return;
+      }
+      diasAvisoTrabalhados = dias;
     }
 
     setResultado(
@@ -84,8 +171,9 @@ export function RescisaoForm() {
         salarioBruto: salario,
         dataAdmissao: admissao,
         dataComunicacao: comunicacao,
-        feriasVencidasPeriodos: periodosVencidos,
+        feriasNaoGozadasIndices: feriasNaoGozadas,
         avisoPrevio: avisoDesabilitado ? "trabalhado" : avisoPrevio,
+        diasAvisoTrabalhados,
       }),
     );
   }
@@ -130,8 +218,10 @@ export function RescisaoForm() {
               setSalarioBruto(formatarMoedaInput(event.target.value));
               limparResultado();
             }}
-            className={fieldClass}
+            className={classeCampo(campoComErro("salarioBruto"))}
             placeholder="R$ 0,00"
+            aria-invalid={campoComErro("salarioBruto")}
+            aria-describedby={erro ? "rescisao-erro" : undefined}
           />
         </label>
 
@@ -148,8 +238,10 @@ export function RescisaoForm() {
                 setDataAdmissao(formatarDataInput(event.target.value));
                 limparResultado();
               }}
-              className={fieldClass}
+              className={classeCampo(campoComErro("dataAdmissao"))}
               placeholder="DD/MM/AAAA"
+              aria-invalid={campoComErro("dataAdmissao")}
+              aria-describedby={erro ? "rescisao-erro" : undefined}
             />
           </label>
 
@@ -165,8 +257,10 @@ export function RescisaoForm() {
                 setDataComunicacao(formatarDataInput(event.target.value));
                 limparResultado();
               }}
-              className={fieldClass}
+              className={classeCampo(campoComErro("dataComunicacao"))}
               placeholder="DD/MM/AAAA"
+              aria-invalid={campoComErro("dataComunicacao")}
+              aria-describedby={erro ? "rescisao-erro" : undefined}
             />
             <span className="text-xs text-muted">
               Dia em que a rescisão foi comunicada. O aviso prévio, se houver,
@@ -175,37 +269,59 @@ export function RescisaoForm() {
           </label>
         </div>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Férias vencidas (períodos não gozados)
-          </span>
-          <input
-            type="number"
-            min={0}
-            step={1}
-            value={feriasVencidas}
-            onChange={(event) => {
-              setFeriasVencidas(event.target.value);
-              limparResultado();
-            }}
-            className={fieldClass}
-          />
+        <fieldset className="flex flex-col gap-3">
+          <legend className="text-sm font-medium text-foreground">
+            Férias não gozadas
+          </legend>
+          {periodosAquisitivos.length === 0 ? (
+            <p className="text-sm text-muted">
+              Nenhum período aquisitivo completo até a data do contrato. O
+              período atual entra nas férias proporcionais.
+            </p>
+          ) : (
+            periodosAquisitivos.map((periodo) => (
+              <label
+                key={periodo.indice}
+                className="flex cursor-pointer items-start gap-3 text-sm text-foreground"
+              >
+                <input
+                  type="checkbox"
+                  checked={periodosMarcados.includes(periodo.indice)}
+                  onChange={() => alternarPeriodoNaoGozado(periodo.indice)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
+                />
+                <span>
+                  Período {periodo.indice} (
+                  {formatarIntervaloPeriodo(periodo.inicio, periodo.fim)})
+                  {periodo.emDobro ? (
+                    <span className="text-highlight"> — em dobro</span>
+                  ) : null}
+                </span>
+              </label>
+            ))
+          )}
           <span className="text-xs text-muted">
-            Períodos aquisitivos já completos que você não tirou férias. O
-            período atual é calculado pela data de admissão.
+            Marque os períodos que você ainda não tirou. O período atual entra
+            nas férias proporcionais. Períodos com concessão vencida (CLT art.
+            137) são pagos em dobro.
           </span>
-        </label>
+        </fieldset>
 
         <label className="flex flex-col gap-2">
           <span className="text-sm font-medium text-foreground">Aviso prévio</span>
           <select
             value={avisoDesabilitado ? "trabalhado" : avisoPrevio}
             onChange={(event) => {
-              setAvisoPrevio(event.target.value as AvisoPrevio);
+              const valor = event.target.value as AvisoPrevio;
+              setAvisoPrevio(valor);
+              if (valor === "trabalhado") {
+                setAvisoTodosDias(true);
+                setDiasAvisoParcial("");
+              }
               limparResultado();
             }}
             disabled={avisoDesabilitado}
-            className={`${fieldClass} cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}
+            className={`${fieldClassBase} cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}
           >
             <option value="trabalhado">Trabalhado</option>
             <option value="indenizado">Indenizado</option>
@@ -229,8 +345,55 @@ export function RescisaoForm() {
           )}
         </label>
 
+        {avisoTrabalhadoVisivel && (
+          <fieldset className="flex flex-col gap-3">
+            <legend className="text-sm font-medium text-foreground">
+              Dias de aviso a trabalhar
+            </legend>
+            <label className="flex cursor-pointer items-center gap-3 text-sm text-foreground">
+              <input
+                type="checkbox"
+                checked={avisoTodosDias}
+                onChange={(event) => {
+                  setAvisoTodosDias(event.target.checked);
+                  if (event.target.checked) setDiasAvisoParcial("");
+                  limparResultado();
+                }}
+                className="h-4 w-4 accent-accent"
+              />
+              Todos ({diasAvisoPrevisto} dias)
+            </label>
+            <div className="flex flex-wrap items-center gap-2">
+              <input
+                type="number"
+                min={1}
+                max={Math.max(1, diasAvisoPrevisto - 1)}
+                step={1}
+                value={diasAvisoParcial}
+                onChange={(event) => {
+                  setDiasAvisoParcial(event.target.value);
+                  if (event.target.value) setAvisoTodosDias(false);
+                  limparResultado();
+                }}
+                className={`${classeCampo(campoComErro("diasAvisoParcial"))} max-w-[7rem] disabled:cursor-not-allowed disabled:opacity-60`}
+                placeholder="Dias"
+                aria-label="Dias de aviso a trabalhar"
+                aria-invalid={campoComErro("diasAvisoParcial")}
+                aria-describedby={erro ? "rescisao-erro" : undefined}
+              />
+            </div>
+            <span className="text-xs text-muted">
+              Se trabalhar menos que o aviso completo, os dias restantes entram
+              como aviso indenizado na demissão sem justa causa ou no acordo. No
+              pedido de demissão não há indenização dos dias não trabalhados.
+            </span>
+          </fieldset>
+        )}
+
         {erro && (
-          <p className="text-sm text-danger" role="alert">{erro}</p>
+          <p id="rescisao-erro" className="text-sm text-danger" role="alert">
+            {erro}
+          </p>
         )}
 
         <button
