@@ -302,6 +302,12 @@ export default function CalculoInssGuiaPage() {
             Calculadora de salário líquido
           </Link>
           <Link
+            href="/decimo-terceiro"
+            className="cursor-pointer text-sm font-medium text-accent hover:underline"
+          >
+            Calculadora de 13º salário
+          </Link>
+          <Link
             href="/rescisao"
             className="cursor-pointer text-sm font-medium text-accent hover:underline"
           >
