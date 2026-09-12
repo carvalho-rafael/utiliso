@@ -18,7 +18,7 @@ Tipos de rescisão:
 
 Exibir o breakdown (verbas, descontos, líquido). Não inventar verbas que a lei não prevê para aquele tipo.
 
-Callout de **seguro-desemprego** no resultado: mensagem por motivo; sem justa causa → calculadora (`/seguro-desemprego`); demais → guia (`/guias/seguro-desemprego`). O benefício não entra no líquido.
+Callout de **seguro-desemprego** no resultado: mensagem por motivo; sem justa causa → calculadora (`/calculadoras/seguro-desemprego`); demais → guia (`/guias/seguro-desemprego`). O benefício não entra no líquido.
 
 ## Transparência
 

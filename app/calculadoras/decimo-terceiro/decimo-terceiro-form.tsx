@@ -5,12 +5,12 @@ import { useState } from "react";
 import {
   calcularDecimoTerceiro,
   type DecimoTerceiroResultado,
-} from "../lib/calculadoras/decimo-terceiro";
+} from "../../lib/calculadoras/decimo-terceiro";
 import {
   formatarMoeda,
   formatarMoedaInput,
   parseMoeda,
-} from "../lib/calculadoras/format";
+} from "../../lib/calculadoras/format";
 
 const fieldClassBase =
   "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";

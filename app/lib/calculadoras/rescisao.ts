@@ -543,7 +543,8 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
   };
 }
 
-export const SEGURO_DESEMPREGO_CALCULADORA_HREF = "/seguro-desemprego";
+export const SEGURO_DESEMPREGO_CALCULADORA_HREF =
+  "/calculadoras/seguro-desemprego";
 export const SEGURO_DESEMPREGO_GUIA_HREF = "/guias/seguro-desemprego";
 
 export type SeguroDesempregoInfo = {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { CalculatorStubPage } from "../components/calculator-stub-page";
-import { getCalculadoraBySlug } from "../lib/calculadoras/catalog";
+import { CalculatorStubPage } from "../../components/calculator-stub-page";
+import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 
 const calculadora = getCalculadoraBySlug("hora-extra")!;
 

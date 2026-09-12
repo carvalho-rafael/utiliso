@@ -166,7 +166,7 @@ export default function SeguroDesempregoGuiaPage() {
         <p className="text-sm text-muted">Ferramentas relacionadas:</p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/rescisao"
+            href="/calculadoras/rescisao"
             className="cursor-pointer text-sm font-medium text-accent hover:underline"
           >
             Calculadora de rescisão

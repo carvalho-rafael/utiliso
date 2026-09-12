@@ -3,24 +3,19 @@
 import Link from "next/link";
 import { useState } from "react";
 import {
-  DIAS_ABONO,
-  calcularFerias,
-  type FeriasResultado,
-} from "../lib/calculadoras/ferias";
-import {
   formatarMoeda,
   formatarMoedaInput,
   parseMoeda,
-} from "../lib/calculadoras/format";
+} from "../../lib/calculadoras/format";
+import {
+  calcularSalarioLiquido,
+  type SalarioLiquidoResultado,
+} from "../../lib/calculadoras/salario-liquido";
 
 const fieldClassBase =
   "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
-type CampoFormulario =
-  | "salarioBruto"
-  | "mediaVariaveis"
-  | "diasGozo"
-  | "dependentes";
+type CampoFormulario = "salarioBruto" | "dependentes" | "custoValeTransporte";
 
 function classeCampo(comErro: boolean) {
   return comErro
@@ -28,16 +23,16 @@ function classeCampo(comErro: boolean) {
     : fieldClassBase;
 }
 
-export function FeriasForm() {
+export function SalarioLiquidoForm() {
   const [salarioBruto, setSalarioBruto] = useState("R$ 3.000,00");
-  const [mediaVariaveis, setMediaVariaveis] = useState("");
-  const [diasGozo, setDiasGozo] = useState("30");
   const [dependentes, setDependentes] = useState("0");
-  const [venderAbono, setVenderAbono] = useState(false);
-  const [adiantarDecimo, setAdiantarDecimo] = useState(false);
+  const [descontaValeTransporte, setDescontaValeTransporte] = useState(false);
+  const [custoValeTransporte, setCustoValeTransporte] = useState("");
   const [erro, setErro] = useState<string | null>(null);
   const [camposErro, setCamposErro] = useState<CampoFormulario[]>([]);
-  const [resultado, setResultado] = useState<FeriasResultado | null>(null);
+  const [resultado, setResultado] = useState<SalarioLiquidoResultado | null>(
+    null,
+  );
 
   function campoComErro(campo: CampoFormulario) {
     return camposErro.includes(campo);
@@ -62,22 +57,10 @@ export function FeriasForm() {
 
     const salario = parseMoeda(salarioBruto);
     const numDependentes = Number.parseInt(dependentes, 10);
-    const numDiasGozo = Number.parseInt(diasGozo, 10);
 
     if (salario <= 0) {
       reportarErro("Informe um salário bruto válido.", ["salarioBruto"]);
       return;
-    }
-
-    let media = 0;
-    if (mediaVariaveis.trim()) {
-      media = parseMoeda(mediaVariaveis);
-      if (media < 0) {
-        reportarErro("Informe uma média de variáveis válida.", [
-          "mediaVariaveis",
-        ]);
-        return;
-      }
     }
 
     if (
@@ -91,32 +74,23 @@ export function FeriasForm() {
       return;
     }
 
-    if (
-      Number.isNaN(numDiasGozo) ||
-      numDiasGozo < 1 ||
-      numDiasGozo > 30 ||
-      !Number.isInteger(numDiasGozo)
-    ) {
-      reportarErro("Informe dias de férias entre 1 e 30.", ["diasGozo"]);
-      return;
-    }
-
-    if (venderAbono && numDiasGozo + DIAS_ABONO > 30) {
-      reportarErro(
-        `Com abono pecuniário (${DIAS_ABONO} dias), o gozo não pode passar de ${30 - DIAS_ABONO} dias.`,
-        ["diasGozo"],
-      );
-      return;
+    let custoVT: number | undefined;
+    if (descontaValeTransporte && custoValeTransporte.trim()) {
+      custoVT = parseMoeda(custoValeTransporte);
+      if (custoVT <= 0) {
+        reportarErro("Informe um custo válido de vale-transporte.", [
+          "custoValeTransporte",
+        ]);
+        return;
+      }
     }
 
     setResultado(
-      calcularFerias({
+      calcularSalarioLiquido({
         salarioBruto: salario,
-        mediaVariaveis: media,
-        diasGozo: numDiasGozo,
-        venderAbono,
         dependentes: numDependentes,
-        adiantarDecimo,
+        descontaValeTransporte,
+        custoValeTransporte: custoVT,
       }),
     );
   }
@@ -139,57 +113,10 @@ export function FeriasForm() {
             className={classeCampo(campoComErro("salarioBruto"))}
             placeholder="R$ 0,00"
             aria-invalid={campoComErro("salarioBruto")}
-            aria-describedby={erro ? "ferias-erro" : undefined}
+            aria-describedby={erro ? "salario-liquido-erro" : undefined}
           />
           <span className="text-xs text-muted">
-            Remuneração mensal habitual usada como base das férias.
-          </span>
-        </label>
-
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Média de variáveis (opcional)
-          </span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={mediaVariaveis}
-            onChange={(event) => {
-              setMediaVariaveis(formatarMoedaInput(event.target.value));
-              limparResultado();
-            }}
-            className={classeCampo(campoComErro("mediaVariaveis"))}
-            placeholder="R$ 0,00"
-            aria-invalid={campoComErro("mediaVariaveis")}
-            aria-describedby={erro ? "ferias-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Média de horas extras, comissões ou outras parcelas habituais
-            incluídas na base das férias.
-          </span>
-        </label>
-
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Dias de férias (gozo)
-          </span>
-          <input
-            type="number"
-            min={1}
-            max={30}
-            step={1}
-            value={diasGozo}
-            onChange={(event) => {
-              setDiasGozo(event.target.value);
-              limparResultado();
-            }}
-            className={`${classeCampo(campoComErro("diasGozo"))} max-w-[7rem]`}
-            aria-invalid={campoComErro("diasGozo")}
-            aria-describedby={erro ? "ferias-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Período de descanso (até 30 dias). Com abono pecuniário, o gozo fica
-            limitado a 20 dias.
+            Valor mensal antes dos descontos obrigatórios (INSS e IRRF).
           </span>
         </label>
 
@@ -208,7 +135,7 @@ export function FeriasForm() {
             }}
             className={`${classeCampo(campoComErro("dependentes"))} max-w-[7rem]`}
             aria-invalid={campoComErro("dependentes")}
-            aria-describedby={erro ? "ferias-erro" : undefined}
+            aria-describedby={erro ? "salario-liquido-erro" : undefined}
           />
           <span className="text-xs text-muted">
             Filhos, cônjuge ou outros dependentes aceitos pela Receita Federal
@@ -218,40 +145,54 @@ export function FeriasForm() {
 
         <fieldset className="flex flex-col gap-3">
           <legend className="text-sm font-medium text-foreground">
-            Opções
+            Vale-transporte
           </legend>
           <label className="flex cursor-pointer items-center gap-3 text-sm text-foreground">
             <input
               type="checkbox"
-              checked={venderAbono}
+              checked={descontaValeTransporte}
               onChange={(event) => {
-                const marcado = event.target.checked;
-                setVenderAbono(marcado);
-                if (marcado && Number.parseInt(diasGozo, 10) === 30) {
-                  setDiasGozo("20");
-                }
+                setDescontaValeTransporte(event.target.checked);
+                if (!event.target.checked) setCustoValeTransporte("");
                 limparResultado();
               }}
               className="h-4 w-4 accent-accent"
             />
-            Converter 1/3 em abono pecuniário ({DIAS_ABONO} dias)
+            Descontar vale-transporte (até 6% do salário básico)
           </label>
-          <label className="flex cursor-pointer items-center gap-3 text-sm text-foreground">
-            <input
-              type="checkbox"
-              checked={adiantarDecimo}
-              onChange={(event) => {
-                setAdiantarDecimo(event.target.checked);
-                limparResultado();
-              }}
-              className="h-4 w-4 accent-accent"
-            />
-            Adiantar 1ª parcela do 13º salário
-          </label>
+
+          {descontaValeTransporte && (
+            <label className="flex flex-col gap-2">
+              <span className="text-sm text-muted">
+                Custo mensal do transporte (opcional)
+              </span>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={custoValeTransporte}
+                onChange={(event) => {
+                  setCustoValeTransporte(formatarMoedaInput(event.target.value));
+                  limparResultado();
+                }}
+                className={classeCampo(campoComErro("custoValeTransporte"))}
+                placeholder="Se vazio, usa 6% do salário"
+                aria-invalid={campoComErro("custoValeTransporte")}
+                aria-describedby={erro ? "salario-liquido-erro" : undefined}
+              />
+              <span className="text-xs text-muted">
+                Se o custo real for menor que 6%, informe o valor. O desconto
+                nunca ultrapassa 6% do salário básico (Lei 7.418/1985).
+              </span>
+            </label>
+          )}
         </fieldset>
 
         {erro && (
-          <p id="ferias-erro" className="text-sm text-danger" role="alert">
+          <p
+            id="salario-liquido-erro"
+            className="text-sm text-danger"
+            role="alert"
+          >
             {erro}
           </p>
         )}
@@ -260,13 +201,13 @@ export function FeriasForm() {
           type="submit"
           className="cursor-pointer rounded-lg bg-highlight px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          Calcular férias
+          Calcular salário líquido
         </button>
       </form>
 
       {resultado && (
         <section
-          aria-label="Resultado das férias"
+          aria-label="Resultado do salário líquido"
           className="flex flex-col gap-6 rounded-lg border border-border bg-surface p-6"
         >
           <div>
@@ -287,8 +228,8 @@ export function FeriasForm() {
             <BreakdownGroup title="FGTS (estimativa)" linhas={resultado.fgts} />
             {resultado.fgts.length > 0 && (
               <p className="mt-2 text-xs text-muted">
-                O FGTS é depositado pelo empregador e não entra no valor líquido
-                das férias.
+                O FGTS é depositado pelo empregador e não entra no salário
+                líquido.
               </p>
             )}
           </div>
@@ -303,7 +244,7 @@ export function FeriasForm() {
               <span>- {formatarMoeda(resultado.totalDescontos)}</span>
             </div>
             <div className="mt-3 flex justify-between text-lg font-semibold text-foreground">
-              <span>Valor líquido das férias</span>
+              <span>Salário líquido</span>
               <span className="text-highlight">
                 {formatarMoeda(resultado.liquido)}
               </span>

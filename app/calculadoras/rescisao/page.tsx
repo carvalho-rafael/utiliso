@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getCalculadoraBySlug } from "../lib/calculadoras/catalog";
+import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { RescisaoForm } from "./rescisao-form";
 
 const calculadora = getCalculadoraBySlug("rescisao")!;

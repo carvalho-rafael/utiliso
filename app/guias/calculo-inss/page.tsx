@@ -87,7 +87,7 @@ export default function CalculoInssGuiaPage() {
           que sobra no contracheque com as tabelas de {TABELAS_ANO}.
         </p>
         <Link
-          href="/salario-liquido"
+          href="/calculadoras/salario-liquido"
           className="mt-4 inline-flex cursor-pointer rounded-lg bg-highlight px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           Calcular salário líquido
@@ -296,19 +296,19 @@ export default function CalculoInssGuiaPage() {
         <p className="text-sm text-muted">Ferramentas relacionadas:</p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/salario-liquido"
+            href="/calculadoras/salario-liquido"
             className="cursor-pointer text-sm font-medium text-accent hover:underline"
           >
             Calculadora de salário líquido
           </Link>
           <Link
-            href="/decimo-terceiro"
+            href="/calculadoras/decimo-terceiro"
             className="cursor-pointer text-sm font-medium text-accent hover:underline"
           >
             Calculadora de 13º salário
           </Link>
           <Link
-            href="/rescisao"
+            href="/calculadoras/rescisao"
             className="cursor-pointer text-sm font-medium text-accent hover:underline"
           >
             Calculadora de rescisão

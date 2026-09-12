@@ -11,7 +11,8 @@ function navLinkClass(isActive: boolean) {
 
 export function SiteNav() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isCalculadoras =
+    pathname === "/calculadoras" || pathname.startsWith("/calculadoras/");
   const isGuias = pathname === "/guias" || pathname.startsWith("/guias/");
   const isSobre = pathname === "/sobre";
 
@@ -20,7 +21,7 @@ export function SiteNav() {
       aria-label="Principal"
       className="absolute left-1/2 flex -translate-x-1/2 items-center gap-3"
     >
-      <Link href="/#calculadoras" className={navLinkClass(isHome)}>
+      <Link href="/calculadoras" className={navLinkClass(isCalculadoras)}>
         Calculadoras
       </Link>
       <span className="text-muted" aria-hidden="true">|</span>

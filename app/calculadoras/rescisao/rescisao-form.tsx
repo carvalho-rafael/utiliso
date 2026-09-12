@@ -6,7 +6,7 @@ import {
   formatarMoeda,
   formatarMoedaInput,
   parseMoeda,
-} from "../lib/calculadoras/format";
+} from "../../lib/calculadoras/format";
 import {
   calcularDiasAviso,
   calcularRescisao,
@@ -20,7 +20,7 @@ import {
   type AvisoPrevio,
   type MotivoRescisao,
   type RescisaoResultado,
-} from "../lib/calculadoras/rescisao";
+} from "../../lib/calculadoras/rescisao";
 
 const MOTIVOS: { value: MotivoRescisao; label: string }[] = [
   { value: "pedido_demissao", label: "Pedido de demissão" },

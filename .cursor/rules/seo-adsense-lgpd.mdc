@@ -7,13 +7,13 @@ alwaysApply: true
 
 Uma URL própria por ferramenta e por guia, para indexação no Google:
 
-**Calculadoras:**
+**Calculadoras** (índice em `/calculadoras`):
 
-- `/rescisao`
-- `/salario-liquido`
-- `/ferias`
-- `/decimo-terceiro`
-- `/hora-extra`
+- `/calculadoras/rescisao`
+- `/calculadoras/salario-liquido`
+- `/calculadoras/ferias`
+- `/calculadoras/decimo-terceiro`
+- `/calculadoras/hora-extra`
 
 **Guias:**
 

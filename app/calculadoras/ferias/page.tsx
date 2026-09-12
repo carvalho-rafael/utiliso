@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getCalculadoraBySlug } from "../lib/calculadoras/catalog";
+import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { FeriasForm } from "./ferias-form";
 
 const calculadora = getCalculadoraBySlug("ferias")!;
@@ -114,7 +114,7 @@ export default function FeriasPage() {
               Não. Férias indenizadas na rescisão têm regras diferentes (por
               exemplo, isenção de IRRF sobre férias indenizadas). Use a{" "}
               <a
-                href="/rescisao"
+                href="/calculadoras/rescisao"
                 className="font-medium text-accent hover:underline"
               >
                 calculadora de rescisão

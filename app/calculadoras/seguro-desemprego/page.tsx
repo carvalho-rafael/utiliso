@@ -33,7 +33,7 @@ export default function SeguroDesempregoPage() {
       </div>
 
       <Link
-        href="/rescisao"
+        href="/calculadoras/rescisao"
         className="cursor-pointer text-sm font-medium text-accent hover:underline"
       >
         Voltar para a calculadora de rescisão

@@ -43,7 +43,7 @@ export default function SobrePage() {
 
       <div className="flex flex-wrap gap-4">
         <Link
-          href="/#calculadoras"
+          href="/calculadoras"
           className="cursor-pointer text-sm font-medium text-accent hover:underline"
         >
           Ver calculadoras

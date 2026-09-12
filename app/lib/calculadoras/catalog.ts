@@ -5,6 +5,12 @@ export type CalculatorIcon =
   | "calendar"
   | "clock";
 
+export const CALCULADORAS_BASE = "/calculadoras";
+
+export function calculadoraHref(slug: string): string {
+  return `${CALCULADORAS_BASE}/${slug}`;
+}
+
 export type Calculadora = {
   slug: string;
   href: string;
@@ -18,7 +24,7 @@ export type Calculadora = {
 export const calculadoras: Calculadora[] = [
   {
     slug: "rescisao",
-    href: "/rescisao",
+    href: calculadoraHref("rescisao"),
     title: "Rescisão",
     description: "Calcule quanto vai receber",
     metaDescription:
@@ -28,7 +34,7 @@ export const calculadoras: Calculadora[] = [
   },
   {
     slug: "salario-liquido",
-    href: "/salario-liquido",
+    href: calculadoraHref("salario-liquido"),
     title: "Salário líquido",
     description: "Descubra quanto sobra no contracheque",
     metaDescription:
@@ -38,7 +44,7 @@ export const calculadoras: Calculadora[] = [
   },
   {
     slug: "ferias",
-    href: "/ferias",
+    href: calculadoraHref("ferias"),
     title: "Férias",
     description: "Estime o valor das férias e do abono",
     metaDescription:
@@ -48,7 +54,7 @@ export const calculadoras: Calculadora[] = [
   },
   {
     slug: "decimo-terceiro",
-    href: "/decimo-terceiro",
+    href: calculadoraHref("decimo-terceiro"),
     title: "13º salário",
     description: "Calcule o décimo terceiro proporcional",
     metaDescription:
@@ -58,7 +64,7 @@ export const calculadoras: Calculadora[] = [
   },
   {
     slug: "hora-extra",
-    href: "/hora-extra",
+    href: calculadoraHref("hora-extra"),
     title: "Hora extra",
     description: "Calcule o valor das horas extras",
     metaDescription:

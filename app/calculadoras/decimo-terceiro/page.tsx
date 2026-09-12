@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getCalculadoraBySlug } from "../lib/calculadoras/catalog";
+import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { DecimoTerceiroForm } from "./decimo-terceiro-form";
 
 const calculadora = getCalculadoraBySlug("decimo-terceiro")!;
@@ -59,7 +59,7 @@ export default function DecimoTerceiroPage() {
             a 1ª parcela pode ser paga junto com as férias (CLT art. 145) — veja
             a{" "}
             <a
-              href="/ferias"
+              href="/calculadoras/ferias"
               className="font-medium text-accent hover:underline"
             >
               calculadora de férias
@@ -112,7 +112,7 @@ export default function DecimoTerceiroPage() {
             <dd>
               Para 13º proporcional na rescisão, use a{" "}
               <a
-                href="/rescisao"
+                href="/calculadoras/rescisao"
                 className="font-medium text-accent hover:underline"
               >
                 calculadora de rescisão

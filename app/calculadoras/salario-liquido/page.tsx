@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getCalculadoraBySlug } from "../lib/calculadoras/catalog";
+import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { SalarioLiquidoForm } from "./salario-liquido-form";
 
 const calculadora = getCalculadoraBySlug("salario-liquido")!;
