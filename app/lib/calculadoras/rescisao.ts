@@ -676,6 +676,10 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
 export const SEGURO_DESEMPREGO_CALCULADORA_HREF =
   "/calculadoras/seguro-desemprego";
 export const SEGURO_DESEMPREGO_GUIA_HREF = "/guias/seguro-desemprego";
+export const PEDIDO_DEMISSAO_GUIA_HREF =
+  "/guias/pedido-de-demissao-o-que-recebo";
+export const DEMISSAO_SEM_JUSTA_CAUSA_GUIA_HREF =
+  "/guias/demissao-sem-justa-causa-o-que-recebo";
 
 export type SeguroDesempregoInfo = {
   elegivel: boolean;
@@ -714,11 +718,11 @@ export function getSeguroDesempregoInfo(
     case "pedido_demissao":
       return {
         elegivel: false,
-        titulo: "Seguro-desemprego",
+        titulo: "Pedido de demissão",
         texto:
-          "No pedido de demissão não há direito ao seguro-desemprego. O benefício é destinado a quem foi dispensado sem justa causa.",
-        ctaLabel: "Entenda o seguro-desemprego",
-        href: SEGURO_DESEMPREGO_GUIA_HREF,
+          "Quem pede as contas recebe saldo, 13º e férias proporcionais, em regra sem saque de FGTS e sem seguro-desemprego. O aviso não cumprido pode gerar desconto.",
+        ctaLabel: "O que você recebe no pedido de demissão",
+        href: PEDIDO_DEMISSAO_GUIA_HREF,
       };
     case "com_justa_causa":
       return {

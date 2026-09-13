@@ -69,7 +69,14 @@ export default function SeguroDesempregoGuiaPage() {
           <li>
             Ter sido dispensado <strong className="text-foreground">sem justa causa</strong>{" "}
             (inclui extinção normal do contrato por prazo determinado, quando
-            aplicável);
+            aplicável). As verbas pagas pela empresa estão no{" "}
+            <Link
+              href="/guias/demissao-sem-justa-causa-o-que-recebo"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              guia da demissão sem justa causa
+            </Link>
+            ;
           </li>
           <li>
             Não ter renda própria suficiente para o sustento (inclui atividade
@@ -87,7 +94,15 @@ export default function SeguroDesempregoGuiaPage() {
         <ul className="list-disc space-y-2 pl-5">
           <li>
             <strong className="text-foreground">Pedido de demissão</strong> —
-            quem pede para sair não recebe seguro-desemprego;
+            quem pede para sair não recebe seguro-desemprego. As verbas da
+            rescisão nesse caso estão no{" "}
+            <Link
+              href="/guias/pedido-de-demissao-o-que-recebo"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              guia do pedido de demissão
+            </Link>
+            ;
           </li>
           <li>
             <strong className="text-foreground">Demissão por justa causa</strong>;
@@ -183,6 +198,12 @@ export default function SeguroDesempregoGuiaPage() {
             className="cursor-pointer text-sm font-medium text-accent hover:underline"
           >
             Calculadora de seguro-desemprego
+          </Link>
+          <Link
+            href="/guias/demissao-sem-justa-causa-o-que-recebo"
+            className="cursor-pointer text-sm font-medium text-accent hover:underline"
+          >
+            Demissão sem justa causa: o que recebo?
           </Link>
         </div>
       </div>

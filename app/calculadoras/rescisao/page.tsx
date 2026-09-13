@@ -34,11 +34,26 @@ export default function RescisaoPage() {
             <strong className="text-foreground">Pedido de demissão:</strong>{" "}
             direito a 13º e férias proporcionais, sem multa FGTS. Aviso não
             cumprido (total ou parcial) pode gerar desconto de até 30 dias.
+            Veja o{" "}
+            <Link
+              href="/guias/pedido-de-demissao-o-que-recebo"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              guia do pedido de demissão
+            </Link>
+            .
           </li>
           <li>
             <strong className="text-foreground">Sem justa causa:</strong> todas
             as verbas rescisórias, aviso prévio indenizado (se não trabalhado) e
-            multa de 40% sobre o FGTS.
+            multa de 40% sobre o FGTS. Veja o{" "}
+            <Link
+              href="/guias/demissao-sem-justa-causa-o-que-recebo"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              guia da demissão sem justa causa
+            </Link>
+            .
           </li>
           <li>
             <strong className="text-foreground">Com justa causa:</strong> saldo

@@ -44,6 +44,32 @@ export const guias: Guia[] = [
     atualizadoEm: "2026-09-12",
     fonte: "Portaria Interministerial MPS/MF nº 13/2026",
   },
+  {
+    slug: "pedido-de-demissao-o-que-recebo",
+    href: "/guias/pedido-de-demissao-o-que-recebo",
+    title: "Pedido de demissão: o que recebo?",
+    description: "Verbas, aviso, FGTS e o que não entra",
+    metaDescription:
+      "Guia do pedido de demissão: saldo, 13º e férias proporcionais, aviso de 30 dias, FGTS sem saque e sem seguro-desemprego.",
+    icon: "briefcase",
+    vigencia: "conforme a CLT em vigor",
+    atualizadoEm: "2026-09-12",
+    fonte:
+      "CLT arts. 146, 147, 477 e 487; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990; Lei 7.998/1990",
+  },
+  {
+    slug: "demissao-sem-justa-causa-o-que-recebo",
+    href: "/guias/demissao-sem-justa-causa-o-que-recebo",
+    title: "Demissão sem justa causa: o que recebo?",
+    description: "Verbas, aviso, FGTS, multa de 40% e seguro",
+    metaDescription:
+      "Guia da demissão sem justa causa: saldo, 13º, férias, aviso prévio, multa de 40% do FGTS, saque e seguro-desemprego.",
+    icon: "briefcase",
+    vigencia: "conforme a CLT em vigor",
+    atualizadoEm: "2026-09-12",
+    fonte:
+      "CLT arts. 146, 147, 477 e 487; Lei 12.506/2011; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990, art. 18; Lei 7.998/1990",
+  },
 ];
 
 export function getGuiaBySlug(slug: string): Guia | undefined {

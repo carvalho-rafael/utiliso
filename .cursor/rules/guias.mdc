@@ -14,16 +14,31 @@ Conteúdo em **pt-BR**, uma URL por guia (`/guias/<slug>`). Índice em `/guias`.
 - Links para calculadoras relacionadas quando fizer sentido.
 - **YMYL:** cada guia no catálogo (`app/lib/guias/catalog.ts`) tem `vigencia`, `atualizadoEm` e `fonte`. Exibir com `EditorialMeta` (abaixo do subtítulo) e `EditorialFonte` (antes do rodapé de links). Atualizar `atualizadoEm` só quando o conteúdo mudar — nunca `new Date()` no render.
 
-## Seguro-desemprego (primeiro guia)
+## Seguro-desemprego (`/guias/seguro-desemprego`)
 
-- Rota: `/guias/seguro-desemprego`
 - Direito na dispensa **sem justa causa** (requisitos de vínculo e renda).
 - Sem direito: pedido de demissão, justa causa, acordo (art. 484-A).
 - Benefício **não entra no líquido** da rescisão.
+
+## Pedido de demissão (`/guias/pedido-de-demissao-o-que-recebo`)
+
+- Verbas: saldo, 13º proporcional, férias vencidas e proporcionais + 1/3.
+- Sem saque FGTS, sem multa 40%, sem seguro-desemprego.
+- Aviso do empregado: 30 dias; não cumprido pode gerar desconto (CLT art. 487, § 2º).
+- CTA: calculadora de rescisão.
+
+## Demissão sem justa causa (`/guias/demissao-sem-justa-causa-o-que-recebo`)
+
+- Verbas: saldo, 13º, férias + 1/3, aviso indenizado (se não trabalhado).
+- Aviso do empregador: 30 dias + 3 por ano, até 90 (Lei 12.506/2011).
+- FGTS: saque de 100% + multa 40% (fora do líquido).
+- Seguro-desemprego: pode ter direito; não entra no líquido.
+- CTA: calculadora de rescisão; link para calculadora/guia de seguro.
 
 ## CTA na calculadora de rescisão
 
 Callout no resultado, por motivo:
 
 - **Sem justa causa:** “Calcular seguro-desemprego” → `/calculadoras/seguro-desemprego`.
-- **Demais motivos:** “Entenda o seguro-desemprego” → `/guias/seguro-desemprego`.
+- **Pedido de demissão:** “O que você recebe no pedido de demissão” → `/guias/pedido-de-demissao-o-que-recebo`.
+- **Justa causa e acordo:** “Entenda o seguro-desemprego” → `/guias/seguro-desemprego`.
