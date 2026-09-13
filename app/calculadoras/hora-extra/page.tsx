@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
+import { TABELAS_ANO } from "../../lib/calculadoras/tabelas-2026";
 import { HoraExtraForm } from "./hora-extra-form";
 
 const calculadora = getCalculadoraBySlug("hora-extra")!;
+
+const linkClass =
+  "cursor-pointer font-medium text-accent hover:underline";
 
 export const metadata: Metadata = {
   title: `Calculadora de ${calculadora.title} — Utiliso`,
@@ -18,8 +22,8 @@ export default function HoraExtraPage() {
           Calculadora de Hora Extra
         </h1>
         <p className="text-lg text-muted">
-          Estime o valor das horas extras com adicional de 50% ou 100%, DSR e
-          descontos de INSS e IRRF.
+          Estime o valor das horas extras com o adicional da sua convenção
+          (piso de 50%), DSR e descontos de INSS e IRRF.
         </p>
       </div>
 
@@ -35,14 +39,11 @@ export default function HoraExtraPage() {
             bruto dividido pela jornada mensal (ex.: 44h/semana = divisor 220).
           </li>
           <li>
-            <strong className="text-foreground">Hora extra 50%:</strong>{" "}
-            adicional mínimo de 50% sobre a hora normal em dias úteis (CF art.
-            7º, XVI; CLT art. 59, §1º).
-          </li>
-          <li>
-            <strong className="text-foreground">Hora extra 100%:</strong>{" "}
-            adicional de 100% em domingos e feriados não compensados (Lei
-            605/1949; Súmula 146 TST).
+            <strong className="text-foreground">Adicional:</strong> piso de 50%
+            sobre a hora normal em dias úteis (CF art. 7º, XVI; CLT art. 59,
+            §1º). Informe o percentual da convenção coletiva quando for maior
+            (60%, 70%…). Domingos e feriados não compensados costumam usar 100%
+            (Lei 605/1949; Súmula 146 TST).
           </li>
           <li>
             <strong className="text-foreground">DSR:</strong> repouso semanal
@@ -53,20 +54,14 @@ export default function HoraExtraPage() {
             <strong className="text-foreground">INSS e IRRF:</strong> calculados
             sobre o acréscimo das horas extras no mês (diferença entre o mês
             com e sem extras). Tabelas{" "}
-            <Link
-              href="/tabelas/inss"
-              className="cursor-pointer font-medium text-accent hover:underline"
-            >
+            <Link href="/tabelas/inss" className={linkClass}>
               INSS
             </Link>{" "}
             e{" "}
-            <Link
-              href="/tabelas/irrf"
-              className="cursor-pointer font-medium text-accent hover:underline"
-            >
+            <Link href="/tabelas/irrf" className={linkClass}>
               IRRF
             </Link>{" "}
-            de 2026.
+            de {TABELAS_ANO}.
           </li>
           <li>
             <strong className="text-foreground">FGTS:</strong> 8% depositados
@@ -91,24 +86,28 @@ export default function HoraExtraPage() {
           </div>
           <div>
             <dt className="font-medium text-foreground">
+              Posso usar 60% ou 70% em vez de 50%?
+            </dt>
+            <dd>
+              Sim. O 50% é o mínimo legal. Muitas convenções coletivas fixam
+              adicional maior. Informe o percentual do seu acordo ou CCT em
+              cada linha de horas extras.
+            </dd>
+          </div>
+          <div>
+            <dt className="font-medium text-foreground">
               Hora extra entra no 13º salário e nas férias?
             </dt>
             <dd>
               Sim, quando habituais. O 13º e as férias usam a média das horas
               extras dos últimos meses. Use a{" "}
-              <a
-                href="/calculadoras/decimo-terceiro"
-                className="font-medium text-accent hover:underline"
-              >
+              <Link href="/calculadoras/decimo-terceiro" className={linkClass}>
                 calculadora de 13º salário
-              </a>{" "}
+              </Link>{" "}
               e a{" "}
-              <a
-                href="/calculadoras/ferias"
-                className="font-medium text-accent hover:underline"
-              >
+              <Link href="/calculadoras/ferias" className={linkClass}>
                 calculadora de férias
-              </a>{" "}
+              </Link>{" "}
               com a média de variáveis.
             </dd>
           </div>

@@ -6,6 +6,7 @@ import {
   CalculadoraResultadoAviso,
 } from "../../components/calculadora-resultado-aviso";
 import {
+  ADICIONAL_MINIMO,
   calcularHoraExtra,
   JORNADAS,
   type HoraExtraResultado,
@@ -19,14 +20,19 @@ import {
 const fieldClassBase =
   "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
+type LinhaFormulario = {
+  horas: string;
+  adicional: string;
+};
+
 type CampoFormulario =
   | "salarioBruto"
   | "jornadaCustom"
-  | "horas50"
-  | "horas100"
   | "diasUteis"
   | "diasDsr"
-  | "dependentes";
+  | "dependentes"
+  | `horas-${number}`
+  | `adicional-${number}`;
 
 function classeCampo(comErro: boolean) {
   return comErro
@@ -40,12 +46,20 @@ function parseHoras(value: string): number {
   return Number.parseFloat(trimmed.replace(",", "."));
 }
 
+function parseAdicional(value: string): number {
+  const trimmed = value.trim();
+  if (!trimmed) return Number.NaN;
+  return Number.parseFloat(trimmed.replace(",", "."));
+}
+
 export function HoraExtraForm() {
   const [salarioBruto, setSalarioBruto] = useState("R$ 3.000,00");
   const [jornada, setJornada] = useState<number | "custom">(220);
   const [jornadaCustom, setJornadaCustom] = useState("");
-  const [horas50, setHoras50] = useState("");
-  const [horas100, setHoras100] = useState("");
+  const [linhas, setLinhas] = useState<LinhaFormulario[]>([
+    { horas: "", adicional: "50" },
+    { horas: "", adicional: "100" },
+  ]);
   const [incluirDsr, setIncluirDsr] = useState(true);
   const [diasUteis, setDiasUteis] = useState("25");
   const [diasDsr, setDiasDsr] = useState("5");
@@ -70,14 +84,35 @@ export function HoraExtraForm() {
     setCamposErro([]);
   }
 
+  function atualizarLinha(
+    indice: number,
+    campo: keyof LinhaFormulario,
+    valor: string,
+  ) {
+    setLinhas((atuais) =>
+      atuais.map((linha, i) =>
+        i === indice ? { ...linha, [campo]: valor } : linha,
+      ),
+    );
+    limparResultado();
+  }
+
+  function adicionarLinha() {
+    setLinhas((atuais) => [...atuais, { horas: "", adicional: "50" }]);
+    limparResultado();
+  }
+
+  function removerLinha(indice: number) {
+    setLinhas((atuais) => atuais.filter((_, i) => i !== indice));
+    limparResultado();
+  }
+
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setErro(null);
     setCamposErro([]);
 
     const salario = parseMoeda(salarioBruto);
-    const numHoras50 = parseHoras(horas50);
-    const numHoras100 = parseHoras(horas100);
     const numDependentes = Number.parseInt(dependentes, 10);
 
     if (salario <= 0) {
@@ -102,24 +137,38 @@ export function HoraExtraForm() {
       jornadaMensal = jornada;
     }
 
-    if (Number.isNaN(numHoras50) || numHoras50 < 0) {
-      reportarErro("Informe horas extras 50% válidas (0 ou mais).", [
-        "horas50",
-      ]);
-      return;
+    const linhasCalculadas: { horas: number; adicionalPercentual: number }[] =
+      [];
+
+    for (const [indice, linha] of linhas.entries()) {
+      const horas = parseHoras(linha.horas);
+      const campoHoras = `horas-${indice}` as const;
+      const campoAdicional = `adicional-${indice}` as const;
+
+      if (Number.isNaN(horas) || horas < 0) {
+        reportarErro("Informe horas extras válidas (0 ou mais).", [campoHoras]);
+        return;
+      }
+
+      if (horas === 0) {
+        continue;
+      }
+
+      const adicional = parseAdicional(linha.adicional);
+      if (Number.isNaN(adicional) || adicional < ADICIONAL_MINIMO) {
+        reportarErro(
+          `Informe um adicional de pelo menos ${ADICIONAL_MINIMO}% (piso da CF/CLT; a convenção pode ser maior).`,
+          [campoAdicional],
+        );
+        return;
+      }
+
+      linhasCalculadas.push({ horas, adicionalPercentual: adicional });
     }
 
-    if (Number.isNaN(numHoras100) || numHoras100 < 0) {
-      reportarErro("Informe horas extras 100% válidas (0 ou mais).", [
-        "horas100",
-      ]);
-      return;
-    }
-
-    if (numHoras50 === 0 && numHoras100 === 0) {
-      reportarErro("Informe ao menos uma hora extra (50% ou 100%).", [
-        "horas50",
-        "horas100",
+    if (linhasCalculadas.length === 0) {
+      reportarErro("Informe ao menos uma hora extra.", [
+        ...linhas.map((_, indice) => `horas-${indice}` as const),
       ]);
       return;
     }
@@ -165,8 +214,7 @@ export function HoraExtraForm() {
       calcularHoraExtra({
         salarioBruto: salario,
         jornadaMensal,
-        horas50: numHoras50,
-        horas100: numHoras100,
+        linhas: linhasCalculadas,
         incluirDsr,
         diasUteis: numDiasUteis,
         diasDsr: numDiasDsr,
@@ -196,7 +244,8 @@ export function HoraExtraForm() {
             aria-describedby={erro ? "hora-extra-erro" : undefined}
           />
           <span className="text-xs text-muted">
-            Remuneração mensal habitual usada como base da hora normal.
+            Remuneração mensal habitual usada como base da hora normal
+            (salário-base e adicionais habituais).
           </span>
         </label>
 
@@ -260,51 +309,69 @@ export function HoraExtraForm() {
           </span>
         </fieldset>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-foreground">
-              Horas extras 50%
-            </span>
-            <input
-              type="text"
-              inputMode="decimal"
-              value={horas50}
-              onChange={(event) => {
-                setHoras50(event.target.value);
-                limparResultado();
-              }}
-              className={classeCampo(campoComErro("horas50"))}
-              placeholder="0"
-              aria-invalid={campoComErro("horas50")}
-              aria-describedby={erro ? "hora-extra-erro" : undefined}
-            />
-            <span className="text-xs text-muted">
-              Dias úteis e horas além da jornada (adicional mínimo de 50%).
-            </span>
-          </label>
-
-          <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-foreground">
-              Horas extras 100%
-            </span>
-            <input
-              type="text"
-              inputMode="decimal"
-              value={horas100}
-              onChange={(event) => {
-                setHoras100(event.target.value);
-                limparResultado();
-              }}
-              className={classeCampo(campoComErro("horas100"))}
-              placeholder="0"
-              aria-invalid={campoComErro("horas100")}
-              aria-describedby={erro ? "hora-extra-erro" : undefined}
-            />
-            <span className="text-xs text-muted">
-              Domingos e feriados não compensados (adicional de 100%).
-            </span>
-          </label>
-        </div>
+        <fieldset className="flex flex-col gap-4">
+          <legend className="text-sm font-medium text-foreground">
+            Horas extras
+          </legend>
+          {linhas.map((linha, indice) => (
+            <div
+              key={indice}
+              className="grid grid-cols-1 gap-4 sm:grid-cols-[1fr_8rem_auto] sm:items-end"
+            >
+              <label className="flex flex-col gap-2">
+                <span className="text-sm text-muted">Horas</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={linha.horas}
+                  onChange={(event) =>
+                    atualizarLinha(indice, "horas", event.target.value)
+                  }
+                  className={classeCampo(campoComErro(`horas-${indice}`))}
+                  placeholder="0"
+                  aria-invalid={campoComErro(`horas-${indice}`)}
+                  aria-describedby={erro ? "hora-extra-erro" : undefined}
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-sm text-muted">Adicional (%)</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={linha.adicional}
+                  onChange={(event) =>
+                    atualizarLinha(indice, "adicional", event.target.value)
+                  }
+                  className={classeCampo(campoComErro(`adicional-${indice}`))}
+                  placeholder={`${ADICIONAL_MINIMO}`}
+                  aria-invalid={campoComErro(`adicional-${indice}`)}
+                  aria-describedby={erro ? "hora-extra-erro" : undefined}
+                />
+              </label>
+              {linhas.length > 1 ? (
+                <button
+                  type="button"
+                  onClick={() => removerLinha(indice)}
+                  className="cursor-pointer self-end pb-3 text-sm font-medium text-accent hover:underline"
+                >
+                  Remover
+                </button>
+              ) : (
+                <span className="hidden sm:block" />
+              )}
+            </div>
+          ))}
+          <span className="text-xs text-muted">
+            {`Piso legal de ${ADICIONAL_MINIMO}% em dias úteis (CF art. 7º, XVI; CLT art. 59, §1º). Convenção coletiva pode ser maior (60%, 70%…). Domingos e feriados não compensados costumam usar 100%.`}
+          </span>
+          <button
+            type="button"
+            onClick={adicionarLinha}
+            className="cursor-pointer self-start text-sm font-medium text-accent hover:underline"
+          >
+            Adicionar outra alíquota
+          </button>
+        </fieldset>
 
         <fieldset className="flex flex-col gap-3">
           <legend className="text-sm font-medium text-foreground">DSR</legend>
@@ -413,18 +480,14 @@ export function HoraExtraForm() {
                 {formatarMoeda(resultado.valorHora)}
               </span>
             </p>
-            <p className="mt-1">
-              Hora extra 50%:{" "}
-              <span className="font-medium text-foreground">
-                {formatarMoeda(resultado.valorHora50)}
-              </span>
-            </p>
-            <p className="mt-1">
-              Hora extra 100%:{" "}
-              <span className="font-medium text-foreground">
-                {formatarMoeda(resultado.valorHora100)}
-              </span>
-            </p>
+            {resultado.valoresHoraExtra.map((item) => (
+              <p key={item.adicionalPercentual} className="mt-1">
+                Hora extra {item.adicionalPercentual}%:{" "}
+                <span className="font-medium text-foreground">
+                  {formatarMoeda(item.valor)}
+                </span>
+              </p>
+            ))}
           </div>
 
           <BreakdownGroup title="Proventos" linhas={resultado.verbas} />
@@ -496,9 +559,9 @@ function BreakdownGroup({
     <div>
       <h3 className="text-sm font-medium text-highlight">{title}</h3>
       <ul className="mt-2 flex flex-col gap-2">
-        {linhas.map((linha) => (
+        {linhas.map((linha, indice) => (
           <li
-            key={linha.label}
+            key={`${linha.label}-${indice}`}
             className="flex justify-between gap-4 text-sm text-foreground"
           >
             <span className="text-muted">{linha.label}</span>

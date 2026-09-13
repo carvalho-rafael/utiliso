@@ -17,20 +17,26 @@ export const JORNADAS = [
   { horas: 180, label: "36h semanais (divisor 180)" },
 ] as const;
 
-/** CF art. 7º, XVI; CLT art. 59, §1º — mínimo 50% em dias úteis. */
-export const ADICIONAL_50 = 0.5;
-
-/** Lei 605/1949; Súmula 146 TST — 100% em domingos e feriados não compensados. */
-export const ADICIONAL_100 = 1;
+/** CF art. 7º, XVI; CLT art. 59, §1º — piso; CCT pode ser maior. */
+export const ADICIONAL_MINIMO = 50;
 
 /** Lei 8.036/1990, art. 15: 8% depositado pelo empregador (não desconta do líquido). */
 const ALIQUOTA_FGTS = 0.08;
 
+export type LinhaHoraExtra = {
+  horas: number;
+  adicionalPercentual: number;
+};
+
+export type ValorHoraExtra = {
+  adicionalPercentual: number;
+  valor: number;
+};
+
 export type HoraExtraInput = {
   salarioBruto: number;
   jornadaMensal: number;
-  horas50: number;
-  horas100: number;
+  linhas: LinhaHoraExtra[];
   incluirDsr: boolean;
   diasUteis: number;
   diasDsr: number;
@@ -46,16 +52,14 @@ export type HoraExtraResultado = {
   liquido: number;
   tabelasAno: number;
   valorHora: number;
-  valorHora50: number;
-  valorHora100: number;
+  valoresHoraExtra: ValorHoraExtra[];
 };
 
 export function calcularHoraExtra(input: HoraExtraInput): HoraExtraResultado {
   const {
     salarioBruto,
     jornadaMensal,
-    horas50,
-    horas100,
+    linhas,
     incluirDsr,
     diasUteis,
     diasDsr,
@@ -65,14 +69,37 @@ export function calcularHoraExtra(input: HoraExtraInput): HoraExtraResultado {
   const verbas: LinhaBreakdown[] = [];
   const descontos: LinhaBreakdown[] = [];
   const fgts: LinhaBreakdown[] = [];
+  const valoresHoraExtra: ValorHoraExtra[] = [];
 
   const valorHora = round2(salarioBruto / jornadaMensal);
-  const valorHora50 = round2(valorHora * (1 + ADICIONAL_50));
-  const valorHora100 = round2(valorHora * (1 + ADICIONAL_100));
+  let extras = 0;
 
-  const he50 = round2(horas50 * valorHora50);
-  const he100 = round2(horas100 * valorHora100);
-  const extras = round2(he50 + he100);
+  for (const linha of linhas) {
+    if (linha.horas <= 0) continue;
+
+    const valorHoraExtra = round2(
+      valorHora * (1 + linha.adicionalPercentual / 100),
+    );
+    const he = round2(linha.horas * valorHoraExtra);
+    extras = round2(extras + he);
+
+    if (
+      !valoresHoraExtra.some(
+        (item) => item.adicionalPercentual === linha.adicionalPercentual,
+      )
+    ) {
+      valoresHoraExtra.push({
+        adicionalPercentual: linha.adicionalPercentual,
+        valor: valorHoraExtra,
+      });
+    }
+
+    verbas.push({
+      label: `Hora extra ${linha.adicionalPercentual}% (${linha.horas}h)`,
+      valor: he,
+      tipo: "verba",
+    });
+  }
 
   const dsr =
     incluirDsr && diasUteis > 0
@@ -80,22 +107,6 @@ export function calcularHoraExtra(input: HoraExtraInput): HoraExtraResultado {
       : 0;
 
   const adicionalTotal = round2(extras + dsr);
-
-  if (he50 > 0) {
-    verbas.push({
-      label: `Hora extra 50% (${horas50}h)`,
-      valor: he50,
-      tipo: "verba",
-    });
-  }
-
-  if (he100 > 0) {
-    verbas.push({
-      label: `Hora extra 100% (${horas100}h)`,
-      valor: he100,
-      tipo: "verba",
-    });
-  }
 
   if (dsr > 0) {
     verbas.push({
@@ -159,7 +170,6 @@ export function calcularHoraExtra(input: HoraExtraInput): HoraExtraResultado {
     liquido,
     tabelasAno: TABELAS_ANO,
     valorHora,
-    valorHora50,
-    valorHora100,
+    valoresHoraExtra,
   };
 }

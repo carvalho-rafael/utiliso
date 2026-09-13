@@ -69,7 +69,7 @@ export const calculadoras: Calculadora[] = [
     title: "Hora extra",
     description: "Calcule o valor das horas extras",
     metaDescription:
-      "Calculadora de hora extra com adicional de 50% e 100%.",
+      "Calculadora de hora extra com adicional livre (piso de 50%), DSR, INSS e IRRF.",
     popular: false,
     icon: "clock",
   },
