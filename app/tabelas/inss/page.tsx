@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TabelaCalculadoraCta } from "../../components/tabela-calculadora-cta";
+import { TabelaFonte, TabelaMeta } from "../../components/tabela-meta";
 import { TabelasRelacionadas } from "../../components/tabelas-relacionadas";
 import { formatarMoeda } from "../../lib/calculadoras/format";
 import {
@@ -30,8 +31,9 @@ export default function TabelaInssPage() {
         </h1>
         <p className="text-lg text-muted">
           Alíquotas progressivas de contribuição previdenciária para empregados
-          CLT, vigentes a partir de janeiro de {TABELAS_ANO}.
+          CLT, vigentes {tabela.vigencia}.
         </p>
+        <TabelaMeta tabela={tabela} />
       </div>
 
       <TabelaCalculadoraCta
@@ -104,6 +106,8 @@ export default function TabelaInssPage() {
           acima desse valor têm a contribuição limitada ao teto — o desconto
           máximo do empregado é de {formatarMoeda(inssMaximo)}.
         </p>
+
+        <TabelaFonte tabela={tabela} />
 
         <h2 className="text-base font-medium text-foreground">
           Perguntas frequentes

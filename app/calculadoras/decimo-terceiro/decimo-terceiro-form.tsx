@@ -1,7 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import {
+  CalculadoraInssLinks,
+  CalculadoraResultadoAviso,
+} from "../../components/calculadora-resultado-aviso";
 import {
   calcularDecimoTerceiro,
   type DecimoTerceiroResultado,
@@ -232,10 +235,7 @@ export function DecimoTerceiroForm() {
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
-            <p className="mt-1 text-sm text-muted">
-              Estimativa com tabelas INSS/IRRF {resultado.tabelasAno}. Não
-              substitui contador, advogado ou departamento pessoal.
-            </p>
+            <CalculadoraResultadoAviso ano={resultado.tabelasAno} />
           </div>
 
           <div className="flex flex-col gap-3 rounded-lg border border-border bg-background p-4">
@@ -311,12 +311,7 @@ export function DecimoTerceiroForm() {
               cada faixa salarial tem sua alíquota, aplicada só sobre a parcela
               do salário dentro da faixa.
             </p>
-            <Link
-              href="/guias/calculo-inss"
-              className="mt-3 inline-block cursor-pointer text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              Ver guia do cálculo do INSS
-            </Link>
+            <CalculadoraInssLinks ano={resultado.tabelasAno} />
           </aside>
         </section>
       )}

@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  EditorialFonte,
+  EditorialMeta,
+} from "../../components/tabela-meta";
 import { SEGURO_DESEMPREGO_CALCULADORA_HREF } from "../../lib/calculadoras/rescisao";
 import { getGuiaBySlug } from "../../lib/guias/catalog";
 
@@ -21,6 +25,7 @@ export default function SeguroDesempregoGuiaPage() {
           Entenda quem tem direito, quantas parcelas receber e como solicitar o
           benefício.
         </p>
+        <EditorialMeta conteudo={guia} />
       </div>
 
       <aside
@@ -160,6 +165,8 @@ export default function SeguroDesempregoGuiaPage() {
             </dd>
           </div>
         </dl>
+
+        <EditorialFonte conteudo={guia} />
       </section>
 
       <div className="flex flex-col gap-3 border-t border-border pt-6">

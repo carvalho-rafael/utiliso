@@ -1,0 +1,30 @@
+---
+description: Páginas de tabelas oficiais (INSS, IRRF, etc.) para SEO e YMYL
+globs: app/tabelas/**/*,app/lib/tabelas/**/*,app/components/tabela*.tsx,app/components/home-tabelas.tsx
+alwaysApply: false
+---
+
+# Tabelas trabalhistas
+
+URLs em `/tabelas` (índice) e `/tabelas/<slug>`. Catálogo: `app/lib/tabelas/catalog.ts`.
+
+## Conteúdo obrigatório (YMYL)
+
+Cada página de tabela deve exibir:
+
+| Campo | Significado | Onde |
+|---|---|---|
+| **Vigência** | Quando a tabela do governo passou a valer | `tabela.vigencia` + subtítulo |
+| **Atualizado em** | Quando a página foi revisada no Utiliso | `tabela.atualizadoEm` via `EditorialMeta` / `TabelaMeta` |
+| **Fonte** | Ato/órgão oficial | `tabela.fonte` via `EditorialFonte` / `TabelaFonte` |
+
+Também: H1 com o ano, tabela HTML a partir das constantes de cálculo, FAQ curto, aviso de estimativa, CTA para a calculadora relacionada.
+
+## Regras
+
+- Uma fonte de verdade: números vêm de `tabelas-2026.ts` / `seguro-desemprego.ts`, não hardcode na página.
+- Ano no H1/title, **não** no path (`/tabelas/inss`, não `/tabelas/inss-2026`).
+- Atualizar `atualizadoEm` só quando mudar valor, fonte ou texto relevante — não a cada deploy.
+- Nunca `new Date()` para “Atualizado em”.
+- Distinguir vigência (governo) de revisão editorial (Utiliso).
+- Link cruzado com guias e calculadoras; não duplicar o guia inteiro na página da tabela.

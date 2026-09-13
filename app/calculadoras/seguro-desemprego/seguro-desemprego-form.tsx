@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { CalculadoraResultadoAviso } from "../../components/calculadora-resultado-aviso";
 import {
   formatarMoeda,
   formatarMoedaInput,
@@ -299,10 +300,10 @@ export function SeguroDesempregoForm() {
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
-            <p className="mt-1 text-sm text-muted">
-              Estimativa com tabela MTE {resultado.tabelasAno} (INPC). Não
-              substitui contador, advogado ou departamento pessoal.
-            </p>
+            <CalculadoraResultadoAviso
+              ano={resultado.tabelasAno}
+              variant="seguro"
+            />
           </div>
 
           {!resultado.elegivel ? (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TabelaCalculadoraCta } from "../../components/tabela-calculadora-cta";
+import { TabelaFonte, TabelaMeta } from "../../components/tabela-meta";
 import { TabelasRelacionadas } from "../../components/tabelas-relacionadas";
 import { formatarMoeda } from "../../lib/calculadoras/format";
 import {
@@ -29,8 +30,9 @@ export default function TabelaSeguroDesempregoPage() {
         </h1>
         <p className="text-lg text-muted">
           Piso, teto e faixas do benefício após demissão sem justa causa,
-          vigentes a partir de 11 de janeiro de {SEGURO_DESEMPREGO_ANO}.
+          vigentes {tabela.vigencia}.
         </p>
+        <TabelaMeta tabela={tabela} />
       </div>
 
       <TabelaCalculadoraCta
@@ -116,6 +118,8 @@ export default function TabelaSeguroDesempregoPage() {
           {formatarMoeda(SEGURO_TETO)}. O benefício não entra no líquido da
           rescisão — é solicitado separadamente após a demissão sem justa causa.
         </p>
+
+        <TabelaFonte tabela={tabela} />
 
         <h2 className="text-base font-medium text-foreground">
           Perguntas frequentes

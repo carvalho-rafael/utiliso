@@ -1,7 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import {
+  CalculadoraInssLinks,
+  CalculadoraResultadoAviso,
+} from "../../components/calculadora-resultado-aviso";
 import {
   calcularHoraExtra,
   JORNADAS,
@@ -400,10 +403,7 @@ export function HoraExtraForm() {
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
-            <p className="mt-1 text-sm text-muted">
-              Estimativa com tabelas INSS/IRRF {resultado.tabelasAno}. Não
-              substitui contador, advogado ou departamento pessoal.
-            </p>
+            <CalculadoraResultadoAviso ano={resultado.tabelasAno} />
           </div>
 
           <div className="rounded-lg border border-border bg-background p-4 text-sm text-muted">
@@ -473,12 +473,7 @@ export function HoraExtraForm() {
               do salário dentro da faixa. Os descontos aqui são a diferença
               entre o mês com horas extras e o mês sem elas.
             </p>
-            <Link
-              href="/guias/calculo-inss"
-              className="mt-3 inline-block cursor-pointer text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              Ver guia do cálculo do INSS
-            </Link>
+            <CalculadoraInssLinks ano={resultado.tabelasAno} />
           </aside>
         </section>
       )}

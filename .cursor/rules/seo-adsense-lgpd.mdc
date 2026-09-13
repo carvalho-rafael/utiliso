@@ -30,6 +30,16 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 
 Cada página tem título, meta description, H1 e texto único (como funciona, FAQ). Não publicar só o formulário — thin content não indexa.
 
+## Tabelas (YMYL)
+
+Páginas em `/tabelas/<slug>` são conteúdo financeiro (YMYL). Cada uma deve ter:
+
+1. **Vigência** — quando a tabela oficial passou a valer (ex.: “a partir de janeiro de 2026”).
+2. **Atualizado em** — data de revisão editorial da página (ISO no catálogo `atualizadoEm`). Atualizar só quando números, fonte ou texto relevante mudarem — **nunca** usar `new Date()` no render.
+3. **Fonte** — ato/órgão oficial (Portaria, Receita, MTE/CODEFAT, etc.), no catálogo `fonte` e bloco “Fonte” na página.
+
+Campos em `app/lib/tabelas/catalog.ts`; UI em `EditorialMeta` / `EditorialFonte` (aliases `TabelaMeta` / `TabelaFonte`). Não misturar vigência com data de revisão.
+
 A home lista calculadoras, tabelas e guias. Nav: `Calculadoras | Guias | Sobre`. Rodapé: link para `/privacidade` e reabrir preferências de cookies.
 
 ## Analytics (GA4)

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { RescisaoForm } from "./rescisao-form";
 
@@ -61,11 +62,17 @@ export default function RescisaoPage() {
               Quais verbas têm IRRF?
             </dt>
             <dd>
-              Só o saldo de salário (tabela mensal) e o 13º proporcional
-              (tributação exclusiva). Férias indenizadas com 1/3, aviso prévio
-              indenizado e a multa do FGTS são isentos. O redutor de 2026 zera
-              o imposto quando o rendimento tributável de cada base fica até R$
-              5.000.
+              Só o saldo de salário (
+              <Link
+                href="/tabelas/irrf"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                tabela IRRF
+              </Link>{" "}
+              mensal) e o 13º proporcional (tributação exclusiva). Férias
+              indenizadas com 1/3, aviso prévio indenizado e a multa do FGTS são
+              isentos. O redutor de 2026 zera o imposto quando o rendimento
+              tributável de cada base fica até R$ 5.000.
             </dd>
           </div>
           <div>
@@ -98,7 +105,21 @@ export default function RescisaoPage() {
             </dt>
             <dd>
               Não. É uma estimativa baseada nas informações fornecidas e nas
-              tabelas vigentes. Consulte um profissional para valores oficiais.
+              tabelas vigentes (
+              <Link
+                href="/tabelas/inss"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                INSS
+              </Link>
+              ,{" "}
+              <Link
+                href="/tabelas/irrf"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                IRRF
+              </Link>
+              ). Consulte um profissional para valores oficiais.
             </dd>
           </div>
         </dl>

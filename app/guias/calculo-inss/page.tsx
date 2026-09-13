@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  EditorialFonte,
+  EditorialMeta,
+} from "../../components/tabela-meta";
 import { formatarMoeda } from "../../lib/calculadoras/format";
 import {
   calcularINSS,
@@ -73,6 +77,7 @@ export default function CalculoInssGuiaPage() {
           Entenda a tabela progressiva, as alíquotas e como o desconto é
           calculado na folha de pagamento.
         </p>
+        <EditorialMeta conteudo={guia} />
       </div>
 
       <aside
@@ -297,6 +302,8 @@ export default function CalculoInssGuiaPage() {
             </dd>
           </div>
         </dl>
+
+        <EditorialFonte conteudo={guia} />
       </section>
 
       <div className="flex flex-col gap-3 border-t border-border pt-6">

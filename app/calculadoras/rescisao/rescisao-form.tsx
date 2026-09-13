@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { CalculadoraResultadoAviso } from "../../components/calculadora-resultado-aviso";
 import {
   formatarMoeda,
   formatarMoedaInput,
@@ -413,10 +414,7 @@ export function RescisaoForm() {
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
-            <p className="mt-1 text-sm text-muted">
-              Estimativa com tabelas INSS/IRRF {resultado.tabelasAno}. Não
-              substitui contador, advogado ou departamento pessoal.
-            </p>
+            <CalculadoraResultadoAviso ano={resultado.tabelasAno} />
           </div>
 
           <aside

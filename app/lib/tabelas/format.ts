@@ -18,3 +18,15 @@ export function formatarFaixa(de: number, ate: number | null): string {
   }
   return `De ${formatarMoeda(de)} a ${formatarMoeda(ate)}`;
 }
+
+/** Formata ISO YYYY-MM-DD para exibição em pt-BR (ex.: 12 de setembro de 2026). */
+export function formatarDataAtualizacao(isoDate: string): string {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return date.toLocaleDateString("pt-BR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}

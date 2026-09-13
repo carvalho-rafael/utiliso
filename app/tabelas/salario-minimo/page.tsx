@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TabelaCalculadoraCta } from "../../components/tabela-calculadora-cta";
+import { TabelaFonte, TabelaMeta } from "../../components/tabela-meta";
 import { TabelasRelacionadas } from "../../components/tabelas-relacionadas";
 import { formatarMoeda } from "../../lib/calculadoras/format";
 import {
@@ -26,9 +27,10 @@ export default function TabelaSalarioMinimoPage() {
           Salário mínimo {TABELAS_ANO}
         </h1>
         <p className="text-lg text-muted">
-          Valor nacional vigente a partir de 1º de janeiro de {TABELAS_ANO} e
-          relação com outras tabelas trabalhistas.
+          Valor nacional vigente {tabela.vigencia} e relação com outras tabelas
+          trabalhistas.
         </p>
+        <TabelaMeta tabela={tabela} />
       </div>
 
       <TabelaCalculadoraCta
@@ -132,6 +134,8 @@ export default function TabelaSalarioMinimoPage() {
           </Link>
           .
         </p>
+
+        <TabelaFonte tabela={tabela} />
 
         <h2 className="text-base font-medium text-foreground">
           Perguntas frequentes

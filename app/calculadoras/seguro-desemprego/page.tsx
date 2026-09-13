@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import {
   SEGURO_FAIXA1_LIMITE,
@@ -51,7 +52,14 @@ export default function SeguroDesempregoPage() {
             {formatarMoeda(SEGURO_FAIXA1_LIMITE + 0.01)} a{" "}
             {formatarMoeda(SEGURO_FAIXA2_LIMITE)}, R$ 1.777,74 + 50% do
             excedente; acima disso, teto de {formatarMoeda(SEGURO_TETO)}. Piso:{" "}
-            {formatarMoeda(SEGURO_PISO)} (salário mínimo).
+            {formatarMoeda(SEGURO_PISO)} (
+            <Link
+              href="/tabelas/salario-minimo"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              salário mínimo
+            </Link>
+            ).
           </li>
           <li>
             <strong className="text-foreground">Parcelas:</strong> 3, 4 ou 5
@@ -60,8 +68,15 @@ export default function SeguroDesempregoPage() {
             4º).
           </li>
           <li>
-            <strong className="text-foreground">Tabela:</strong> reajustada pelo
-            INPC, vigente a partir de 11/01/2026 (Resolução CODEFAT nº 957/2022).
+            <strong className="text-foreground">Tabela:</strong>{" "}
+            <Link
+              href="/tabelas/seguro-desemprego"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              tabela MTE/CODEFAT
+            </Link>
+            , reajustada pelo INPC, vigente a partir de 11/01/2026 (Resolução
+            CODEFAT nº 957/2022).
           </li>
         </ul>
 

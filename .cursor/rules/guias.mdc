@@ -12,6 +12,7 @@ Conteúdo em **pt-BR**, uma URL por guia (`/guias/<slug>`). Índice em `/guias`.
 - H1, meta description e texto único (não thin content): explicação, requisitos, FAQ.
 - Aviso de que não substitui contador, advogado ou departamento pessoal.
 - Links para calculadoras relacionadas quando fizer sentido.
+- **YMYL:** cada guia no catálogo (`app/lib/guias/catalog.ts`) tem `vigencia`, `atualizadoEm` e `fonte`. Exibir com `EditorialMeta` (abaixo do subtítulo) e `EditorialFonte` (antes do rodapé de links). Atualizar `atualizadoEm` só quando o conteúdo mudar — nunca `new Date()` no render.
 
 ## Seguro-desemprego (primeiro guia)
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { DecimoTerceiroForm } from "./decimo-terceiro-form";
 
@@ -47,12 +48,26 @@ export default function DecimoTerceiroPage() {
           <li>
             <strong className="text-foreground">INSS:</strong> incide sobre o
             13º bruto inteiro, descontado na 2ª parcela. Tabela progressiva de
-            2026 (Portaria Interministerial MPS/MF nº 13/2026).
+            2026 (
+            <Link
+              href="/tabelas/inss"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              tabela INSS
+            </Link>
+            ).
           </li>
           <li>
             <strong className="text-foreground">IRRF:</strong> tributação
             exclusiva sobre o 13º bruto, também na 2ª parcela. O INSS dedutível
-            e os dependentes entram na base (Lei 15.270/2025).
+            e os dependentes entram na base (Lei 15.270/2025). Veja a{" "}
+            <Link
+              href="/tabelas/irrf"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              tabela IRRF
+            </Link>
+            .
           </li>
           <li>
             <strong className="text-foreground">Adiantamento nas férias:</strong>{" "}
@@ -60,7 +75,7 @@ export default function DecimoTerceiroPage() {
             a{" "}
             <a
               href="/calculadoras/ferias"
-              className="font-medium text-accent hover:underline"
+              className="cursor-pointer font-medium text-accent hover:underline"
             >
               calculadora de férias
             </a>

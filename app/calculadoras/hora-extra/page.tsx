@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { HoraExtraForm } from "./hora-extra-form";
 
@@ -51,8 +52,21 @@ export default function HoraExtraPage() {
           <li>
             <strong className="text-foreground">INSS e IRRF:</strong> calculados
             sobre o acréscimo das horas extras no mês (diferença entre o mês
-            com e sem extras). Tabela progressiva de 2026 (Portaria
-            Interministerial MPS/MF nº 13/2026).
+            com e sem extras). Tabelas{" "}
+            <Link
+              href="/tabelas/inss"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              INSS
+            </Link>{" "}
+            e{" "}
+            <Link
+              href="/tabelas/irrf"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              IRRF
+            </Link>{" "}
+            de 2026.
           </li>
           <li>
             <strong className="text-foreground">FGTS:</strong> 8% depositados

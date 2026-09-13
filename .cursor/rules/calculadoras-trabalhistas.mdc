@@ -27,6 +27,14 @@ Toda calculadora mostra:
 - Aviso de que o resultado é estimativa e não substitui contador, advogado ou o DP
 - Referência às regras/tabelas usadas (ex.: ano da tabela INSS/IRRF)
 
+## Links para tabelas (sem poluir)
+
+Não repetir o bloco Fonte/Atualizado das páginas de tabela acima do formulário.
+
+- No aviso do **resultado**, linkar INSS/IRRF (ou tabela MTE no seguro) via `CalculadoraResultadoAviso`.
+- No texto “Como funciona” / FAQ, hiperlinks inline quando citar tabela ou Portaria.
+- No callout de INSS do resultado, `CalculadoraInssLinks` (guia + tabela).
+
 ## UI das calculadoras
 
 - Botão de calcular e demais CTAs: `cursor-pointer`.

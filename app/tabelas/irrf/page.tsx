@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TabelaCalculadoraCta } from "../../components/tabela-calculadora-cta";
+import { TabelaFonte, TabelaMeta } from "../../components/tabela-meta";
 import { TabelasRelacionadas } from "../../components/tabelas-relacionadas";
 import { formatarMoeda } from "../../lib/calculadoras/format";
 import {
@@ -28,8 +29,9 @@ export default function TabelaIrrfPage() {
         </h1>
         <p className="text-lg text-muted">
           Faixas de imposto de renda retido na fonte na folha de pagamento,
-          vigentes a partir de janeiro de {TABELAS_ANO}.
+          vigentes {tabela.vigencia}.
         </p>
+        <TabelaMeta tabela={tabela} />
       </div>
 
       <TabelaCalculadoraCta
@@ -107,6 +109,8 @@ export default function TabelaIrrfPage() {
           {formatarMoeda(5000.01)} e {formatarMoeda(7350)}, a redução diminui
           progressivamente até zerar.
         </p>
+
+        <TabelaFonte tabela={tabela} />
 
         <h2 className="text-base font-medium text-foreground">
           Perguntas frequentes

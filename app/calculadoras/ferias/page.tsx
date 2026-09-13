@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { FeriasForm } from "./ferias-form";
 
@@ -49,13 +50,26 @@ export default function FeriasPage() {
             <strong className="text-foreground">INSS:</strong> incide sobre
             férias gozadas e o 1/3 constitucional do gozo. Não incide sobre o
             abono pecuniário nem sobre o 1/3 desse abono (Lei 8.212/1991, art.
-            28, § 9º). Tabela progressiva de 2026 (Portaria Interministerial
-            MPS/MF nº 13/2026).
+            28, § 9º). Tabela progressiva de 2026 (
+            <Link
+              href="/tabelas/inss"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              tabela INSS
+            </Link>
+            ).
           </li>
           <li>
             <strong className="text-foreground">IRRF:</strong> incide sobre
             férias gozadas e o 1/3 do gozo. O abono pecuniário e seu 1/3 são
-            isentos (IN RFB 936/2009).
+            isentos (IN RFB 936/2009). Veja a{" "}
+            <Link
+              href="/tabelas/irrf"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              tabela IRRF
+            </Link>
+            .
           </li>
           <li>
             <strong className="text-foreground">13º salário:</strong> a 1ª
