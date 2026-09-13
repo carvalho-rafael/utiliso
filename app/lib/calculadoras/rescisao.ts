@@ -32,6 +32,8 @@ export type RescisaoInput = {
   avisoPrevio: AvisoPrevio;
   /** Aviso trabalhado: null = todos os dias; caso contrário, dias efetivamente trabalhados. */
   diasAvisoTrabalhados: number | null;
+  /** Dependentes para dedução do IRRF (Lei 9.250). */
+  dependentes?: number;
 };
 
 export type LinhaBreakdown = {
@@ -63,6 +65,9 @@ export type RescisaoResultado = {
 /** CLT art. 477, § 6º: pagamento em até 10 dias corridos após o término do contrato. */
 export const PRAZO_PAGAMENTO_RESCISAO_DIAS = 10;
 
+/** Lei 8.036/1990, art. 15: 8% depositado pelo empregador. */
+const ALIQUOTA_FGTS = 0.08;
+
 function diasNoMes(date: Date): number {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 }
@@ -74,7 +79,15 @@ function addDays(date: Date, days: number): Date {
 }
 
 function addMonths(date: Date, months: number): Date {
-  return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
+  const day = date.getDate();
+  const cursor = new Date(date.getFullYear(), date.getMonth() + months, 1);
+  const lastDay = new Date(
+    cursor.getFullYear(),
+    cursor.getMonth() + 1,
+    0,
+  ).getDate();
+  cursor.setDate(Math.min(day, lastDay));
+  return cursor;
 }
 
 function startOfDay(date: Date): Date {
@@ -161,10 +174,55 @@ function saldoSalario(salario: number, data: Date): number {
   return round2((salario / diasMes) * dias);
 }
 
-function decimoTerceiroProporcional(salario: number, referencia: Date): number {
-  const inicioAno = new Date(referencia.getFullYear(), 0, 1);
-  const avos = contarAvos(inicioAno, referencia);
-  return round2((salario / 12) * avos);
+type ParcelaDecimo = {
+  ano: number;
+  avos: number;
+  valor: number;
+};
+
+function laterDate(a: Date, b: Date): Date {
+  return startOfDay(a) >= startOfDay(b) ? startOfDay(a) : startOfDay(b);
+}
+
+function earlierDate(a: Date, b: Date): Date {
+  return startOfDay(a) <= startOfDay(b) ? startOfDay(a) : startOfDay(b);
+}
+
+/**
+ * Lei 4.090/1962: avos do ano da rescisão, a partir da admissão.
+ * Anos anteriores já foram pagos em dezembro. Se o aviso projeta o contrato
+ * (CLT art. 487 § 1º) para o ano seguinte, gera avos nesse ano também.
+ */
+function decimoTerceiroPorAno(
+  salario: number,
+  admissao: Date,
+  referencia: Date,
+  dataComunicacao: Date,
+): ParcelaDecimo[] {
+  const inicio = startOfDay(admissao);
+  const fim = startOfDay(referencia);
+  if (fim < inicio) return [];
+
+  const anoInicial = Math.max(
+    inicio.getFullYear(),
+    startOfDay(dataComunicacao).getFullYear(),
+  );
+  const parcelas: ParcelaDecimo[] = [];
+  for (let ano = anoInicial; ano <= fim.getFullYear(); ano += 1) {
+    const inicioAno = new Date(ano, 0, 1);
+    const fimAno = new Date(ano, 11, 31);
+    const avos = Math.min(
+      12,
+      contarAvos(laterDate(inicio, inicioAno), earlierDate(fim, fimAno)),
+    );
+    if (avos <= 0) continue;
+    parcelas.push({
+      ano,
+      avos,
+      valor: round2((salario / 12) * avos),
+    });
+  }
+  return parcelas;
 }
 
 function feriasProporcionais(
@@ -217,21 +275,36 @@ export function resolverDataFimContrato(params: {
   dataAdmissao: Date;
   dataComunicacao: Date;
   avisoPrevio: AvisoPrevio;
+  /** Pedido com aviso parcial: o contrato encerra no último dia trabalhado. */
+  diasAvisoTrabalhados?: number | null;
 }): Date {
-  const { motivo, dataAdmissao, dataComunicacao, avisoPrevio } = params;
+  const {
+    motivo,
+    dataAdmissao,
+    dataComunicacao,
+    avisoPrevio,
+    diasAvisoTrabalhados,
+  } = params;
   const diasAviso = calcularDiasAviso(motivo, dataAdmissao, dataComunicacao);
 
   const dispensadoPeloEmpregador =
     motivo === "sem_justa_causa" || motivo === "acordo";
 
-  const avisoProjetaContrato =
-    motivo !== "com_justa_causa" &&
-    (avisoPrevio === "trabalhado" ||
-      (dispensadoPeloEmpregador && avisoPrevio === "indenizado"));
+  if (motivo === "com_justa_causa") return dataComunicacao;
 
-  return avisoProjetaContrato
-    ? addDays(dataComunicacao, diasAviso)
-    : dataComunicacao;
+  if (avisoPrevio === "trabalhado") {
+    const diasProj =
+      motivo === "pedido_demissao"
+        ? (diasAvisoTrabalhados ?? diasAviso)
+        : diasAviso;
+    return addDays(dataComunicacao, diasProj);
+  }
+
+  if (dispensadoPeloEmpregador && avisoPrevio === "indenizado") {
+    return addDays(dataComunicacao, diasAviso);
+  }
+
+  return dataComunicacao;
 }
 
 function aplicarFeriasNaoGozadas(
@@ -294,6 +367,7 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
     feriasNaoGozadasIndices,
     avisoPrevio,
     diasAvisoTrabalhados,
+    dependentes = 0,
   } = input;
 
   const verbas: LinhaBreakdown[] = [];
@@ -310,6 +384,7 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
     dataAdmissao,
     dataComunicacao,
     avisoPrevio,
+    diasAvisoTrabalhados,
   });
 
   const avisoProjetaContrato =
@@ -365,13 +440,25 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
   let decimo = 0;
   let feriasProp = { base: 0, terco: 0, total: 0, avos: 0 };
   let avisoIndenizado = 0;
+  const parcelasDecimo =
+    motivo === "com_justa_causa"
+      ? []
+      : decimoTerceiroPorAno(
+          salarioBruto,
+          dataAdmissao,
+          dataFimContrato,
+          dataComunicacao,
+        );
 
   if (motivo !== "com_justa_causa") {
-    decimo = decimoTerceiroProporcional(salarioBruto, dataFimContrato);
-    if (decimo > 0) {
+    const variasAnos = parcelasDecimo.length > 1;
+    for (const parcela of parcelasDecimo) {
+      decimo = round2(decimo + parcela.valor);
       verbas.push({
-        label: "13º salário proporcional",
-        valor: decimo,
+        label: variasAnos
+          ? `13º salário proporcional ${parcela.ano} (${parcela.avos}/12 avos)`
+          : `13º salário proporcional (${parcela.avos}/12 avos)`,
+        valor: parcela.valor,
         tipo: "verba",
       });
     }
@@ -430,18 +517,33 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
     }
   }
 
-  if (motivo === "pedido_demissao" && avisoPrevio === "indenizado") {
-    const descontoAviso = valorAvisoPrevio(salarioBruto, 30);
-    descontos.push({
-      label: "Desconto aviso prévio não cumprido (até 30 dias)",
-      valor: descontoAviso,
-      tipo: "desconto",
-    });
+  if (motivo === "pedido_demissao") {
+    const diasNaoTrabalhados =
+      avisoPrevio === "indenizado"
+        ? 30
+        : avisoTrabalhadoAtivo
+          ? Math.max(0, diasAviso - diasTrabalhadosEfetivos)
+          : 0;
+    const diasDesconto = Math.min(30, diasNaoTrabalhados);
+    if (diasDesconto > 0) {
+      descontos.push({
+        label:
+          diasDesconto === 30
+            ? "Desconto aviso prévio não cumprido (até 30 dias)"
+            : `Desconto aviso prévio não cumprido (${diasDesconto} dias)`,
+        valor: valorAvisoPrevio(salarioBruto, diasDesconto),
+        tipo: "desconto",
+      });
+    }
   }
 
-  // INSS: saldo e 13º em bases próprias. Férias e aviso indenizados não têm INSS.
+  // INSS: saldo e 13º em bases próprias (um 13º por ano civil). Férias e aviso indenizados não têm INSS.
   const inssSalario = calcularINSS(saldo);
-  const inssDecimo = decimo > 0 ? calcularINSS(decimo) : 0;
+  const inssDecimos = parcelasDecimo.map((parcela) => ({
+    ...parcela,
+    inss: parcela.valor > 0 ? calcularINSS(parcela.valor) : 0,
+  }));
+  const variasAnosDecimo = inssDecimos.length > 1;
 
   if (inssSalario > 0) {
     descontos.push({
@@ -450,17 +552,19 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
       tipo: "desconto",
     });
   }
-  if (inssDecimo > 0) {
+  for (const parcela of inssDecimos) {
+    if (parcela.inss <= 0) continue;
     descontos.push({
-      label: "INSS (13º proporcional)",
-      valor: inssDecimo,
+      label: variasAnosDecimo
+        ? `INSS (13º proporcional ${parcela.ano})`
+        : "INSS (13º proporcional)",
+      valor: parcela.inss,
       tipo: "desconto",
     });
   }
 
-  // IRRF: saldo de salário. 13º exclusivo. Férias indenizadas e aviso indenizado são isentos.
-  const irrfMes = calcularIRRF(saldo, inssSalario);
-  const irrfDecimo = decimo > 0 ? calcularIRRF(decimo, inssDecimo) : 0;
+  // IRRF: saldo de salário. 13º exclusivo por ano. Férias indenizadas e aviso indenizado são isentos.
+  const irrfMes = calcularIRRF(saldo, inssSalario, dependentes);
 
   if (irrfMes > 0) {
     descontos.push({
@@ -469,21 +573,49 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
       tipo: "desconto",
     });
   }
-  if (irrfDecimo > 0) {
+  for (const parcela of inssDecimos) {
+    if (parcela.valor <= 0) continue;
+    const irrfDecimo = calcularIRRF(parcela.valor, parcela.inss, dependentes);
+    if (irrfDecimo <= 0) continue;
     descontos.push({
-      label: "IRRF (13º proporcional)",
+      label: variasAnosDecimo
+        ? `IRRF (13º proporcional ${parcela.ano})`
+        : "IRRF (13º proporcional)",
       valor: irrfDecimo,
       tipo: "desconto",
     });
   }
 
-  const mesesFGTS = mesesContrato(dataAdmissao, dataFimContrato);
-  const saldoFGTS = round2(salarioBruto * 0.08 * mesesFGTS);
-  fgts.push({
-    label: "Saldo FGTS estimado (8% mensal)",
-    valor: saldoFGTS,
-    tipo: "info",
-  });
+  const dataBaseFgtsMensal = avisoTrabalhadoAtivo
+    ? dataUltimoDiaTrabalhado
+    : dataComunicacao;
+  const mesesFGTS = mesesContrato(dataAdmissao, dataBaseFgtsMensal);
+  const fgtsMensal = round2(salarioBruto * ALIQUOTA_FGTS * mesesFGTS);
+  const fgtsDecimo = round2(decimo * ALIQUOTA_FGTS);
+  const fgtsAviso = round2(avisoIndenizado * ALIQUOTA_FGTS);
+  const saldoFGTS = round2(fgtsMensal + fgtsDecimo + fgtsAviso);
+
+  if (fgtsMensal > 0) {
+    fgts.push({
+      label: "Saldo FGTS estimado (8% mensal)",
+      valor: fgtsMensal,
+      tipo: "info",
+    });
+  }
+  if (fgtsDecimo > 0) {
+    fgts.push({
+      label: "FGTS sobre 13º proporcional (8%)",
+      valor: fgtsDecimo,
+      tipo: "info",
+    });
+  }
+  if (fgtsAviso > 0) {
+    fgts.push({
+      label: "FGTS sobre aviso indenizado (8%)",
+      valor: fgtsAviso,
+      tipo: "info",
+    });
+  }
 
   if (motivo === "sem_justa_causa") {
     const multa = round2(saldoFGTS * 0.4);
@@ -492,6 +624,13 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
       valor: multa,
       tipo: "info",
     });
+    if (saldoFGTS > 0) {
+      fgts.push({
+        label: "Saque de 100% do FGTS (estimado)",
+        valor: saldoFGTS,
+        tipo: "info",
+      });
+    }
   }
 
   if (motivo === "acordo") {
@@ -545,6 +684,19 @@ export type SeguroDesempregoInfo = {
   ctaLabel: string;
   href: string;
 };
+
+export function getFgtsSaqueNota(motivo: MotivoRescisao): string {
+  switch (motivo) {
+    case "sem_justa_causa":
+      return "Na demissão sem justa causa é possível sacar o saldo da conta e a multa de 40%. Saldo e multa não entram no líquido da rescisão.";
+    case "acordo":
+      return "No acordo (art. 484-A), o saque é de até 80% do saldo e a multa é de 20%. Saldo e multa não entram no líquido da rescisão.";
+    case "pedido_demissao":
+      return "No pedido de demissão, em regra não há saque do FGTS nem multa. O saldo estimado não entra no líquido da rescisão.";
+    case "com_justa_causa":
+      return "Na justa causa, em regra não há saque do FGTS nem multa. O saldo estimado não entra no líquido da rescisão.";
+  }
+}
 
 export function getSeguroDesempregoInfo(
   motivo: MotivoRescisao,

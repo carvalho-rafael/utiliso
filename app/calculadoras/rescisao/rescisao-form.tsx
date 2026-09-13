@@ -14,6 +14,7 @@ import {
   formatarDataExibicao,
   formatarDataInput,
   formatarIntervaloPeriodo,
+  getFgtsSaqueNota,
   getSeguroDesempregoInfo,
   listarPeriodosAquisitivos,
   parseDataInput,
@@ -35,6 +36,7 @@ const fieldClassBase =
 
 type CampoFormulario =
   | "salarioBruto"
+  | "dependentes"
   | "dataAdmissao"
   | "dataComunicacao"
   | "diasAvisoParcial";
@@ -48,6 +50,7 @@ function classeCampo(comErro: boolean) {
 export function RescisaoForm() {
   const [motivo, setMotivo] = useState<MotivoRescisao>("sem_justa_causa");
   const [salarioBruto, setSalarioBruto] = useState("R$ 3.000,00");
+  const [dependentes, setDependentes] = useState("0");
   const [dataAdmissao, setDataAdmissao] = useState("");
   const [dataComunicacao, setDataComunicacao] = useState("");
   const [periodosMarcados, setPeriodosMarcados] = useState<number[]>([]);
@@ -71,6 +74,15 @@ export function RescisaoForm() {
   const avisoDesabilitado = motivo === "com_justa_causa";
   const avisoAtivo = avisoDesabilitado ? "trabalhado" : avisoPrevio;
 
+  const avisoTrabalhadoVisivel =
+    !avisoDesabilitado && avisoPrevio === "trabalhado";
+
+  const diasAvisoTrabalhadosForm = useMemo(() => {
+    if (!avisoTrabalhadoVisivel || avisoTodosDias) return null;
+    const dias = Number.parseInt(diasAvisoParcial, 10);
+    return Number.isNaN(dias) ? null : dias;
+  }, [avisoTrabalhadoVisivel, avisoTodosDias, diasAvisoParcial]);
+
   const periodosAquisitivos = useMemo(() => {
     const admissao = parseDataInput(dataAdmissao);
     const comunicacao = parseDataInput(dataComunicacao);
@@ -81,10 +93,17 @@ export function RescisaoForm() {
       dataAdmissao: admissao,
       dataComunicacao: comunicacao,
       avisoPrevio: avisoAtivo,
+      diasAvisoTrabalhados: diasAvisoTrabalhadosForm,
     });
 
     return listarPeriodosAquisitivos(admissao, fimContrato);
-  }, [dataAdmissao, dataComunicacao, motivo, avisoAtivo]);
+  }, [
+    dataAdmissao,
+    dataComunicacao,
+    motivo,
+    avisoAtivo,
+    diasAvisoTrabalhadosForm,
+  ]);
 
   const feriasNaoGozadas = useMemo(() => {
     const indices = periodosAquisitivos.map((periodo) => periodo.indice);
@@ -97,9 +116,6 @@ export function RescisaoForm() {
     if (!admissao || !comunicacao || comunicacao < admissao) return 30;
     return calcularDiasAviso(motivo, admissao, comunicacao);
   }, [dataAdmissao, dataComunicacao, motivo]);
-
-  const avisoTrabalhadoVisivel =
-    !avisoDesabilitado && avisoPrevio === "trabalhado";
 
   function alternarPeriodoNaoGozado(indice: number) {
     setPeriodosMarcados((atual) =>
@@ -122,10 +138,21 @@ export function RescisaoForm() {
     setCamposErro([]);
 
     const salario = parseMoeda(salarioBruto);
+    const numDependentes = Number.parseInt(dependentes, 10);
     const admissao = parseDataInput(dataAdmissao);
     const comunicacao = parseDataInput(dataComunicacao);
     if (salario <= 0) {
       reportarErro("Informe um salário bruto válido.", ["salarioBruto"]);
+      return;
+    }
+    if (
+      Number.isNaN(numDependentes) ||
+      numDependentes < 0 ||
+      !Number.isInteger(numDependentes)
+    ) {
+      reportarErro("Informe um número válido de dependentes (0 ou mais).", [
+        "dependentes",
+      ]);
       return;
     }
     if (!admissao) {
@@ -177,6 +204,7 @@ export function RescisaoForm() {
         feriasNaoGozadasIndices: feriasNaoGozadas,
         avisoPrevio: avisoDesabilitado ? "trabalhado" : avisoPrevio,
         diasAvisoTrabalhados,
+        dependentes: numDependentes,
       }),
     );
   }
@@ -226,6 +254,30 @@ export function RescisaoForm() {
             aria-invalid={campoComErro("salarioBruto")}
             aria-describedby={erro ? "rescisao-erro" : undefined}
           />
+        </label>
+
+        <label className="flex flex-col gap-2">
+          <span className="text-sm font-medium text-foreground">
+            Dependentes
+          </span>
+          <input
+            type="number"
+            min={0}
+            step={1}
+            value={dependentes}
+            onChange={(event) => {
+              setDependentes(event.target.value);
+              limparResultado();
+            }}
+            className={`${classeCampo(campoComErro("dependentes"))} max-w-[7rem]`}
+            aria-invalid={campoComErro("dependentes")}
+            aria-describedby={erro ? "rescisao-erro" : undefined}
+          />
+          <span className="text-xs text-muted">
+            Filhos, cônjuge ou outros dependentes aceitos pela Receita Federal
+            (R$ 189,59 cada na dedução do IRRF). Só altera o imposto se o
+            rendimento tributável da verba passar de R$ 5.000.
+          </span>
         </label>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -388,7 +440,8 @@ export function RescisaoForm() {
             <span className="text-xs text-muted">
               Se trabalhar menos que o aviso completo, os dias restantes entram
               como aviso indenizado na demissão sem justa causa ou no acordo. No
-              pedido de demissão não há indenização dos dias não trabalhados.
+              pedido de demissão, os dias não trabalhados podem ser descontados
+              (CLT art. 487, § 2º), até 30 dias.
             </span>
           </fieldset>
         )}
@@ -463,7 +516,9 @@ export function RescisaoForm() {
             <BreakdownGroup title="FGTS (estimativa)" linhas={resultado.fgts} />
             {resultado.fgts.length > 0 && (
               <p className="mt-2 text-xs text-muted">
-                Saldo e multa do FGTS não entram no líquido da rescisão.
+                {getFgtsSaqueNota(motivo)} A estimativa soma 8% mensal, 8% sobre
+                o 13º e 8% sobre o aviso indenizado — o saldo real está na conta
+                FGTS.
               </p>
             )}
           </div>

@@ -33,7 +33,7 @@ export default function RescisaoPage() {
           <li>
             <strong className="text-foreground">Pedido de demissão:</strong>{" "}
             direito a 13º e férias proporcionais, sem multa FGTS. Aviso não
-            cumprido pode gerar desconto de até 30 dias.
+            cumprido (total ou parcial) pode gerar desconto de até 30 dias.
           </li>
           <li>
             <strong className="text-foreground">Sem justa causa:</strong> todas
@@ -72,7 +72,8 @@ export default function RescisaoPage() {
               mensal) e o 13º proporcional (tributação exclusiva). Férias
               indenizadas com 1/3, aviso prévio indenizado e a multa do FGTS são
               isentos. O redutor de 2026 zera o imposto quando o rendimento
-              tributável de cada base fica até R$ 5.000.
+              tributável de cada base fica até R$ 5.000. Dependentes entram na
+              dedução legal se forem mais vantajosos que o desconto simplificado.
             </dd>
           </div>
           <div>
@@ -97,6 +98,30 @@ export default function RescisaoPage() {
               demissão sem justa causa, mas o aviso indenizado é de 50%, a multa
               do FGTS é de 20% (com saque de até 80% do saldo) e não há
               seguro-desemprego.
+            </dd>
+          </div>
+          <div>
+            <dt className="font-medium text-foreground">
+              Como entra o 13º proporcional?
+            </dt>
+            <dd>
+              Conta-se 1/12 por mês com 15 dias ou mais de trabalho no ano
+              civil, a partir da admissão (Lei 4.090/1962). O aviso prévio que
+              projeta o contrato (CLT art. 487, § 1º) entra nessa conta: se a
+              projeção cruzar 1º de janeiro, há 13º do ano que fecha e avos do
+              ano seguinte.
+            </dd>
+          </div>
+          <div>
+            <dt className="font-medium text-foreground">
+              Posso sacar o FGTS na rescisão?
+            </dt>
+            <dd>
+              Na demissão sem justa causa, sim (saldo + multa de 40%). No
+              acordo, saque de até 80% e multa de 20%. Pedido de demissão e
+              justa causa, em regra, não permitem saque. A estimativa soma 8%
+              mensal, 8% sobre o 13º e 8% sobre o aviso indenizado — o valor
+              oficial é o da conta FGTS.
             </dd>
           </div>
           <div>
