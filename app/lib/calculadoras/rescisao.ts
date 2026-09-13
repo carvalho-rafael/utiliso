@@ -439,11 +439,9 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
     });
   }
 
-  // INSS: saldo e 13º em bases próprias. Aviso indenizado tem INSS e é isento de IRRF.
+  // INSS: saldo e 13º em bases próprias. Férias e aviso indenizados não têm INSS.
   const inssSalario = calcularINSS(saldo);
   const inssDecimo = decimo > 0 ? calcularINSS(decimo) : 0;
-  const inssAvisoIndenizado =
-    avisoIndenizado > 0 ? calcularINSS(avisoIndenizado) : 0;
 
   if (inssSalario > 0) {
     descontos.push({
@@ -456,13 +454,6 @@ export function calcularRescisao(input: RescisaoInput): RescisaoResultado {
     descontos.push({
       label: "INSS (13º proporcional)",
       valor: inssDecimo,
-      tipo: "desconto",
-    });
-  }
-  if (inssAvisoIndenizado > 0) {
-    descontos.push({
-      label: "INSS (aviso prévio indenizado)",
-      valor: inssAvisoIndenizado,
       tipo: "desconto",
     });
   }

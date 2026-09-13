@@ -21,9 +21,16 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 - `/guias` (índice)
 - `/guias/seguro-desemprego`
 
+**Tabelas** (índice em `/tabelas`):
+
+- `/tabelas/inss`
+- `/tabelas/irrf`
+- `/tabelas/salario-minimo`
+- `/tabelas/seguro-desemprego`
+
 Cada página tem título, meta description, H1 e texto único (como funciona, FAQ). Não publicar só o formulário — thin content não indexa.
 
-A home lista calculadoras e guias. Nav: `Calculadoras | Guias | Sobre`. Rodapé: link para `/privacidade` e reabrir preferências de cookies.
+A home lista calculadoras, tabelas e guias. Nav: `Calculadoras | Guias | Sobre`. Rodapé: link para `/privacidade` e reabrir preferências de cookies.
 
 ## Analytics (GA4)
 

@@ -96,13 +96,12 @@ export function calcularFerias(input: FeriasInput): FeriasResultado {
     });
   }
 
-  const baseINSS = round2(ferias + tercoFerias + abono + tercoAbono);
+  // INSS: só férias gozadas e 1/3 do gozo (Lei 8.212/1991, art. 28, § 9º, e, 6).
+  const baseINSS = round2(ferias + tercoFerias);
   const inss = calcularINSS(baseINSS);
 
-  const rendimentoTributavel = round2(ferias + tercoFerias);
-  const inssDedutivel =
-    baseINSS > 0 ? round2(inss * (rendimentoTributavel / baseINSS)) : 0;
-  const irrf = calcularIRRF(rendimentoTributavel, inssDedutivel, dependentes);
+  const rendimentoTributavel = baseINSS;
+  const irrf = calcularIRRF(rendimentoTributavel, inss, dependentes);
 
   if (inss > 0) {
     descontos.push({
@@ -120,7 +119,8 @@ export function calcularFerias(input: FeriasInput): FeriasResultado {
     });
   }
 
-  const fgtsValor = round2(baseINSS * ALIQUOTA_FGTS);
+  const baseFGTS = round2(ferias + tercoFerias + abono + tercoAbono);
+  const fgtsValor = round2(baseFGTS * ALIQUOTA_FGTS);
   if (fgtsValor > 0) {
     fgts.push({
       label: "FGTS (8% — depositado pelo empregador)",

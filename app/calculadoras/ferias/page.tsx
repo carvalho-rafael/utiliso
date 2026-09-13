@@ -47,14 +47,15 @@ export default function FeriasPage() {
           </li>
           <li>
             <strong className="text-foreground">INSS:</strong> incide sobre
-            férias, 1/3 e abono. Tabela progressiva de 2026 (Portaria
-            Interministerial MPS/MF nº 13/2026).
+            férias gozadas e o 1/3 constitucional do gozo. Não incide sobre o
+            abono pecuniário nem sobre o 1/3 desse abono (Lei 8.212/1991, art.
+            28, § 9º). Tabela progressiva de 2026 (Portaria Interministerial
+            MPS/MF nº 13/2026).
           </li>
           <li>
             <strong className="text-foreground">IRRF:</strong> incide sobre
-            férias e 1/3 constitucional. O abono pecuniário é isento (Lei
-            7.713/1988, art. 6º, V). O INSS dedutível é rateado pela parcela
-            tributável.
+            férias gozadas e o 1/3 do gozo. O abono pecuniário e seu 1/3 são
+            isentos (IN RFB 936/2009).
           </li>
           <li>
             <strong className="text-foreground">13º salário:</strong> a 1ª
@@ -79,11 +80,12 @@ export default function FeriasPage() {
         <dl className="space-y-3">
           <div>
             <dt className="font-medium text-foreground">
-              O abono pecuniário paga Imposto de Renda?
+              O abono pecuniário paga INSS ou Imposto de Renda?
             </dt>
             <dd>
-              Não. O abono pecuniário e seu 1/3 são isentos de IRRF (Lei
-              7.713/1988). O INSS, porém, incide sobre essas verbas.
+              Não. O abono pecuniário e seu 1/3 não integram o
+              salário-de-contribuição do INSS (Lei 8.212/1991, art. 28, § 9º) e
+              são isentos de IRRF (IN RFB 936/2009).
             </dd>
           </div>
           <div>

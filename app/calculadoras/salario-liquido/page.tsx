@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
+import { TABELAS_ANO } from "../../lib/calculadoras/tabelas-2026";
 import { SalarioLiquidoForm } from "./salario-liquido-form";
 
 const calculadora = getCalculadoraBySlug("salario-liquido")!;
@@ -31,13 +33,27 @@ export default function SalarioLiquidoPage() {
           <li>
             <strong className="text-foreground">INSS:</strong> contribuição
             previdenciária progressiva (7,5% a 14%), com teto de R$ 8.475,55 em
-            2026 (Portaria Interministerial MPS/MF nº 13/2026).
+            {TABELAS_ANO} (
+            <Link
+              href="/tabelas/inss"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              tabela INSS
+            </Link>
+            ).
           </li>
           <li>
             <strong className="text-foreground">IRRF:</strong> imposto de renda
             retido na fonte. A base usa o maior entre as deduções legais (INSS +
             R$ 189,59 por dependente) e o desconto simplificado de R$ 607,20.
-            Rendimentos até R$ 5.000 têm o imposto zerado pela Lei 15.270/2025.
+            Rendimentos até R$ 5.000 têm o imposto zerado pela Lei 15.270/2025 (
+            <Link
+              href="/tabelas/irrf"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              tabela IRRF
+            </Link>
+            ).
           </li>
           <li>
             <strong className="text-foreground">Vale-transporte:</strong>{" "}

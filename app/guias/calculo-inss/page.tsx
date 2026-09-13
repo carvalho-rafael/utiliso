@@ -117,7 +117,14 @@ export default function CalculoInssGuiaPage() {
           . O modelo é <strong className="text-foreground">progressivo</strong>:
           cada faixa salarial tem sua alíquota, aplicada apenas sobre a parcela
           do salário dentro daquela faixa — e não sobre o bruto inteiro de uma
-          vez.
+          vez. Consulte também a{" "}
+          <Link
+            href="/tabelas/inss"
+            className="cursor-pointer font-medium text-accent hover:underline"
+          >
+            tabela INSS {TABELAS_ANO}
+          </Link>
+          .
         </p>
 
         <div className="overflow-x-auto rounded-lg border border-border">

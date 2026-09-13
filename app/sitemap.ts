@@ -4,6 +4,7 @@ import {
   calculadoras,
 } from "./lib/calculadoras/catalog";
 import { guias } from "./lib/guias/catalog";
+import { TABELAS_BASE, tabelas } from "./lib/tabelas/catalog";
 import { SITE_URL } from "./lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -12,9 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     CALCULADORAS_BASE,
     ...calculadoras.map((calculadora) => calculadora.href),
     "/guias",
+    TABELAS_BASE,
     "/sobre",
     "/privacidade",
     ...guias.map((guia) => guia.href),
+    ...tabelas.map((tabela) => tabela.href),
   ];
 
   return paginas.map((path) => ({

@@ -1,9 +1,9 @@
 import type { MotivoRescisao } from "./rescisao";
-import { round2 } from "./tabelas-2026";
+import { round2, SALARIO_MINIMO } from "./tabelas-2026";
 
 /** Tabela MTE/CODEFAT vigente a partir de 11/01/2026 (INPC 3,90%). Lei 7.998/1990. */
 export const SEGURO_DESEMPREGO_ANO = 2026;
-export const SEGURO_PISO = 1621;
+export const SEGURO_PISO = SALARIO_MINIMO;
 export const SEGURO_TETO = 2518.65;
 export const SEGURO_FAIXA1_LIMITE = 2222.17;
 export const SEGURO_FAIXA2_LIMITE = 3703.99;

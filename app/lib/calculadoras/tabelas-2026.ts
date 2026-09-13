@@ -1,8 +1,11 @@
 /** Tabelas INSS e IRRF vigentes a partir de janeiro/2026. */
 
+/** Salário mínimo nacional (vigente a partir de 1º de janeiro de 2026). */
+export const SALARIO_MINIMO = 1621;
+
 /** Portaria Interministerial MPS/MF nº 13/2026 — empregado, doméstico e avulso. */
 export const INSS_FAIXAS_EMPREGADO = [
-  { limite: 1621, aliquota: 0.075 },
+  { limite: SALARIO_MINIMO, aliquota: 0.075 },
   { limite: 2902.84, aliquota: 0.09 },
   { limite: 4354.27, aliquota: 0.12 },
   { limite: 8475.55, aliquota: 0.14 },
@@ -36,6 +39,31 @@ const IRRF_FAIXAS = [
   { limite: 4664.68, aliquota: 0.225, deducao: 675.49 },
   { limite: Infinity, aliquota: 0.275, deducao: 908.73 },
 ] as const;
+
+export type FaixaIRRFTabela = {
+  de: number;
+  ate: number | null;
+  aliquota: number;
+  deducao: number;
+};
+
+/** Faixas formatadas para exibição em tabelas e guias. */
+export function listarFaixasIRRFTabela(): FaixaIRRFTabela[] {
+  let anterior = 0;
+  return IRRF_FAIXAS.map((faixa) => {
+    const de = anterior === 0 ? 0 : round2(anterior + 0.01);
+    const ate = faixa.limite === Infinity ? null : faixa.limite;
+    if (faixa.limite !== Infinity) {
+      anterior = faixa.limite;
+    }
+    return {
+      de,
+      ate,
+      aliquota: faixa.aliquota,
+      deducao: faixa.deducao,
+    };
+  });
+}
 
 export const DESCONTO_SIMPLIFICADO_IRRF = 607.2;
 export const DEDUCAO_DEPENDENTE_IRRF = 189.59;
