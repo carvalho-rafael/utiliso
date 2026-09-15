@@ -331,7 +331,14 @@ export function RescisaoForm() {
           {periodosAquisitivos.length === 0 ? (
             <p className="text-sm text-muted">
               Nenhum período aquisitivo completo até a data do contrato. O
-              período atual entra nas férias proporcionais.
+              período atual entra nas{" "}
+              <Link
+                href="/guias/ferias-proporcionais"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                férias proporcionais
+              </Link>
+              .
             </p>
           ) : (
             periodosAquisitivos.map((periodo) => (
@@ -357,8 +364,14 @@ export function RescisaoForm() {
           )}
           <span className="text-xs text-muted">
             Marque os períodos que você ainda não tirou. O período atual entra
-            nas férias proporcionais. Períodos com concessão vencida (CLT art.
-            137) são pagos em dobro.
+            nas{" "}
+            <Link
+              href="/guias/ferias-proporcionais"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              férias proporcionais
+            </Link>
+            . Períodos com concessão vencida (CLT art. 137) são pagos em dobro.
           </span>
         </fieldset>
 

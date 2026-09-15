@@ -45,6 +45,19 @@ export const guias: Guia[] = [
     fonte: "Portaria Interministerial MPS/MF nº 13/2026",
   },
   {
+    slug: "ferias-proporcionais",
+    href: "/guias/ferias-proporcionais",
+    title: "Férias proporcionais na rescisão",
+    description: "Avos, 1/3, quando há direito e quando não",
+    metaDescription:
+      "Guia de férias proporcionais na rescisão: como contar os avos, o 1/3 constitucional, pedido de demissão, justa causa e a diferença para férias gozadas.",
+    icon: "book",
+    vigencia: "conforme a CLT em vigor",
+    atualizadoEm: "2026-09-14",
+    fonte:
+      "CLT arts. 130, 146 e 147; CF art. 7º, XVII; Súmula 171 do TST; Lei 8.212/1991, art. 28, § 9º",
+  },
+  {
     slug: "pedido-de-demissao-o-que-recebo",
     href: "/guias/pedido-de-demissao-o-que-recebo",
     title: "Pedido de demissão: o que recebo?",

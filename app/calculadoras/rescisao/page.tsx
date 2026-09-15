@@ -117,6 +117,24 @@ export default function RescisaoPage() {
           </div>
           <div>
             <dt className="font-medium text-foreground">
+              Como entram as férias proporcionais?
+            </dt>
+            <dd>
+              Conta-se 1/12 por mês com mais de 14 dias no período aquisitivo
+              corrente (aniversário da admissão até o fim do contrato), mais
+              1/3. Não há proporcionais na justa causa. O aviso que projeta o
+              contrato entra nessa conta. Veja o{" "}
+              <Link
+                href="/guias/ferias-proporcionais"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                guia de férias proporcionais na rescisão
+              </Link>
+              .
+            </dd>
+          </div>
+          <div>
+            <dt className="font-medium text-foreground">
               Como entra o 13º proporcional?
             </dt>
             <dd>

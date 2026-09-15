@@ -76,7 +76,11 @@ export default function DemissaoSemJustaCausaGuiaPage() {
           </li>
           <li>
             <strong className="text-foreground">Férias proporcionais</strong> +
-            1/3 (CLT arts. 146 e 147; Súmula 171 do TST);
+            1/3 (CLT arts. 146 e 147; Súmula 171 do TST). Detalhe no{" "}
+            <Link href="/guias/ferias-proporcionais" className={linkClass}>
+              guia de férias proporcionais na rescisão
+            </Link>
+            ;
           </li>
           <li>
             <strong className="text-foreground">Aviso prévio indenizado</strong>{" "}
@@ -288,6 +292,9 @@ export default function DemissaoSemJustaCausaGuiaPage() {
           </Link>
           <Link href="/guias/seguro-desemprego" className={linkClass}>
             Guia de seguro-desemprego
+          </Link>
+          <Link href="/guias/ferias-proporcionais" className={linkClass}>
+            Férias proporcionais na rescisão
           </Link>
           <Link
             href="/guias/pedido-de-demissao-o-que-recebo"

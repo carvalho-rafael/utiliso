@@ -128,14 +128,21 @@ export default function FeriasPage() {
             </dt>
             <dd>
               Não. Férias indenizadas na rescisão têm regras diferentes (por
-              exemplo, isenção de IRRF sobre férias indenizadas). Use a{" "}
-              <a
+              exemplo, isenção de INSS e IRRF). Use a{" "}
+              <Link
                 href="/calculadoras/rescisao"
-                className="font-medium text-accent hover:underline"
+                className="cursor-pointer font-medium text-accent hover:underline"
               >
                 calculadora de rescisão
-              </a>{" "}
-              para esse caso.
+              </Link>{" "}
+              e o{" "}
+              <Link
+                href="/guias/ferias-proporcionais"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                guia de férias proporcionais
+              </Link>
+              .
             </dd>
           </div>
           <div>

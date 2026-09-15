@@ -27,6 +27,14 @@ Conteúdo em **pt-BR**, uma URL por guia (`/guias/<slug>`). Índice em `/guias`.
 - Aviso do empregado: 30 dias; não cumprido pode gerar desconto (CLT art. 487, § 2º).
 - CTA: calculadora de rescisão.
 
+## Férias proporcionais (`/guias/ferias-proporcionais`)
+
+- Verba do período aquisitivo incompleto na rescisão: (salário ÷ 12) × avos + 1/3.
+- Avos: mês com mais de 14 dias no período aquisitivo (aniversário da admissão), não no ano civil.
+- Direito: sem justa causa, pedido (mesmo com menos de 1 ano, Súmula 171) e acordo 484-A. Sem direito na justa causa (vencidas continuam devidas).
+- Indenizadas: sem INSS nem IRRF (Lei 8.212/1991, art. 28, § 9º) — oposto das férias gozadas.
+- CTA: calculadora de rescisão; não usar a calculadora de férias gozadas.
+
 ## Demissão sem justa causa (`/guias/demissao-sem-justa-causa-o-que-recebo`)
 
 - Verbas: saldo, 13º, férias + 1/3, aviso indenizado (se não trabalhado).

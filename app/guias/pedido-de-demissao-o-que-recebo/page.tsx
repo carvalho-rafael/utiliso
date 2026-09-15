@@ -74,7 +74,11 @@ export default function PedidoDemissaoGuiaPage() {
           <li>
             <strong className="text-foreground">Férias proporcionais</strong> +
             1/3, mesmo com menos de um ano de contrato (CLT arts. 146 e 147;
-            Súmula 171 do TST).
+            Súmula 171 do TST). Veja o{" "}
+            <Link href="/guias/ferias-proporcionais" className={linkClass}>
+              guia de férias proporcionais na rescisão
+            </Link>
+            .
           </li>
         </ul>
         <p>
@@ -174,6 +178,11 @@ export default function PedidoDemissaoGuiaPage() {
             <dd>
               Sim, no pedido de demissão. A Súmula 171 do TST garante férias
               proporcionais em qualquer extinção do contrato, salvo justa causa.
+              O{" "}
+              <Link href="/guias/ferias-proporcionais" className={linkClass}>
+                guia de férias proporcionais
+              </Link>{" "}
+              detalha avos, 1/3 e a diferença para férias gozadas.
             </dd>
           </div>
           <div>
@@ -242,6 +251,9 @@ export default function PedidoDemissaoGuiaPage() {
           </Link>
           <Link href="/calculadoras/ferias" className={linkClass}>
             Calculadora de férias
+          </Link>
+          <Link href="/guias/ferias-proporcionais" className={linkClass}>
+            Férias proporcionais na rescisão
           </Link>
           <Link href="/calculadoras/decimo-terceiro" className={linkClass}>
             Calculadora de 13º salário
