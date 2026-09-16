@@ -29,7 +29,7 @@ const SOLICITACOES: { value: SolicitacaoSeguro; label: string }[] = [
 ];
 
 const fieldClassBase =
-  "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+  "w-full rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 type CampoFormulario =
   | "salario1"
@@ -135,12 +135,13 @@ export function SeguroDesempregoForm() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <fieldset className="flex flex-col gap-3">
+    <div className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <fieldset className="flex flex-col gap-2">
           <legend className="text-sm font-medium text-foreground">
             Motivo do desligamento
           </legend>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {MOTIVOS.map((item) => (
             <label
               key={item.value}
@@ -159,12 +160,14 @@ export function SeguroDesempregoForm() {
               {item.label}
             </label>
           ))}
+          </div>
         </fieldset>
 
-        <fieldset className="flex flex-col gap-3">
+        <fieldset className="flex flex-col gap-2">
           <legend className="text-sm font-medium text-foreground">
             Qual solicitação do benefício?
           </legend>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
           {SOLICITACOES.map((item) => (
             <label
               key={item.value}
@@ -183,6 +186,7 @@ export function SeguroDesempregoForm() {
               {item.label}
             </label>
           ))}
+          </div>
         </fieldset>
 
         <label className="flex flex-col gap-2">
@@ -209,7 +213,7 @@ export function SeguroDesempregoForm() {
           </span>
         </label>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           <p className="text-sm font-medium text-foreground">
             Salários do último vínculo
           </p>
@@ -219,6 +223,7 @@ export function SeguroDesempregoForm() {
             salários no vínculo.
           </p>
 
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:items-start">
           <label className="flex flex-col gap-2">
             <span className="text-sm text-muted">Último salário</span>
             <input
@@ -273,6 +278,7 @@ export function SeguroDesempregoForm() {
               aria-describedby={erro ? "seguro-desemprego-erro" : undefined}
             />
           </label>
+          </div>
         </div>
 
         {erro && (
@@ -287,7 +293,7 @@ export function SeguroDesempregoForm() {
 
         <button
           type="submit"
-          className="cursor-pointer rounded-lg bg-highlight px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="cursor-pointer rounded-lg bg-highlight px-4 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           Calcular seguro-desemprego
         </button>
@@ -296,7 +302,7 @@ export function SeguroDesempregoForm() {
       {resultado && (
         <section
           aria-label="Resultado do seguro-desemprego"
-          className="flex flex-col gap-6 rounded-lg border border-border bg-surface p-6"
+          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>

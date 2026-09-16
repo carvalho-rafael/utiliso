@@ -17,7 +17,7 @@ import {
 } from "../../lib/calculadoras/format";
 
 const fieldClassBase =
-  "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+  "w-full rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 type CampoFormulario =
   | "salarioBruto"
@@ -125,104 +125,109 @@ export function FeriasForm() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Salário bruto
-          </span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={salarioBruto}
-            onChange={(event) => {
-              setSalarioBruto(formatarMoedaInput(event.target.value));
-              limparResultado();
-            }}
-            className={classeCampo(campoComErro("salarioBruto"))}
-            placeholder="R$ 0,00"
-            aria-invalid={campoComErro("salarioBruto")}
-            aria-describedby={erro ? "ferias-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Remuneração mensal habitual usada como base das férias.
-          </span>
-        </label>
+    <div className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-start">
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Salário bruto
+            </span>
+            <input
+              type="text"
+              inputMode="numeric"
+              value={salarioBruto}
+              onChange={(event) => {
+                setSalarioBruto(formatarMoedaInput(event.target.value));
+                limparResultado();
+              }}
+              className={classeCampo(campoComErro("salarioBruto"))}
+              placeholder="R$ 0,00"
+              aria-invalid={campoComErro("salarioBruto")}
+              aria-describedby={erro ? "ferias-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Remuneração mensal habitual usada como base das férias.
+            </span>
+          </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Média de variáveis (opcional)
-          </span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={mediaVariaveis}
-            onChange={(event) => {
-              setMediaVariaveis(formatarMoedaInput(event.target.value));
-              limparResultado();
-            }}
-            className={classeCampo(campoComErro("mediaVariaveis"))}
-            placeholder="R$ 0,00"
-            aria-invalid={campoComErro("mediaVariaveis")}
-            aria-describedby={erro ? "ferias-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Média de horas extras, comissões ou outras parcelas habituais
-            incluídas na base das férias.
-          </span>
-        </label>
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Média de variáveis (opcional)
+            </span>
+            <input
+              type="text"
+              inputMode="numeric"
+              value={mediaVariaveis}
+              onChange={(event) => {
+                setMediaVariaveis(formatarMoedaInput(event.target.value));
+                limparResultado();
+              }}
+              className={classeCampo(campoComErro("mediaVariaveis"))}
+              placeholder="R$ 0,00"
+              aria-invalid={campoComErro("mediaVariaveis")}
+              aria-describedby={erro ? "ferias-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Média de horas extras, comissões ou outras parcelas habituais
+              incluídas na base das férias.
+            </span>
+          </label>
+        </div>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Dias de férias (gozo)
-          </span>
-          <input
-            type="number"
-            min={1}
-            max={30}
-            step={1}
-            value={diasGozo}
-            onChange={(event) => {
-              setDiasGozo(event.target.value);
-              limparResultado();
-            }}
-            className={`${classeCampo(campoComErro("diasGozo"))} max-w-[7rem]`}
-            aria-invalid={campoComErro("diasGozo")}
-            aria-describedby={erro ? "ferias-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Período de descanso (até 30 dias). Com abono pecuniário, o gozo fica
-            limitado a 20 dias.
-          </span>
-        </label>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-start">
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Dias de férias (gozo)
+            </span>
+            <input
+              type="number"
+              min={1}
+              max={30}
+              step={1}
+              value={diasGozo}
+              onChange={(event) => {
+                setDiasGozo(event.target.value);
+                limparResultado();
+              }}
+              className={`${classeCampo(campoComErro("diasGozo"))} sm:max-w-[7rem]`}
+              aria-invalid={campoComErro("diasGozo")}
+              aria-describedby={erro ? "ferias-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Período de descanso (até 30 dias). Com abono pecuniário, o gozo
+              fica limitado a 20 dias.
+            </span>
+          </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Dependentes
-          </span>
-          <input
-            type="number"
-            min={0}
-            step={1}
-            value={dependentes}
-            onChange={(event) => {
-              setDependentes(event.target.value);
-              limparResultado();
-            }}
-            className={`${classeCampo(campoComErro("dependentes"))} max-w-[7rem]`}
-            aria-invalid={campoComErro("dependentes")}
-            aria-describedby={erro ? "ferias-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Filhos, cônjuge ou outros dependentes aceitos pela Receita Federal
-            (R$ 189,59 cada na dedução do IRRF).
-          </span>
-        </label>
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Dependentes
+            </span>
+            <input
+              type="number"
+              min={0}
+              step={1}
+              value={dependentes}
+              onChange={(event) => {
+                setDependentes(event.target.value);
+                limparResultado();
+              }}
+              className={`${classeCampo(campoComErro("dependentes"))} sm:max-w-[7rem]`}
+              aria-invalid={campoComErro("dependentes")}
+              aria-describedby={erro ? "ferias-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Filhos, cônjuge ou outros dependentes aceitos pela Receita Federal
+              (R$ 189,59 cada na dedução do IRRF).
+            </span>
+          </label>
+        </div>
 
-        <fieldset className="flex flex-col gap-3">
+        <fieldset className="flex flex-col gap-2">
           <legend className="text-sm font-medium text-foreground">
             Opções
           </legend>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <label className="flex cursor-pointer items-center gap-3 text-sm text-foreground">
             <input
               type="checkbox"
@@ -251,6 +256,7 @@ export function FeriasForm() {
             />
             Adiantar 1ª parcela do 13º salário
           </label>
+          </div>
         </fieldset>
 
         {erro && (
@@ -261,7 +267,7 @@ export function FeriasForm() {
 
         <button
           type="submit"
-          className="cursor-pointer rounded-lg bg-highlight px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="cursor-pointer rounded-lg bg-highlight px-4 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           Calcular férias
         </button>
@@ -270,7 +276,7 @@ export function FeriasForm() {
       {resultado && (
         <section
           aria-label="Resultado das férias"
-          className="flex flex-col gap-6 rounded-lg border border-border bg-surface p-6"
+          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>

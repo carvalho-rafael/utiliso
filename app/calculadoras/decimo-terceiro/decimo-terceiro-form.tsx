@@ -22,7 +22,7 @@ import {
 import { TABELAS_ANO } from "../../lib/calculadoras/tabelas-2026";
 
 const fieldClassBase =
-  "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+  "w-full rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 type CampoFormulario =
   | "salarioBruto"
@@ -132,104 +132,108 @@ export function DecimoTerceiroForm() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Salário bruto
-          </span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={salarioBruto}
-            onChange={(event) => {
-              setSalarioBruto(formatarMoedaInput(event.target.value));
-              limparResultado();
-            }}
-            className={classeCampo(campoComErro("salarioBruto"))}
-            placeholder="R$ 0,00"
-            aria-invalid={campoComErro("salarioBruto")}
-            aria-describedby={erro ? "decimo-terceiro-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Remuneração mensal habitual usada como base do 13º.
-          </span>
-        </label>
+    <div className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-start">
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Salário bruto
+            </span>
+            <input
+              type="text"
+              inputMode="numeric"
+              value={salarioBruto}
+              onChange={(event) => {
+                setSalarioBruto(formatarMoedaInput(event.target.value));
+                limparResultado();
+              }}
+              className={classeCampo(campoComErro("salarioBruto"))}
+              placeholder="R$ 0,00"
+              aria-invalid={campoComErro("salarioBruto")}
+              aria-describedby={erro ? "decimo-terceiro-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Remuneração mensal habitual usada como base do 13º.
+            </span>
+          </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Data de admissão
-          </span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={dataAdmissao}
-            onChange={(event) => {
-              setDataAdmissao(formatarDataInput(event.target.value));
-              limparResultado();
-            }}
-            className={classeCampo(campoComErro("dataAdmissao"))}
-            placeholder="DD/MM/AAAA"
-            aria-invalid={campoComErro("dataAdmissao")}
-            aria-describedby={
-              erro ? "decimo-terceiro-erro" : "decimo-terceiro-admissao-ajuda"
-            }
-          />
-          <span
-            id="decimo-terceiro-admissao-ajuda"
-            className="text-xs text-muted"
-          >
-            {avosPreview !== null && avosPreview > 0
-              ? `${avosPreview}/12 avos em ${TABELAS_ANO}. Só entra o mês com 15 dias ou mais de trabalho.`
-              : `Os avos de ${TABELAS_ANO} são contados a partir desta data. Só entra o mês com 15 dias ou mais (Lei 4.090/1962).`}
-          </span>
-        </label>
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Data de admissão
+            </span>
+            <input
+              type="text"
+              inputMode="numeric"
+              value={dataAdmissao}
+              onChange={(event) => {
+                setDataAdmissao(formatarDataInput(event.target.value));
+                limparResultado();
+              }}
+              className={classeCampo(campoComErro("dataAdmissao"))}
+              placeholder="DD/MM/AAAA"
+              aria-invalid={campoComErro("dataAdmissao")}
+              aria-describedby={
+                erro ? "decimo-terceiro-erro" : "decimo-terceiro-admissao-ajuda"
+              }
+            />
+            <span
+              id="decimo-terceiro-admissao-ajuda"
+              className="text-xs text-muted"
+            >
+              {avosPreview !== null && avosPreview > 0
+                ? `${avosPreview}/12 avos em ${TABELAS_ANO}. Só entra o mês com 15 dias ou mais de trabalho.`
+                : `Os avos de ${TABELAS_ANO} são contados a partir desta data. Só entra o mês com 15 dias ou mais (Lei 4.090/1962).`}
+            </span>
+          </label>
+        </div>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Média de variáveis (opcional)
-          </span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={mediaVariaveis}
-            onChange={(event) => {
-              setMediaVariaveis(formatarMoedaInput(event.target.value));
-              limparResultado();
-            }}
-            className={classeCampo(campoComErro("mediaVariaveis"))}
-            placeholder="R$ 0,00"
-            aria-invalid={campoComErro("mediaVariaveis")}
-            aria-describedby={erro ? "decimo-terceiro-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Média de horas extras, comissões ou outras parcelas habituais
-            incluídas na base do 13º.
-          </span>
-        </label>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-start">
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Média de variáveis (opcional)
+            </span>
+            <input
+              type="text"
+              inputMode="numeric"
+              value={mediaVariaveis}
+              onChange={(event) => {
+                setMediaVariaveis(formatarMoedaInput(event.target.value));
+                limparResultado();
+              }}
+              className={classeCampo(campoComErro("mediaVariaveis"))}
+              placeholder="R$ 0,00"
+              aria-invalid={campoComErro("mediaVariaveis")}
+              aria-describedby={erro ? "decimo-terceiro-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Média de horas extras, comissões ou outras parcelas habituais
+              incluídas na base do 13º.
+            </span>
+          </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Dependentes (opcional)
-          </span>
-          <input
-            type="number"
-            min={0}
-            step={1}
-            value={dependentes}
-            onChange={(event) => {
-              setDependentes(event.target.value);
-              limparResultado();
-            }}
-            className={`${classeCampo(campoComErro("dependentes"))} max-w-[7rem]`}
-            aria-invalid={campoComErro("dependentes")}
-            aria-describedby={erro ? "decimo-terceiro-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Filhos, cônjuge ou outros dependentes aceitos pela Receita Federal
-            (R$ 189,59 cada na dedução do IRRF).
-          </span>
-        </label>
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Dependentes (opcional)
+            </span>
+            <input
+              type="number"
+              min={0}
+              step={1}
+              value={dependentes}
+              onChange={(event) => {
+                setDependentes(event.target.value);
+                limparResultado();
+              }}
+              className={`${classeCampo(campoComErro("dependentes"))} sm:max-w-[7rem]`}
+              aria-invalid={campoComErro("dependentes")}
+              aria-describedby={erro ? "decimo-terceiro-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Filhos, cônjuge ou outros dependentes aceitos pela Receita Federal
+              (R$ 189,59 cada na dedução do IRRF).
+            </span>
+          </label>
+        </div>
 
         {erro && (
           <p
@@ -243,7 +247,7 @@ export function DecimoTerceiroForm() {
 
         <button
           type="submit"
-          className="cursor-pointer rounded-lg bg-highlight px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="cursor-pointer rounded-lg bg-highlight px-4 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           Calcular 13º salário
         </button>
@@ -252,7 +256,7 @@ export function DecimoTerceiroForm() {
       {resultado && (
         <section
           aria-label="Resultado do 13º salário"
-          className="flex flex-col gap-6 rounded-lg border border-border bg-surface p-6"
+          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
@@ -272,7 +276,7 @@ export function DecimoTerceiroForm() {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             <ParcelaCard
               titulo="1ª parcela"
               valor={resultado.primeiraParcela}

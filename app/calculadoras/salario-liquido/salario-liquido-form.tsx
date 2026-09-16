@@ -16,7 +16,7 @@ import {
 } from "../../lib/calculadoras/salario-liquido";
 
 const fieldClassBase =
-  "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+  "w-full rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 type CampoFormulario = "salarioBruto" | "dependentes" | "custoValeTransporte";
 
@@ -99,54 +99,56 @@ export function SalarioLiquidoForm() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Salário bruto
-          </span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={salarioBruto}
-            onChange={(event) => {
-              setSalarioBruto(formatarMoedaInput(event.target.value));
-              limparResultado();
-            }}
-            className={classeCampo(campoComErro("salarioBruto"))}
-            placeholder="R$ 0,00"
-            aria-invalid={campoComErro("salarioBruto")}
-            aria-describedby={erro ? "salario-liquido-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Valor mensal antes dos descontos obrigatórios (INSS e IRRF).
-          </span>
-        </label>
+    <div className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-start">
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Salário bruto
+            </span>
+            <input
+              type="text"
+              inputMode="numeric"
+              value={salarioBruto}
+              onChange={(event) => {
+                setSalarioBruto(formatarMoedaInput(event.target.value));
+                limparResultado();
+              }}
+              className={classeCampo(campoComErro("salarioBruto"))}
+              placeholder="R$ 0,00"
+              aria-invalid={campoComErro("salarioBruto")}
+              aria-describedby={erro ? "salario-liquido-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Valor mensal antes dos descontos obrigatórios (INSS e IRRF).
+            </span>
+          </label>
 
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Dependentes
-          </span>
-          <input
-            type="number"
-            min={0}
-            step={1}
-            value={dependentes}
-            onChange={(event) => {
-              setDependentes(event.target.value);
-              limparResultado();
-            }}
-            className={`${classeCampo(campoComErro("dependentes"))} max-w-[7rem]`}
-            aria-invalid={campoComErro("dependentes")}
-            aria-describedby={erro ? "salario-liquido-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Filhos, cônjuge ou outros dependentes aceitos pela Receita Federal
-            (R$ 189,59 cada na dedução do IRRF).
-          </span>
-        </label>
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-foreground">
+              Dependentes
+            </span>
+            <input
+              type="number"
+              min={0}
+              step={1}
+              value={dependentes}
+              onChange={(event) => {
+                setDependentes(event.target.value);
+                limparResultado();
+              }}
+              className={`${classeCampo(campoComErro("dependentes"))} sm:max-w-[7rem]`}
+              aria-invalid={campoComErro("dependentes")}
+              aria-describedby={erro ? "salario-liquido-erro" : undefined}
+            />
+            <span className="text-xs text-muted">
+              Filhos, cônjuge ou outros dependentes aceitos pela Receita Federal
+              (R$ 189,59 cada na dedução do IRRF).
+            </span>
+          </label>
+        </div>
 
-        <fieldset className="flex flex-col gap-3">
+        <fieldset className="flex flex-col gap-2">
           <legend className="text-sm font-medium text-foreground">
             Vale-transporte
           </legend>
@@ -202,7 +204,7 @@ export function SalarioLiquidoForm() {
 
         <button
           type="submit"
-          className="cursor-pointer rounded-lg bg-highlight px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="cursor-pointer rounded-lg bg-highlight px-4 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           Calcular salário líquido
         </button>
@@ -211,7 +213,7 @@ export function SalarioLiquidoForm() {
       {resultado && (
         <section
           aria-label="Resultado do salário líquido"
-          className="flex flex-col gap-6 rounded-lg border border-border bg-surface p-6"
+          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
