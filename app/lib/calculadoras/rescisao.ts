@@ -137,7 +137,7 @@ function ultimoAniversarioAdmissao(admissao: Date, referencia: Date): Date {
 }
 
 /** Mês conta como avo se trabalhou mais de 14 dias no período. */
-function contarAvos(inicio: Date, fim: Date): number {
+export function contarAvos(inicio: Date, fim: Date): number {
   const start = startOfDay(inicio);
   const end = startOfDay(fim);
   if (end < start) return 0;

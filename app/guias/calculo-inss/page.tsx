@@ -288,7 +288,22 @@ export default function CalculoInssGuiaPage() {
             </dt>
             <dd>
               Sim. O décimo terceiro é tributado separadamente, com a mesma
-              tabela progressiva aplicada ao valor da parcela paga naquele mês.
+              tabela progressiva aplicada ao 13º bruto. A 1ª parcela não tem
+              desconto: o INSS sai na 2ª. Veja o{" "}
+              <Link
+                href="/guias/primeira-parcela-decimo-terceiro"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                guia da 1ª parcela
+              </Link>{" "}
+              e o{" "}
+              <Link
+                href="/guias/segunda-parcela-decimo-terceiro"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                guia da 2ª parcela do 13º
+              </Link>
+              .
             </dd>
           </div>
           <div>
@@ -320,6 +335,18 @@ export default function CalculoInssGuiaPage() {
             className="cursor-pointer text-sm font-medium text-accent hover:underline"
           >
             Calculadora de 13º salário
+          </Link>
+          <Link
+            href="/guias/primeira-parcela-decimo-terceiro"
+            className="cursor-pointer text-sm font-medium text-accent hover:underline"
+          >
+            Primeira parcela do 13º salário
+          </Link>
+          <Link
+            href="/guias/segunda-parcela-decimo-terceiro"
+            className="cursor-pointer text-sm font-medium text-accent hover:underline"
+          >
+            Segunda parcela do 13º salário
           </Link>
           <Link
             href="/calculadoras/rescisao"

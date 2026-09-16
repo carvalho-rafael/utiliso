@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   CalculadoraInssLinks,
   CalculadoraResultadoAviso,
 } from "../../components/calculadora-resultado-aviso";
 import {
+  avosDecimoTerceiroNoAno,
   calcularDecimoTerceiro,
   type DecimoTerceiroResultado,
 } from "../../lib/calculadoras/decimo-terceiro";
@@ -14,6 +15,11 @@ import {
   formatarMoedaInput,
   parseMoeda,
 } from "../../lib/calculadoras/format";
+import {
+  formatarDataInput,
+  parseDataInput,
+} from "../../lib/calculadoras/rescisao";
+import { TABELAS_ANO } from "../../lib/calculadoras/tabelas-2026";
 
 const fieldClassBase =
   "w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
@@ -21,7 +27,7 @@ const fieldClassBase =
 type CampoFormulario =
   | "salarioBruto"
   | "mediaVariaveis"
-  | "mesesTrabalhados"
+  | "dataAdmissao"
   | "dependentes";
 
 function classeCampo(comErro: boolean) {
@@ -33,13 +39,19 @@ function classeCampo(comErro: boolean) {
 export function DecimoTerceiroForm() {
   const [salarioBruto, setSalarioBruto] = useState("R$ 3.000,00");
   const [mediaVariaveis, setMediaVariaveis] = useState("");
-  const [mesesTrabalhados, setMesesTrabalhados] = useState("12");
+  const [dataAdmissao, setDataAdmissao] = useState("");
   const [dependentes, setDependentes] = useState("0");
   const [erro, setErro] = useState<string | null>(null);
   const [camposErro, setCamposErro] = useState<CampoFormulario[]>([]);
   const [resultado, setResultado] = useState<DecimoTerceiroResultado | null>(
     null,
   );
+
+  const admissaoPreview = parseDataInput(dataAdmissao);
+  const avosPreview = useMemo(() => {
+    if (!admissaoPreview) return null;
+    return avosDecimoTerceiroNoAno(admissaoPreview, TABELAS_ANO);
+  }, [admissaoPreview]);
 
   function campoComErro(campo: CampoFormulario) {
     return camposErro.includes(campo);
@@ -64,7 +76,7 @@ export function DecimoTerceiroForm() {
 
     const salario = parseMoeda(salarioBruto);
     const numDependentes = Number.parseInt(dependentes, 10);
-    const numMeses = Number.parseInt(mesesTrabalhados, 10);
+    const admissao = parseDataInput(dataAdmissao);
 
     if (salario <= 0) {
       reportarErro("Informe um salário bruto válido.", ["salarioBruto"]);
@@ -93,15 +105,19 @@ export function DecimoTerceiroForm() {
       return;
     }
 
-    if (
-      Number.isNaN(numMeses) ||
-      numMeses < 1 ||
-      numMeses > 12 ||
-      !Number.isInteger(numMeses)
-    ) {
-      reportarErro("Informe meses trabalhados entre 1 e 12.", [
-        "mesesTrabalhados",
+    if (!admissao) {
+      reportarErro("Informe a data de admissão no formato DD/MM/AAAA.", [
+        "dataAdmissao",
       ]);
+      return;
+    }
+
+    const numMeses = avosDecimoTerceiroNoAno(admissao, TABELAS_ANO);
+    if (numMeses <= 0) {
+      reportarErro(
+        `A data de admissão não gera avos de 13º em ${TABELAS_ANO}.`,
+        ["dataAdmissao"],
+      );
       return;
     }
 
@@ -142,6 +158,35 @@ export function DecimoTerceiroForm() {
 
         <label className="flex flex-col gap-2">
           <span className="text-sm font-medium text-foreground">
+            Data de admissão
+          </span>
+          <input
+            type="text"
+            inputMode="numeric"
+            value={dataAdmissao}
+            onChange={(event) => {
+              setDataAdmissao(formatarDataInput(event.target.value));
+              limparResultado();
+            }}
+            className={classeCampo(campoComErro("dataAdmissao"))}
+            placeholder="DD/MM/AAAA"
+            aria-invalid={campoComErro("dataAdmissao")}
+            aria-describedby={
+              erro ? "decimo-terceiro-erro" : "decimo-terceiro-admissao-ajuda"
+            }
+          />
+          <span
+            id="decimo-terceiro-admissao-ajuda"
+            className="text-xs text-muted"
+          >
+            {avosPreview !== null && avosPreview > 0
+              ? `${avosPreview}/12 avos em ${TABELAS_ANO}. Só entra o mês com 15 dias ou mais de trabalho.`
+              : `Os avos de ${TABELAS_ANO} são contados a partir desta data. Só entra o mês com 15 dias ou mais (Lei 4.090/1962).`}
+          </span>
+        </label>
+
+        <label className="flex flex-col gap-2">
+          <span className="text-sm font-medium text-foreground">
             Média de variáveis (opcional)
           </span>
           <input
@@ -165,31 +210,7 @@ export function DecimoTerceiroForm() {
 
         <label className="flex flex-col gap-2">
           <span className="text-sm font-medium text-foreground">
-            Meses trabalhados no ano
-          </span>
-          <input
-            type="number"
-            min={1}
-            max={12}
-            step={1}
-            value={mesesTrabalhados}
-            onChange={(event) => {
-              setMesesTrabalhados(event.target.value);
-              limparResultado();
-            }}
-            className={`${classeCampo(campoComErro("mesesTrabalhados"))} max-w-[7rem]`}
-            aria-invalid={campoComErro("mesesTrabalhados")}
-            aria-describedby={erro ? "decimo-terceiro-erro" : undefined}
-          />
-          <span className="text-xs text-muted">
-            Cada mês com 15 dias ou mais trabalhados conta como 1/12 do 13º
-            (Lei 4.090/1962).
-          </span>
-        </label>
-
-        <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-foreground">
-            Dependentes
+            Dependentes (opcional)
           </span>
           <input
             type="number"

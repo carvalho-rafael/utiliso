@@ -58,6 +58,32 @@ export const guias: Guia[] = [
       "CLT arts. 130, 146 e 147; CF art. 7º, XVII; Súmula 171 do TST; Lei 8.212/1991, art. 28, § 9º",
   },
   {
+    slug: "primeira-parcela-decimo-terceiro",
+    href: "/guias/primeira-parcela-decimo-terceiro",
+    title: "Primeira parcela do 13º salário",
+    description: "Prazo, valor, descontos e adiantamento nas férias",
+    metaDescription:
+      "Guia da 1ª parcela do 13º salário: prazo de fevereiro a novembro, metade do 13º sem INSS nem IRRF, pedido com as férias e diferença para a 2ª parcela.",
+    icon: "book",
+    vigencia: "conforme as Leis 4.090/1962 e 4.749/1965",
+    atualizadoEm: "2026-09-15",
+    fonte:
+      "Lei 4.090/1962; Lei 4.749/1965; Decreto 57.155/1965; CLT art. 145",
+  },
+  {
+    slug: "segunda-parcela-decimo-terceiro",
+    href: "/guias/segunda-parcela-decimo-terceiro",
+    title: "Segunda parcela do 13º salário",
+    description: "Prazo, descontos de INSS e IRRF e o valor líquido",
+    metaDescription:
+      "Guia da 2ª parcela do 13º salário: prazo até 20 de dezembro, restante menos INSS e IRRF, diferença para a 1ª parcela e para a rescisão.",
+    icon: "book",
+    vigencia: "conforme as Leis 4.090/1962 e 4.749/1965",
+    atualizadoEm: "2026-09-15",
+    fonte:
+      "Lei 4.090/1962; Lei 4.749/1965; Decreto 57.155/1965; Portaria Interministerial MPS/MF nº 13/2026; Lei 15.270/2025",
+  },
+  {
     slug: "pedido-de-demissao-o-que-recebo",
     href: "/guias/pedido-de-demissao-o-que-recebo",
     title: "Pedido de demissão: o que recebo?",

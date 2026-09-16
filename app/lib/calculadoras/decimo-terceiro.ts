@@ -1,3 +1,4 @@
+import { contarAvos } from "./rescisao";
 import {
   calcularINSS,
   calcularIRRF,
@@ -44,6 +45,21 @@ export const PRAZO_SEGUNDA_PARCELA = "Até 20 de dezembro";
 
 /** Lei 8.036/1990, art. 15: 8% depositado pelo empregador (não desconta do líquido). */
 const ALIQUOTA_FGTS = 0.08;
+
+/**
+ * Avos do 13º no ano civil: 1/12 por mês com mais de 14 dias, da admissão
+ * (ou de 1º de janeiro) até 31 de dezembro (Lei 4.090/1962).
+ */
+export function avosDecimoTerceiroNoAno(
+  admissao: Date,
+  ano = TABELAS_ANO,
+): number {
+  const inicioAno = new Date(ano, 0, 1);
+  const fimAno = new Date(ano, 11, 31);
+  if (admissao > fimAno) return 0;
+  const inicio = admissao > inicioAno ? admissao : inicioAno;
+  return Math.min(12, contarAvos(inicio, fimAno));
+}
 
 export function calcularDecimoTerceiro(
   input: DecimoTerceiroInput,

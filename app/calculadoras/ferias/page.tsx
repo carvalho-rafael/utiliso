@@ -73,8 +73,16 @@ export default function FeriasPage() {
           </li>
           <li>
             <strong className="text-foreground">13º salário:</strong> a 1ª
-            parcela (metade do salário) pode ser paga junto com as férias (CLT
-            art. 145) — sem INSS nem IRRF nesta parcela.
+            parcela (metade do salário) pode ser paga junto com as férias se
+            pedida em janeiro (Lei 4.749/1965; CLT art. 145) — sem INSS nem
+            IRRF nesta parcela. Veja o{" "}
+            <Link
+              href="/guias/primeira-parcela-decimo-terceiro"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              guia da 1ª parcela do 13º
+            </Link>
+            .
           </li>
           <li>
             <strong className="text-foreground">Pagamento:</strong> o

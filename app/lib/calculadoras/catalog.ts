@@ -59,7 +59,7 @@ export const calculadoras: Calculadora[] = [
     title: "13º salário",
     description: "Calcule o décimo terceiro proporcional",
     metaDescription:
-      "Calculadora de 13º salário: valor integral e proporcional aos meses trabalhados.",
+      "Calculadora de 13º salário: valor integral e proporcional a partir da data de admissão.",
     popular: true,
     icon: "calendar",
   },

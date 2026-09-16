@@ -35,6 +35,20 @@ Conteúdo em **pt-BR**, uma URL por guia (`/guias/<slug>`). Índice em `/guias`.
 - Indenizadas: sem INSS nem IRRF (Lei 8.212/1991, art. 28, § 9º) — oposto das férias gozadas.
 - CTA: calculadora de rescisão; não usar a calculadora de férias gozadas.
 
+## Primeira parcela do 13º (`/guias/primeira-parcela-decimo-terceiro`)
+
+- Adiantamento de metade do 13º, de 1º de fevereiro a 30 de novembro, sem INSS nem IRRF (Lei 4.749/1965).
+- 2ª parcela: restante − INSS − IRRF, até 20 de dezembro; link para `/guias/segunda-parcela-decimo-terceiro`.
+- Com férias: pedido em janeiro (Lei 4.749/1965, art. 2º).
+- Rescisão: 13º proporcional no acerto, não duas parcelas de calendário; CTA da calculadora de 13º.
+
+## Segunda parcela do 13º (`/guias/segunda-parcela-decimo-terceiro`)
+
+- Acerto de dezembro: 13º bruto − 1ª parcela − INSS − IRRF, até 20 de dezembro (Lei 4.749/1965).
+- INSS e IRRF incidem sobre o 13º bruto inteiro e são retidos nesta parcela (não só sobre a 2ª).
+- Sem 1ª parcela no ano: dezembro leva o 13º líquido (bruto − INSS − IRRF).
+- Rescisão: 13º proporcional no acerto, não duas parcelas de calendário; CTA da calculadora de 13º.
+
 ## Demissão sem justa causa (`/guias/demissao-sem-justa-causa-o-que-recebo`)
 
 - Verbas: saldo, 13º, férias + 1/3, aviso indenizado (se não trabalhado).
