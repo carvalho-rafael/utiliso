@@ -40,6 +40,13 @@ export default function RescisaoPage() {
               className="cursor-pointer font-medium text-accent hover:underline"
             >
               guia do pedido de demissão
+            </Link>{" "}
+            e o{" "}
+            <Link
+              href="/guias/pedi-demissao-preciso-cumprir-aviso"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              guia do aviso no pedido
             </Link>
             .
           </li>

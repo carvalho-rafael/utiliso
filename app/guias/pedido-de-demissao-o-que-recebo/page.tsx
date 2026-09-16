@@ -132,28 +132,18 @@ export default function PedidoDemissaoGuiaPage() {
           Quem pede demissão deve comunicar o empregador com{" "}
           <strong className="text-foreground">30 dias</strong> de antecedência
           (CLT art. 487). Os acréscimos de 3 dias por ano de casa (até 90 dias)
-          valem só quando a empresa dispensa, não no pedido.
+          valem só quando a empresa dispensa, não no pedido. A empresa pode
+          abrir mão do cumprimento; se você não trabalhar o aviso, ela pode
+          descontar até 30 dias. O detalhe — trabalhado, dispensado ou não
+          cumprido — está no{" "}
+          <Link
+            href="/guias/pedi-demissao-preciso-cumprir-aviso"
+            className={linkClass}
+          >
+            guia do aviso no pedido de demissão
+          </Link>
+          .
         </p>
-        <ul className="list-disc space-y-2 pl-5">
-          <li>
-            <strong className="text-foreground">Trabalhado:</strong> você
-            cumpre os 30 dias (ou os dias combinados). O salário desses dias
-            entra no holerite. O contrato segue até o último dia, e o prazo de
-            10 dias para pagar a rescisão conta a partir daí (CLT art. 477, §
-            6º).
-          </li>
-          <li>
-            <strong className="text-foreground">Dispensado pela empresa:</strong>{" "}
-            o empregador pode abrir mão do aviso. Você sai na hora, sem
-            desconto.
-          </li>
-          <li>
-            <strong className="text-foreground">Não cumprido</strong> (total ou
-            parcial): a empresa pode descontar até o equivalente a 30 dias de
-            salário (CLT art. 487, § 2º). Nesse caso o contrato encerra na
-            comunicação, sem projetar 13º e férias pelos dias não trabalhados.
-          </li>
-        </ul>
 
         <h2 className="text-base font-medium text-foreground">
           Prazo para receber
@@ -201,8 +191,14 @@ export default function PedidoDemissaoGuiaPage() {
             </dt>
             <dd>
               A empresa pode descontar os dias não trabalhados, até o limite de
-              30. Se ela dispensar o cumprimento, não há desconto. Combine por
-              escrito para evitar discussão no acerto.
+              30. Se ela dispensar o cumprimento, não há desconto. Veja o{" "}
+              <Link
+                href="/guias/pedi-demissao-preciso-cumprir-aviso"
+                className={linkClass}
+              >
+                guia do aviso no pedido de demissão
+              </Link>
+              .
             </dd>
           </div>
           <div>
@@ -248,6 +244,12 @@ export default function PedidoDemissaoGuiaPage() {
         <div className="flex flex-wrap gap-4">
           <Link href="/calculadoras/rescisao" className={linkClass}>
             Calculadora de rescisão
+          </Link>
+          <Link
+            href="/guias/pedi-demissao-preciso-cumprir-aviso"
+            className={linkClass}
+          >
+            Pedi demissão: preciso cumprir aviso?
           </Link>
           <Link href="/calculadoras/ferias" className={linkClass}>
             Calculadora de férias

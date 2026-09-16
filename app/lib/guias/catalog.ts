@@ -92,9 +92,21 @@ export const guias: Guia[] = [
       "Guia do pedido de demissão: saldo, 13º e férias proporcionais, aviso de 30 dias, FGTS sem saque e sem seguro-desemprego.",
     icon: "briefcase",
     vigencia: "conforme a CLT em vigor",
-    atualizadoEm: "2026-09-12",
+    atualizadoEm: "2026-09-15",
     fonte:
       "CLT arts. 146, 147, 477 e 487; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990; Lei 7.998/1990",
+  },
+  {
+    slug: "pedi-demissao-preciso-cumprir-aviso",
+    href: "/guias/pedi-demissao-preciso-cumprir-aviso",
+    title: "Pedi demissão: preciso cumprir aviso?",
+    description: "30 dias, dispensa pela empresa e desconto se não cumprir",
+    metaDescription:
+      "Guia do aviso no pedido de demissão: 30 dias, se a empresa pode dispensar, desconto se não cumprir e diferença para a demissão sem justa causa.",
+    icon: "briefcase",
+    vigencia: "conforme a CLT em vigor",
+    atualizadoEm: "2026-09-15",
+    fonte: "CLT arts. 477, 487 e 488; Lei 12.506/2011",
   },
   {
     slug: "demissao-sem-justa-causa-o-que-recebo",

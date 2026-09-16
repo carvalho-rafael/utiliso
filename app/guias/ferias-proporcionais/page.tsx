@@ -187,7 +187,14 @@ export default function FeriasProporcionaisGuiaPage() {
         <p>
           No pedido de demissão, aviso não cumprido{" "}
           <strong className="text-foreground">não projeta</strong>: o contrato
-          encerra na comunicação. Na justa causa não há aviso.
+          encerra na comunicação. Na justa causa não há aviso. O{" "}
+          <Link
+            href="/guias/pedi-demissao-preciso-cumprir-aviso"
+            className={linkClass}
+          >
+            guia do aviso no pedido
+          </Link>{" "}
+          detalha trabalhado, dispensado pela empresa e desconto.
         </p>
 
         <h2 className="text-base font-medium text-foreground">
@@ -302,6 +309,12 @@ export default function FeriasProporcionaisGuiaPage() {
             className={linkClass}
           >
             Pedido de demissão: o que recebo?
+          </Link>
+          <Link
+            href="/guias/pedi-demissao-preciso-cumprir-aviso"
+            className={linkClass}
+          >
+            Pedi demissão: preciso cumprir aviso?
           </Link>
           <Link
             href="/guias/demissao-sem-justa-causa-o-que-recebo"

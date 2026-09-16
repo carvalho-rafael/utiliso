@@ -24,8 +24,16 @@ Conteúdo em **pt-BR**, uma URL por guia (`/guias/<slug>`). Índice em `/guias`.
 
 - Verbas: saldo, 13º proporcional, férias vencidas e proporcionais + 1/3.
 - Sem saque FGTS, sem multa 40%, sem seguro-desemprego.
-- Aviso do empregado: 30 dias; não cumprido pode gerar desconto (CLT art. 487, § 2º).
+- Aviso do empregado: 30 dias; não cumprido pode gerar desconto (CLT art. 487, § 2º); detalhe em `/guias/pedi-demissao-preciso-cumprir-aviso`.
 - CTA: calculadora de rescisão.
+
+## Aviso no pedido de demissão (`/guias/pedi-demissao-preciso-cumprir-aviso`)
+
+- Sim, em regra: 30 dias (CLT art. 487). Sem o acréscimo de 3 dias por ano (Lei 12.506/2011).
+- Empresa pode dispensar (sai na hora, sem desconto); não é obrigada.
+- Não cumprido (total ou parcial): desconto de até 30 dias (art. 487, § 2º); sem projeção de 13º/férias.
+- Na calculadora, “indenizado” no pedido é desconto, não verba.
+- CTA: calculadora de rescisão; verbas no guia do pedido.
 
 ## Férias proporcionais (`/guias/ferias-proporcionais`)
 

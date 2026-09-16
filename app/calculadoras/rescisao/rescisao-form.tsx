@@ -404,11 +404,22 @@ export function RescisaoForm() {
               até 90 dias). Indenizado: 50% do aviso na rescisão. Multa FGTS de
               20% e saque de até 80%. Sem seguro-desemprego.
             </span>
+          ) : motivo === "pedido_demissao" ? (
+            <span className="text-xs text-muted">
+              Trabalhado: 30 dias, salário no holerite. Indenizado: desconto de
+              até 30 dias se a empresa não dispensar o cumprimento. Veja o{" "}
+              <Link
+                href="/guias/pedi-demissao-preciso-cumprir-aviso"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                guia do aviso no pedido de demissão
+              </Link>
+              .
+            </span>
           ) : (
             <span className="text-xs text-muted">
-              Trabalhado: salário pago mês a mês no holerite (pedido: 30 dias;
-              sem justa causa: 30 + 3 por ano, até 90). Indenizado: verba na
-              demissão sem justa causa, ou desconto no pedido.
+              Trabalhado: salário pago mês a mês no holerite (30 + 3 por ano,
+              até 90). Indenizado: a empresa paga os dias de aviso.
             </span>
           )}
         </label>
@@ -452,9 +463,15 @@ export function RescisaoForm() {
             </div>
             <span className="text-xs text-muted">
               Se trabalhar menos que o aviso completo, os dias restantes entram
-              como aviso indenizado na demissão sem justa causa ou no acordo. No
-              pedido de demissão, os dias não trabalhados podem ser descontados
-              (CLT art. 487, § 2º), até 30 dias.
+              como aviso indenizado na demissão sem justa causa ou no acordo. No{" "}
+              <Link
+                href="/guias/pedi-demissao-preciso-cumprir-aviso"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                pedido de demissão
+              </Link>
+              , os dias não trabalhados podem ser descontados (CLT art. 487, §
+              2º), até 30 dias.
             </span>
           </fieldset>
         )}

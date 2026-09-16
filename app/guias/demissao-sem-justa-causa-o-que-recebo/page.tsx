@@ -200,7 +200,15 @@ export default function DemissaoSemJustaCausaGuiaPage() {
               pedido de demissão
             </Link>{" "}
             não há multa de 40%, em regra não há saque do FGTS nem
-            seguro-desemprego, e o aviso de 30 dias é obrigação do empregado;
+            seguro-desemprego, e o aviso de 30 dias é obrigação do empregado.
+            Veja o{" "}
+            <Link
+              href="/guias/pedi-demissao-preciso-cumprir-aviso"
+              className={linkClass}
+            >
+              guia do aviso no pedido
+            </Link>
+            ;
           </li>
           <li>
             No <strong className="text-foreground">acordo (art. 484-A)</strong>{" "}
@@ -242,7 +250,14 @@ export default function DemissaoSemJustaCausaGuiaPage() {
             <dd>
               30 dias mais 3 por ano completo na empresa, até 90. Exemplo: 4
               anos de casa → 42 dias. Quem pede demissão deve só 30 dias, sem
-              esse acréscimo.
+              esse acréscimo. Detalhe no{" "}
+              <Link
+                href="/guias/pedi-demissao-preciso-cumprir-aviso"
+                className={linkClass}
+              >
+                guia do aviso no pedido de demissão
+              </Link>
+              .
             </dd>
           </div>
           <div>
@@ -301,6 +316,12 @@ export default function DemissaoSemJustaCausaGuiaPage() {
             className={linkClass}
           >
             Pedido de demissão: o que recebo?
+          </Link>
+          <Link
+            href="/guias/pedi-demissao-preciso-cumprir-aviso"
+            className={linkClass}
+          >
+            Pedi demissão: preciso cumprir aviso?
           </Link>
         </div>
       </div>
