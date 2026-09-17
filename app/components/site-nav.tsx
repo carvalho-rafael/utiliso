@@ -19,7 +19,7 @@ export function SiteNav() {
   return (
     <nav
       aria-label="Principal"
-      className="absolute left-1/2 flex -translate-x-1/2 items-center gap-3"
+      className="flex min-w-0 items-center justify-center gap-2 sm:gap-3"
     >
       <Link href="/calculadoras" className={navLinkClass(isCalculadoras)}>
         Calculadoras
