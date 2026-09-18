@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Geist, Geist_Mono } from "next/font/google";
 import { CookieConsent } from "./components/cookie-consent";
+import { SiteBreadcrumbBar } from "./components/site-breadcrumb-bar";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 import { GA_MEASUREMENT_ID } from "./lib/analytics";
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         <SiteHeader />
+        <SiteBreadcrumbBar />
         {children}
         <SiteFooter />
         <CookieConsent />

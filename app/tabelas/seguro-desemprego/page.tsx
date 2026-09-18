@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function TabelaSeguroDesempregoPage() {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-4 py-12">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-4 pb-12 pt-6">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight text-foreground">
           Tabela seguro-desemprego {SEGURO_DESEMPREGO_ANO}
