@@ -1,8 +1,11 @@
+import type { HubSlug } from "../hubs/types";
+
 export type GuiaIcon = "book" | "briefcase";
 
 export type Guia = {
   slug: string;
   href: string;
+  hub: HubSlug;
   title: string;
   description: string;
   metaDescription: string;
@@ -22,6 +25,7 @@ export const guias: Guia[] = [
   {
     slug: "seguro-desemprego",
     href: "/guias/seguro-desemprego",
+    hub: "trabalho",
     title: "Seguro-desemprego",
     description: "Quem tem direito, parcelas e como solicitar",
     metaDescription:
@@ -35,6 +39,7 @@ export const guias: Guia[] = [
   {
     slug: "calculo-inss",
     href: "/guias/calculo-inss",
+    hub: "trabalho",
     title: "Cálculo do INSS",
     description: "Tabela progressiva e como calcular o desconto",
     metaDescription:
@@ -47,6 +52,7 @@ export const guias: Guia[] = [
   {
     slug: "ferias-proporcionais",
     href: "/guias/ferias-proporcionais",
+    hub: "trabalho",
     title: "Férias proporcionais na rescisão",
     description: "Avos, 1/3, quando há direito e quando não",
     metaDescription:
@@ -60,6 +66,7 @@ export const guias: Guia[] = [
   {
     slug: "primeira-parcela-decimo-terceiro",
     href: "/guias/primeira-parcela-decimo-terceiro",
+    hub: "trabalho",
     title: "Primeira parcela do 13º salário",
     description: "Prazo, valor, descontos e adiantamento nas férias",
     metaDescription:
@@ -73,6 +80,7 @@ export const guias: Guia[] = [
   {
     slug: "segunda-parcela-decimo-terceiro",
     href: "/guias/segunda-parcela-decimo-terceiro",
+    hub: "trabalho",
     title: "Segunda parcela do 13º salário",
     description: "Prazo, descontos de INSS e IRRF e o valor líquido",
     metaDescription:
@@ -86,6 +94,7 @@ export const guias: Guia[] = [
   {
     slug: "pedido-de-demissao-o-que-recebo",
     href: "/guias/pedido-de-demissao-o-que-recebo",
+    hub: "trabalho",
     title: "Pedido de demissão: o que recebo?",
     description: "Verbas, aviso, FGTS e o que não entra",
     metaDescription:
@@ -99,6 +108,7 @@ export const guias: Guia[] = [
   {
     slug: "pedi-demissao-preciso-cumprir-aviso",
     href: "/guias/pedi-demissao-preciso-cumprir-aviso",
+    hub: "trabalho",
     title: "Pedi demissão: preciso cumprir aviso?",
     description: "30 dias, dispensa pela empresa e desconto se não cumprir",
     metaDescription:
@@ -111,6 +121,7 @@ export const guias: Guia[] = [
   {
     slug: "demissao-sem-justa-causa-o-que-recebo",
     href: "/guias/demissao-sem-justa-causa-o-que-recebo",
+    hub: "trabalho",
     title: "Demissão sem justa causa: o que recebo?",
     description: "Verbas, aviso, FGTS, multa de 40% e seguro",
     metaDescription:

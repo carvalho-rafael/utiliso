@@ -577,7 +577,6 @@ export function RescisaoForm() {
           </div>
 
           <CalculadoraResultadoAcoes
-            shareTitle="Calculadora de rescisão — Utiliso"
             texto={montarTextoBreakdownCalculadora({
               tituloCalculadora: "Calculadora de rescisão",
               path: "/calculadoras/rescisao",

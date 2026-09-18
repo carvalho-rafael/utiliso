@@ -327,7 +327,6 @@ export function DecimoTerceiroForm() {
           </div>
 
           <CalculadoraResultadoAcoes
-            shareTitle="Calculadora de 13º salário — Utiliso"
             texto={montarTextoBreakdownCalculadora({
               tituloCalculadora: "Calculadora de 13º salário",
               path: "/calculadoras/decimo-terceiro",

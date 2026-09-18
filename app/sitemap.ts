@@ -6,10 +6,12 @@ import {
 import { guias } from "./lib/guias/catalog";
 import { TABELAS_BASE, tabelas } from "./lib/tabelas/catalog";
 import { SITE_URL } from "./lib/site";
+import { hubs } from "./lib/hubs/catalog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paginas = [
     "",
+    ...hubs.map((hub) => hub.href),
     CALCULADORAS_BASE,
     ...calculadoras.map((calculadora) => calculadora.href),
     "/guias",

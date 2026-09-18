@@ -1,3 +1,5 @@
+import type { HubSlug } from "../hubs/types";
+
 export type CalculatorIcon =
   | "briefcase"
   | "money"
@@ -15,6 +17,7 @@ export function calculadoraHref(slug: string): string {
 export type Calculadora = {
   slug: string;
   href: string;
+  hub: HubSlug;
   title: string;
   description: string;
   metaDescription: string;
@@ -26,6 +29,7 @@ export const calculadoras: Calculadora[] = [
   {
     slug: "rescisao",
     href: calculadoraHref("rescisao"),
+    hub: "trabalho",
     title: "Rescisão",
     description: "Calcule quanto vai receber",
     metaDescription:
@@ -36,6 +40,7 @@ export const calculadoras: Calculadora[] = [
   {
     slug: "salario-liquido",
     href: calculadoraHref("salario-liquido"),
+    hub: "trabalho",
     title: "Salário líquido",
     description: "Descubra quanto sobra no contracheque",
     metaDescription:
@@ -46,6 +51,7 @@ export const calculadoras: Calculadora[] = [
   {
     slug: "ferias",
     href: calculadoraHref("ferias"),
+    hub: "trabalho",
     title: "Férias",
     description: "Estime o valor das férias e do abono",
     metaDescription:
@@ -56,6 +62,7 @@ export const calculadoras: Calculadora[] = [
   {
     slug: "decimo-terceiro",
     href: calculadoraHref("decimo-terceiro"),
+    hub: "trabalho",
     title: "13º salário",
     description: "Calcule o décimo terceiro proporcional",
     metaDescription:
@@ -66,6 +73,7 @@ export const calculadoras: Calculadora[] = [
   {
     slug: "hora-extra",
     href: calculadoraHref("hora-extra"),
+    hub: "trabalho",
     title: "Hora extra",
     description: "Calcule o valor das horas extras",
     metaDescription:
@@ -76,6 +84,7 @@ export const calculadoras: Calculadora[] = [
   {
     slug: "seguro-desemprego",
     href: calculadoraHref("seguro-desemprego"),
+    hub: "trabalho",
     title: "Seguro-desemprego",
     description: "Estime parcelas e valor do benefício",
     metaDescription:

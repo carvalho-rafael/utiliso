@@ -530,7 +530,6 @@ export function HoraExtraForm() {
           </div>
 
           <CalculadoraResultadoAcoes
-            shareTitle="Calculadora de hora extra — Utiliso"
             texto={montarTextoBreakdownCalculadora({
               tituloCalculadora: "Calculadora de hora extra",
               path: "/calculadoras/hora-extra",

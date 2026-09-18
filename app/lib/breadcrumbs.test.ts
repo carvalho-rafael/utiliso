@@ -28,4 +28,11 @@ describe("buildBreadcrumbs", () => {
       { label: "Cálculo do INSS" },
     ]);
   });
+
+  it("builds trabalho hub trail", () => {
+    expect(buildBreadcrumbs("/trabalho")).toEqual([
+      { href: "/", label: "Início" },
+      { label: "Trabalho" },
+    ]);
+  });
 });

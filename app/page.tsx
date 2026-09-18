@@ -1,6 +1,4 @@
-import { HomeCalculators } from "./components/home-calculators";
-import { HomeGuides } from "./components/home-guides";
-import { HomeTabelas } from "./components/home-tabelas";
+import { HomeFerramentasBusca } from "./components/home-ferramentas-busca";
 
 export default function Home() {
   return (
@@ -10,14 +8,12 @@ export default function Home() {
           Calcule sem complicação.
         </h1>
         <p className="text-lg text-muted">
-          Calculadoras, tabelas e guias gratuitos para ajudar nas contas e
-          dúvidas do dia a dia.
+          Calculadoras, tabelas e guias gratuitos organizados por tema para
+          ajudar nas contas e dúvidas do dia a dia.
         </p>
       </div>
 
-      <HomeCalculators />
-      <HomeTabelas />
-      <HomeGuides />
+      <HomeFerramentasBusca />
     </main>
   );
 }

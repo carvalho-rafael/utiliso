@@ -256,7 +256,6 @@ export function SalarioLiquidoForm() {
           </div>
 
           <CalculadoraResultadoAcoes
-            shareTitle="Calculadora de salário líquido — Utiliso"
             texto={montarTextoBreakdownCalculadora({
               tituloCalculadora: "Calculadora de salário líquido",
               path: "/calculadoras/salario-liquido",

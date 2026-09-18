@@ -1,3 +1,5 @@
+import type { HubSlug } from "../hubs/types";
+
 export const TABELAS_BASE = "/tabelas";
 
 export function tabelaHref(slug: string): string {
@@ -7,6 +9,7 @@ export function tabelaHref(slug: string): string {
 export type Tabela = {
   slug: string;
   href: string;
+  hub: HubSlug;
   title: string;
   description: string;
   metaDescription: string;
@@ -25,6 +28,7 @@ export const tabelas: Tabela[] = [
   {
     slug: "inss",
     href: tabelaHref("inss"),
+    hub: "trabalho",
     title: "INSS",
     description: "Alíquotas progressivas e teto de contribuição",
     metaDescription:
@@ -36,6 +40,7 @@ export const tabelas: Tabela[] = [
   {
     slug: "irrf",
     href: tabelaHref("irrf"),
+    hub: "trabalho",
     title: "IRRF",
     description: "Faixas, alíquotas e parcela a deduzir na folha",
     metaDescription:
@@ -47,6 +52,7 @@ export const tabelas: Tabela[] = [
   {
     slug: "salario-minimo",
     href: tabelaHref("salario-minimo"),
+    hub: "trabalho",
     title: "Salário mínimo",
     description: "Valor nacional vigente e impacto na folha",
     metaDescription:
@@ -58,6 +64,7 @@ export const tabelas: Tabela[] = [
   {
     slug: "seguro-desemprego",
     href: tabelaHref("seguro-desemprego"),
+    hub: "trabalho",
     title: "Seguro-desemprego",
     description: "Piso, teto e faixas do benefício",
     metaDescription:

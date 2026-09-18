@@ -14,6 +14,8 @@ export function SiteNav() {
   const isCalculadoras =
     pathname === "/calculadoras" || pathname.startsWith("/calculadoras/");
   const isGuias = pathname === "/guias" || pathname.startsWith("/guias/");
+  const isTrabalho =
+    pathname === "/trabalho" || pathname.startsWith("/trabalho/");
   const isSobre = pathname === "/sobre";
 
   return (
@@ -21,6 +23,10 @@ export function SiteNav() {
       aria-label="Principal"
       className="flex min-w-0 items-center justify-center gap-2 sm:gap-3"
     >
+      <Link href="/trabalho" className={navLinkClass(isTrabalho)}>
+        Trabalho
+      </Link>
+      <span className="text-muted" aria-hidden="true">|</span>
       <Link href="/calculadoras" className={navLinkClass(isCalculadoras)}>
         Calculadoras
       </Link>

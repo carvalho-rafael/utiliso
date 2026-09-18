@@ -332,7 +332,6 @@ export function SeguroDesempregoForm() {
               </div>
 
               <CalculadoraResultadoAcoes
-                shareTitle="Calculadora de seguro-desemprego — Utiliso"
                 texto={montarTextoResultado({
                   tituloCalculadora: "Calculadora de seguro-desemprego",
                   path: "/calculadoras/seguro-desemprego",
@@ -383,7 +382,6 @@ export function SeguroDesempregoForm() {
               </div>
 
               <CalculadoraResultadoAcoes
-                shareTitle="Calculadora de seguro-desemprego — Utiliso"
                 texto={montarTextoResultado({
                   tituloCalculadora: "Calculadora de seguro-desemprego",
                   path: "/calculadoras/seguro-desemprego",

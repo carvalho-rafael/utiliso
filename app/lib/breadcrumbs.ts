@@ -60,6 +60,9 @@ export function buildBreadcrumbs(pathname: string): BreadcrumbItem[] {
     case "privacidade":
       items.push({ label: "Privacidade" });
       break;
+    case "trabalho":
+      items.push({ label: "Trabalho" });
+      break;
     default:
       break;
   }

@@ -319,7 +319,6 @@ export function FeriasForm() {
           </div>
 
           <CalculadoraResultadoAcoes
-            shareTitle="Calculadora de férias — Utiliso"
             texto={montarTextoBreakdownCalculadora({
               tituloCalculadora: "Calculadora de férias",
               path: "/calculadoras/ferias",
