@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CalculadoraResultadoAcoes } from "../../components/calculadora-resultado-acoes";
 import {
   CalculadoraInssLinks,
   CalculadoraResultadoAviso,
@@ -11,6 +12,7 @@ import {
   JORNADAS,
   type HoraExtraResultado,
 } from "../../lib/calculadoras/hora-extra";
+import { montarTextoBreakdownCalculadora } from "../../lib/calculadoras/resultado-texto";
 import {
   formatarMoeda,
   formatarMoedaInput,
@@ -470,7 +472,7 @@ export function HoraExtraForm() {
       {resultado && (
         <section
           aria-label="Resultado da hora extra"
-          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
+          className="calculadora-resultado-print flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
@@ -527,9 +529,40 @@ export function HoraExtraForm() {
             </div>
           </div>
 
+          <CalculadoraResultadoAcoes
+            shareTitle="Calculadora de hora extra — Utiliso"
+            texto={montarTextoBreakdownCalculadora({
+              tituloCalculadora: "Calculadora de hora extra",
+              path: "/calculadoras/hora-extra",
+              tabelasAno: resultado.tabelasAno,
+              extraSecoes: [
+                {
+                  titulo: "Valores por hora",
+                  linhas: [
+                    {
+                      label: "Hora normal",
+                      valor: formatarMoeda(resultado.valorHora),
+                    },
+                    ...resultado.valoresHoraExtra.map((item) => ({
+                      label: `Hora extra ${item.adicionalPercentual}%`,
+                      valor: formatarMoeda(item.valor),
+                    })),
+                  ],
+                },
+              ],
+              verbas: resultado.verbas,
+              descontos: resultado.descontos,
+              fgts: resultado.fgts,
+              totalVerbas: resultado.totalVerbas,
+              totalDescontos: resultado.totalDescontos,
+              liquidoLabel: "Valor líquido das horas extras",
+              liquido: resultado.liquido,
+            })}
+          />
+
           <aside
             aria-label="Guia de cálculo do INSS"
-            className="rounded-lg border border-border bg-background p-4"
+            className="print:hidden rounded-lg border border-border bg-background p-4"
           >
             <h3 className="text-sm font-medium text-foreground">
               Como o INSS é calculado?

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CalculadoraResultadoAcoes } from "../../components/calculadora-resultado-acoes";
 import {
   CalculadoraInssLinks,
   CalculadoraResultadoAviso,
@@ -14,6 +15,7 @@ import {
   calcularSalarioLiquido,
   type SalarioLiquidoResultado,
 } from "../../lib/calculadoras/salario-liquido";
+import { montarTextoBreakdownCalculadora } from "../../lib/calculadoras/resultado-texto";
 
 const fieldClassBase =
   "w-full rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
@@ -213,7 +215,7 @@ export function SalarioLiquidoForm() {
       {resultado && (
         <section
           aria-label="Resultado do salário líquido"
-          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
+          className="calculadora-resultado-print flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
@@ -253,9 +255,25 @@ export function SalarioLiquidoForm() {
             </div>
           </div>
 
+          <CalculadoraResultadoAcoes
+            shareTitle="Calculadora de salário líquido — Utiliso"
+            texto={montarTextoBreakdownCalculadora({
+              tituloCalculadora: "Calculadora de salário líquido",
+              path: "/calculadoras/salario-liquido",
+              tabelasAno: resultado.tabelasAno,
+              verbas: resultado.verbas,
+              descontos: resultado.descontos,
+              fgts: resultado.fgts,
+              totalVerbas: resultado.totalVerbas,
+              totalDescontos: resultado.totalDescontos,
+              liquidoLabel: "Salário líquido",
+              liquido: resultado.liquido,
+            })}
+          />
+
           <aside
             aria-label="Guia de cálculo do INSS"
-            className="rounded-lg border border-border bg-background p-4"
+            className="print:hidden rounded-lg border border-border bg-background p-4"
           >
             <h3 className="text-sm font-medium text-foreground">
               Como o INSS é calculado?

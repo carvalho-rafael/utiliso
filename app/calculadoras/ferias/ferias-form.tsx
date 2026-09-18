@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CalculadoraResultadoAcoes } from "../../components/calculadora-resultado-acoes";
 import {
   CalculadoraInssLinks,
   CalculadoraResultadoAviso,
@@ -10,6 +11,7 @@ import {
   calcularFerias,
   type FeriasResultado,
 } from "../../lib/calculadoras/ferias";
+import { montarTextoBreakdownCalculadora } from "../../lib/calculadoras/resultado-texto";
 import {
   formatarMoeda,
   formatarMoedaInput,
@@ -276,7 +278,7 @@ export function FeriasForm() {
       {resultado && (
         <section
           aria-label="Resultado das férias"
-          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
+          className="calculadora-resultado-print flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
@@ -316,9 +318,25 @@ export function FeriasForm() {
             </div>
           </div>
 
+          <CalculadoraResultadoAcoes
+            shareTitle="Calculadora de férias — Utiliso"
+            texto={montarTextoBreakdownCalculadora({
+              tituloCalculadora: "Calculadora de férias",
+              path: "/calculadoras/ferias",
+              tabelasAno: resultado.tabelasAno,
+              verbas: resultado.verbas,
+              descontos: resultado.descontos,
+              fgts: resultado.fgts,
+              totalVerbas: resultado.totalVerbas,
+              totalDescontos: resultado.totalDescontos,
+              liquidoLabel: "Valor líquido das férias",
+              liquido: resultado.liquido,
+            })}
+          />
+
           <aside
             aria-label="Guia de cálculo do INSS"
-            className="rounded-lg border border-border bg-background p-4"
+            className="print:hidden rounded-lg border border-border bg-background p-4"
           >
             <h3 className="text-sm font-medium text-foreground">
               Como o INSS é calculado?

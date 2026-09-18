@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { CalculadoraResultadoAcoes } from "../../components/calculadora-resultado-acoes";
 import {
   CalculadoraInssLinks,
   CalculadoraResultadoAviso,
@@ -10,6 +11,7 @@ import {
   calcularDecimoTerceiro,
   type DecimoTerceiroResultado,
 } from "../../lib/calculadoras/decimo-terceiro";
+import { montarTextoBreakdownCalculadora } from "../../lib/calculadoras/resultado-texto";
 import {
   formatarMoeda,
   formatarMoedaInput,
@@ -256,7 +258,7 @@ export function DecimoTerceiroForm() {
       {resultado && (
         <section
           aria-label="Resultado do 13º salário"
-          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
+          className="calculadora-resultado-print flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
@@ -324,9 +326,44 @@ export function DecimoTerceiroForm() {
             </div>
           </div>
 
+          <CalculadoraResultadoAcoes
+            shareTitle="Calculadora de 13º salário — Utiliso"
+            texto={montarTextoBreakdownCalculadora({
+              tituloCalculadora: "Calculadora de 13º salário",
+              path: "/calculadoras/decimo-terceiro",
+              tabelasAno: resultado.tabelasAno,
+              extraSecoes: [
+                {
+                  titulo: "Resumo",
+                  linhas: [
+                    {
+                      label: `13º bruto (${resultado.avos}/12 avos)`,
+                      valor: formatarMoeda(resultado.bruto),
+                    },
+                    {
+                      label: "1ª parcela",
+                      valor: formatarMoeda(resultado.primeiraParcela),
+                    },
+                    {
+                      label: "2ª parcela",
+                      valor: formatarMoeda(resultado.segundaParcela),
+                    },
+                  ],
+                },
+              ],
+              verbas: resultado.verbas,
+              descontos: resultado.descontos,
+              fgts: resultado.fgts,
+              totalVerbas: resultado.totalVerbas,
+              totalDescontos: resultado.totalDescontos,
+              liquidoLabel: "Total líquido no ano",
+              liquido: resultado.liquido,
+            })}
+          />
+
           <aside
             aria-label="Guia de cálculo do INSS"
-            className="rounded-lg border border-border bg-background p-4"
+            className="print:hidden rounded-lg border border-border bg-background p-4"
           >
             <h3 className="text-sm font-medium text-foreground">
               Como o INSS é calculado?

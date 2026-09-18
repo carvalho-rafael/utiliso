@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { CalculadoraResultadoAcoes } from "../../components/calculadora-resultado-acoes";
 import { CalculadoraResultadoAviso } from "../../components/calculadora-resultado-aviso";
 import {
   formatarMoeda,
@@ -14,6 +15,7 @@ import {
   type SeguroDesempregoResultado,
   type SolicitacaoSeguro,
 } from "../../lib/calculadoras/seguro-desemprego";
+import { montarTextoResultado } from "../../lib/calculadoras/resultado-texto";
 
 const MOTIVOS: { value: MotivoRescisao; label: string }[] = [
   { value: "sem_justa_causa", label: "Demissão sem justa causa" },
@@ -302,7 +304,7 @@ export function SeguroDesempregoForm() {
       {resultado && (
         <section
           aria-label="Resultado do seguro-desemprego"
-          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
+          className="calculadora-resultado-print flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
@@ -313,20 +315,36 @@ export function SeguroDesempregoForm() {
           </div>
 
           {!resultado.elegivel ? (
-            <div className="rounded-lg border border-border bg-background p-4">
-              <p className="text-sm font-medium text-foreground">
-                Sem direito ao benefício neste cenário
-              </p>
-              <p className="mt-2 text-sm text-muted">
-                {resultado.motivoInelegibilidade}
-              </p>
-              <Link
-                href="/guias/seguro-desemprego"
-                className="mt-4 inline-block cursor-pointer text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                Ver guia de seguro-desemprego
-              </Link>
-            </div>
+            <>
+              <div className="rounded-lg border border-border bg-background p-4">
+                <p className="text-sm font-medium text-foreground">
+                  Sem direito ao benefício neste cenário
+                </p>
+                <p className="mt-2 text-sm text-muted">
+                  {resultado.motivoInelegibilidade}
+                </p>
+                <Link
+                  href="/guias/seguro-desemprego"
+                  className="mt-4 inline-block cursor-pointer text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent print:hidden"
+                >
+                  Ver guia de seguro-desemprego
+                </Link>
+              </div>
+
+              <CalculadoraResultadoAcoes
+                shareTitle="Calculadora de seguro-desemprego — Utiliso"
+                texto={montarTextoResultado({
+                  tituloCalculadora: "Calculadora de seguro-desemprego",
+                  path: "/calculadoras/seguro-desemprego",
+                  paragrafos: [
+                    `Tabelas de ${resultado.tabelasAno}.`,
+                    "Sem direito ao benefício neste cenário.",
+                    resultado.motivoInelegibilidade ?? "",
+                  ],
+                  secoes: [],
+                })}
+              />
+            </>
           ) : (
             <>
               <div className="rounded-lg border border-border bg-background p-4 text-sm text-muted">
@@ -364,9 +382,41 @@ export function SeguroDesempregoForm() {
                 </p>
               </div>
 
+              <CalculadoraResultadoAcoes
+                shareTitle="Calculadora de seguro-desemprego — Utiliso"
+                texto={montarTextoResultado({
+                  tituloCalculadora: "Calculadora de seguro-desemprego",
+                  path: "/calculadoras/seguro-desemprego",
+                  paragrafos: [`Tabelas de ${resultado.tabelasAno}.`],
+                  secoes: [
+                    {
+                      titulo: "Estimativa",
+                      linhas: [
+                        {
+                          label: "Média salarial",
+                          valor: formatarMoeda(resultado.mediaSalarial),
+                        },
+                        {
+                          label: "Valor da parcela",
+                          valor: formatarMoeda(resultado.valorParcela),
+                        },
+                        {
+                          label: "Número de parcelas",
+                          valor: String(resultado.numeroParcelas),
+                        },
+                      ],
+                    },
+                  ],
+                  destaque: {
+                    label: "Total estimado",
+                    valor: formatarMoeda(resultado.totalEstimado),
+                  },
+                })}
+              />
+
               <aside
                 aria-label="Informações sobre o benefício"
-                className="rounded-lg border border-border bg-background p-4"
+                className="print:hidden rounded-lg border border-border bg-background p-4"
               >
                 <h3 className="text-sm font-medium text-foreground">
                   O benefício não entra na rescisão

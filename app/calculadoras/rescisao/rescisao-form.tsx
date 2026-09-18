@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { CalculadoraResultadoAcoes } from "../../components/calculadora-resultado-acoes";
 import { CalculadoraResultadoAviso } from "../../components/calculadora-resultado-aviso";
 import {
   formatarMoeda,
@@ -23,6 +24,7 @@ import {
   type MotivoRescisao,
   type RescisaoResultado,
 } from "../../lib/calculadoras/rescisao";
+import { montarTextoBreakdownCalculadora } from "../../lib/calculadoras/resultado-texto";
 
 const MOTIVOS: { value: MotivoRescisao; label: string }[] = [
   { value: "pedido_demissao", label: "Pedido de demissão" },
@@ -497,7 +499,7 @@ export function RescisaoForm() {
       {resultado && (
         <section
           aria-label="Resultado da rescisão"
-          className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
+          className="calculadora-resultado-print flex flex-col gap-4 rounded-lg border border-border bg-surface p-4"
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resultado</h2>
@@ -574,6 +576,27 @@ export function RescisaoForm() {
             </div>
           </div>
 
+          <CalculadoraResultadoAcoes
+            shareTitle="Calculadora de rescisão — Utiliso"
+            texto={montarTextoBreakdownCalculadora({
+              tituloCalculadora: "Calculadora de rescisão",
+              path: "/calculadoras/rescisao",
+              tabelasAno: resultado.tabelasAno,
+              tituloVerbas: "Verbas",
+              extraParagrafos: [
+                `Prazo para pagamento: até ${formatarDataExibicao(resultado.dataLimitePagamento)}`,
+                `Fim do contrato: ${formatarDataExibicao(resultado.dataFimContrato)}`,
+              ],
+              verbas: resultado.verbas,
+              descontos: resultado.descontos,
+              fgts: resultado.fgts,
+              totalVerbas: resultado.totalVerbas,
+              totalDescontos: resultado.totalDescontos,
+              liquidoLabel: "Líquido a receber",
+              liquido: resultado.liquido,
+            })}
+          />
+
           <SeguroDesempregoCallout motivo={motivo} />
         </section>
       )}
@@ -587,7 +610,7 @@ function SeguroDesempregoCallout({ motivo }: { motivo: MotivoRescisao }) {
   return (
     <aside
       aria-label={info.titulo}
-      className="rounded-lg border border-border bg-background p-4"
+      className="print:hidden rounded-lg border border-border bg-background p-4"
     >
       <h3 className="text-sm font-medium text-foreground">{info.titulo}</h3>
       <p className="mt-2 text-sm text-muted">{info.texto}</p>
