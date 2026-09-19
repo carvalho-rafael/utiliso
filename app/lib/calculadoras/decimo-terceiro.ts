@@ -19,6 +19,8 @@ export type DecimoTerceiroInput = {
   /** Meses com 15 dias ou mais trabalhados no ano (1–12). */
   mesesTrabalhados: number;
   dependentes: number;
+  /** Rescisão ou saída no ano: um único líquido com INSS e IRRF, sem 1ª/2ª parcela. */
+  modoPagamento?: ModoPagamentoDecimo;
 };
 
 export type DecimoTerceiroResultado = {
@@ -35,6 +37,7 @@ export type DecimoTerceiroResultado = {
   prazoPrimeiraParcela: string;
   segundaParcela: number;
   prazoSegundaParcela: string;
+  modoPagamento: ModoPagamentoDecimo;
 };
 
 /** Lei 4.749/1965: 1ª parcela entre 1º de fevereiro e 30 de novembro. */
@@ -47,19 +50,35 @@ export const PRAZO_SEGUNDA_PARCELA = "Até 20 de dezembro";
 const ALIQUOTA_FGTS = 0.08;
 
 /**
- * Avos do 13º no ano civil: 1/12 por mês com mais de 14 dias, da admissão
- * (ou de 1º de janeiro) até 31 de dezembro (Lei 4.090/1962).
+ * Avos do 13º entre duas datas no ano civil: 1/12 por mês com mais de 14 dias
+ * (Lei 4.090/1962). Datas fora do `ano` são limitadas a 1/1 e 31/12.
+ */
+export function avosDecimoTerceiroNoPeriodo(
+  admissao: Date,
+  dataFim: Date,
+  ano = TABELAS_ANO,
+): number {
+  const inicioAno = new Date(ano, 0, 1);
+  const fimAno = new Date(ano, 11, 31);
+  if (dataFim < inicioAno || admissao > fimAno) return 0;
+  const inicio = admissao > inicioAno ? admissao : inicioAno;
+  const fim = dataFim < fimAno ? dataFim : fimAno;
+  if (fim < inicio) return 0;
+  return Math.min(12, contarAvos(inicio, fim));
+}
+
+/**
+ * Avos do 13º no ano civil: da admissão (ou 1º de janeiro) até 31 de dezembro.
  */
 export function avosDecimoTerceiroNoAno(
   admissao: Date,
   ano = TABELAS_ANO,
 ): number {
-  const inicioAno = new Date(ano, 0, 1);
   const fimAno = new Date(ano, 11, 31);
-  if (admissao > fimAno) return 0;
-  const inicio = admissao > inicioAno ? admissao : inicioAno;
-  return Math.min(12, contarAvos(inicio, fimAno));
+  return avosDecimoTerceiroNoPeriodo(admissao, fimAno, ano);
 }
+
+export type ModoPagamentoDecimo = "duas-parcelas" | "acerto";
 
 export function calcularDecimoTerceiro(
   input: DecimoTerceiroInput,
@@ -69,6 +88,7 @@ export function calcularDecimoTerceiro(
     mediaVariaveis = 0,
     mesesTrabalhados,
     dependentes,
+    modoPagamento = "duas-parcelas",
   } = input;
 
   const verbas: LinhaBreakdown[] = [];
@@ -78,13 +98,16 @@ export function calcularDecimoTerceiro(
   const base = round2(salarioBruto + mediaVariaveis);
   const avos = Math.min(12, Math.max(0, mesesTrabalhados));
   const bruto = round2((base / 12) * avos);
-  const primeiraParcela = round2(bruto / 2);
 
   const inss = calcularINSS(bruto);
   const irrf = calcularIRRF(bruto, inss, dependentes);
-  const segundaParcela = round2(
-    Math.max(0, bruto - primeiraParcela - inss - irrf),
-  );
+
+  const primeiraParcela =
+    modoPagamento === "acerto" ? 0 : round2(bruto / 2);
+  const segundaParcela =
+    modoPagamento === "acerto"
+      ? round2(Math.max(0, bruto - inss - irrf))
+      : round2(Math.max(0, bruto - primeiraParcela - inss - irrf));
 
   verbas.push({
     label: `13º salário (${avos}/12 avos)`,
@@ -123,7 +146,10 @@ export function calcularDecimoTerceiro(
   const totalDescontos = round2(
     descontos.reduce((sum, linha) => sum + linha.valor, 0),
   );
-  const liquido = round2(primeiraParcela + segundaParcela);
+  const liquido =
+    modoPagamento === "acerto"
+      ? segundaParcela
+      : round2(primeiraParcela + segundaParcela);
 
   return {
     verbas,
@@ -139,5 +165,6 @@ export function calcularDecimoTerceiro(
     prazoPrimeiraParcela: PRAZO_PRIMEIRA_PARCELA,
     segundaParcela,
     prazoSegundaParcela: PRAZO_SEGUNDA_PARCELA,
+    modoPagamento,
   };
 }

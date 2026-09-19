@@ -16,11 +16,11 @@ export default function DecimoTerceiroPage() {
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-4 pb-12 pt-6">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-          Calculadora de 13º Salário
+          Calculadora de 13º salário proporcional
         </h1>
         <p className="text-lg text-muted">
-          Estime o valor integral ou proporcional do décimo terceiro, com as
-          duas parcelas e os descontos de INSS e IRRF.
+          Conte os avos no ano civil, estime o 13º proporcional e veja as duas
+          parcelas no emprego ou o líquido no acerto quando há saída no ano.
         </p>
       </div>
 
@@ -34,9 +34,11 @@ export default function DecimoTerceiroPage() {
         </h2>
         <ul className="list-disc space-y-2 pl-5">
           <li>
-            <strong className="text-foreground">Avos:</strong> informe a data
-            de admissão. Cada mês com 15 dias ou mais trabalhados no ano conta
-            como 1/12 do 13º (Lei 4.090/1962).
+            <strong className="text-foreground">Avos:</strong> cada mês com 15
+            dias ou mais no período conta como 1/12 do 13º (Lei 4.090/1962).
+            No emprego, o período vai da admissão (ou 1º de janeiro) até 31 de
+            dezembro; na saída no ano, até a data de rescisão ou fim do
+            contrato.
           </li>
           <li>
             <strong className="text-foreground">1ª parcela:</strong> metade do

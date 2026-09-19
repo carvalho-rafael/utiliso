@@ -6,8 +6,10 @@ import {
   CalculadoraInssLinks,
   CalculadoraResultadoAviso,
 } from "../../components/calculadora-resultado-aviso";
+import Link from "next/link";
 import {
   avosDecimoTerceiroNoAno,
+  avosDecimoTerceiroNoPeriodo,
   calcularDecimoTerceiro,
   type DecimoTerceiroResultado,
 } from "../../lib/calculadoras/decimo-terceiro";
@@ -26,10 +28,29 @@ import { TABELAS_ANO } from "../../lib/calculadoras/tabelas-2026";
 const fieldClassBase =
   "w-full rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
+type ModoAvos = "admissao-ano" | "data-saida" | "manual";
+
+const MODOS_AVOS: { value: ModoAvos; label: string }[] = [
+  {
+    value: "admissao-ano",
+    label: "Ainda no emprego (avos até 31/12)",
+  },
+  {
+    value: "data-saida",
+    label: "Saída no ano (avos até a data de saída)",
+  },
+  {
+    value: "manual",
+    label: "Informar avos (1 a 12)",
+  },
+];
+
 type CampoFormulario =
   | "salarioBruto"
   | "mediaVariaveis"
   | "dataAdmissao"
+  | "dataSaida"
+  | "avosManual"
   | "dependentes";
 
 function classeCampo(comErro: boolean) {
@@ -41,7 +62,10 @@ function classeCampo(comErro: boolean) {
 export function DecimoTerceiroForm() {
   const [salarioBruto, setSalarioBruto] = useState("R$ 3.000,00");
   const [mediaVariaveis, setMediaVariaveis] = useState("");
+  const [modoAvos, setModoAvos] = useState<ModoAvos>("admissao-ano");
   const [dataAdmissao, setDataAdmissao] = useState("");
+  const [dataSaida, setDataSaida] = useState("");
+  const [avosManual, setAvosManual] = useState("12");
   const [dependentes, setDependentes] = useState("0");
   const [erro, setErro] = useState<string | null>(null);
   const [camposErro, setCamposErro] = useState<CampoFormulario[]>([]);
@@ -50,10 +74,24 @@ export function DecimoTerceiroForm() {
   );
 
   const admissaoPreview = parseDataInput(dataAdmissao);
+  const saidaPreview = parseDataInput(dataSaida);
   const avosPreview = useMemo(() => {
+    if (modoAvos === "manual") {
+      const n = Number.parseInt(avosManual, 10);
+      if (Number.isNaN(n) || n < 1 || n > 12) return null;
+      return n;
+    }
     if (!admissaoPreview) return null;
+    if (modoAvos === "data-saida") {
+      if (!saidaPreview) return null;
+      return avosDecimoTerceiroNoPeriodo(
+        admissaoPreview,
+        saidaPreview,
+        TABELAS_ANO,
+      );
+    }
     return avosDecimoTerceiroNoAno(admissaoPreview, TABELAS_ANO);
-  }, [admissaoPreview]);
+  }, [admissaoPreview, avosManual, modoAvos, saidaPreview]);
 
   function campoComErro(campo: CampoFormulario) {
     return camposErro.includes(campo);
@@ -107,18 +145,63 @@ export function DecimoTerceiroForm() {
       return;
     }
 
-    if (!admissao) {
-      reportarErro("Informe a data de admissão no formato DD/MM/AAAA.", [
-        "dataAdmissao",
-      ]);
-      return;
+    let numMeses = 0;
+    let modoPagamento: "duas-parcelas" | "acerto" = "duas-parcelas";
+
+    if (modoAvos === "manual") {
+      numMeses = Number.parseInt(avosManual, 10);
+      if (
+        Number.isNaN(numMeses) ||
+        numMeses < 1 ||
+        numMeses > 12 ||
+        !Number.isInteger(numMeses)
+      ) {
+        reportarErro("Informe um número de avos entre 1 e 12.", ["avosManual"]);
+        return;
+      }
+    } else {
+      if (!admissao) {
+        reportarErro("Informe a data de admissão no formato DD/MM/AAAA.", [
+          "dataAdmissao",
+        ]);
+        return;
+      }
+
+      if (modoAvos === "data-saida") {
+        const saida = parseDataInput(dataSaida);
+        if (!saida) {
+          reportarErro("Informe a data de saída no formato DD/MM/AAAA.", [
+            "dataSaida",
+          ]);
+          return;
+        }
+        if (saida.getFullYear() !== TABELAS_ANO) {
+          reportarErro(
+            `A data de saída deve ser em ${TABELAS_ANO} (ano das tabelas).`,
+            ["dataSaida"],
+          );
+          return;
+        }
+        if (saida < admissao) {
+          reportarErro("A data de saída não pode ser anterior à admissão.", [
+            "dataSaida",
+            "dataAdmissao",
+          ]);
+          return;
+        }
+        numMeses = avosDecimoTerceiroNoPeriodo(admissao, saida, TABELAS_ANO);
+        modoPagamento = "acerto";
+      } else {
+        numMeses = avosDecimoTerceiroNoAno(admissao, TABELAS_ANO);
+      }
     }
 
-    const numMeses = avosDecimoTerceiroNoAno(admissao, TABELAS_ANO);
     if (numMeses <= 0) {
       reportarErro(
-        `A data de admissão não gera avos de 13º em ${TABELAS_ANO}.`,
-        ["dataAdmissao"],
+        `Não há avos de 13º proporcional em ${TABELAS_ANO} com essas datas.`,
+        modoAvos === "data-saida"
+          ? ["dataAdmissao", "dataSaida"]
+          : ["dataAdmissao"],
       );
       return;
     }
@@ -129,6 +212,7 @@ export function DecimoTerceiroForm() {
         mediaVariaveis: media,
         mesesTrabalhados: numMeses,
         dependentes: numDependentes,
+        modoPagamento,
       }),
     );
   }
@@ -136,6 +220,33 @@ export function DecimoTerceiroForm() {
   return (
     <div className="flex flex-col gap-6">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <fieldset className="flex flex-col gap-2">
+          <legend className="text-sm font-medium text-foreground">
+            Como contar os avos proporcionais
+          </legend>
+          <div className="flex flex-col gap-2">
+            {MODOS_AVOS.map((item) => (
+              <label
+                key={item.value}
+                className="flex cursor-pointer items-center gap-3 text-sm text-foreground"
+              >
+                <input
+                  type="radio"
+                  name="modoAvos"
+                  value={item.value}
+                  checked={modoAvos === item.value}
+                  onChange={() => {
+                    setModoAvos(item.value);
+                    limparResultado();
+                  }}
+                  className="h-4 w-4 accent-accent"
+                />
+                {item.label}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-start">
           <label className="flex flex-col gap-2">
             <span className="text-sm font-medium text-foreground">
@@ -159,34 +270,91 @@ export function DecimoTerceiroForm() {
             </span>
           </label>
 
-          <label className="flex flex-col gap-2">
-            <span className="text-sm font-medium text-foreground">
-              Data de admissão
-            </span>
-            <input
-              type="text"
-              inputMode="numeric"
-              value={dataAdmissao}
-              onChange={(event) => {
-                setDataAdmissao(formatarDataInput(event.target.value));
-                limparResultado();
-              }}
-              className={classeCampo(campoComErro("dataAdmissao"))}
-              placeholder="DD/MM/AAAA"
-              aria-invalid={campoComErro("dataAdmissao")}
-              aria-describedby={
-                erro ? "decimo-terceiro-erro" : "decimo-terceiro-admissao-ajuda"
-              }
-            />
-            <span
-              id="decimo-terceiro-admissao-ajuda"
-              className="text-xs text-muted"
-            >
-              {avosPreview !== null && avosPreview > 0
-                ? `${avosPreview}/12 avos em ${TABELAS_ANO}. Só entra o mês com 15 dias ou mais de trabalho.`
-                : `Os avos de ${TABELAS_ANO} são contados a partir desta data. Só entra o mês com 15 dias ou mais (Lei 4.090/1962).`}
-            </span>
-          </label>
+          {modoAvos !== "manual" ? (
+            <label className="flex flex-col gap-2">
+              <span className="text-sm font-medium text-foreground">
+                Data de admissão
+              </span>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={dataAdmissao}
+                onChange={(event) => {
+                  setDataAdmissao(formatarDataInput(event.target.value));
+                  limparResultado();
+                }}
+                className={classeCampo(campoComErro("dataAdmissao"))}
+                placeholder="DD/MM/AAAA"
+                aria-invalid={campoComErro("dataAdmissao")}
+                aria-describedby={
+                  erro
+                    ? "decimo-terceiro-erro"
+                    : "decimo-terceiro-admissao-ajuda"
+                }
+              />
+              <span
+                id="decimo-terceiro-admissao-ajuda"
+                className="text-xs text-muted"
+              >
+                {avosPreview !== null && avosPreview > 0
+                  ? `${avosPreview}/12 avos em ${TABELAS_ANO}. Só entra o mês com 15 dias ou mais de trabalho.`
+                  : `Os avos de ${TABELAS_ANO} são contados a partir desta data. Só entra o mês com 15 dias ou mais (Lei 4.090/1962).`}
+              </span>
+            </label>
+          ) : (
+            <label className="flex flex-col gap-2">
+              <span className="text-sm font-medium text-foreground">
+                Avos no ano (1 a 12)
+              </span>
+              <input
+                type="number"
+                min={1}
+                max={12}
+                step={1}
+                value={avosManual}
+                onChange={(event) => {
+                  setAvosManual(event.target.value);
+                  limparResultado();
+                }}
+                className={`${classeCampo(campoComErro("avosManual"))} sm:max-w-[7rem]`}
+                aria-invalid={campoComErro("avosManual")}
+                aria-describedby={
+                  erro ? "decimo-terceiro-erro" : "decimo-terceiro-avos-ajuda"
+                }
+              />
+              <span id="decimo-terceiro-avos-ajuda" className="text-xs text-muted">
+                Cada avo equivale a 1/12 do salário. Use quando já sabe quantos
+                meses contam no ano.
+              </span>
+            </label>
+          )}
+
+          {modoAvos === "data-saida" && (
+            <label className="flex flex-col gap-2">
+              <span className="text-sm font-medium text-foreground">
+                Data de saída
+              </span>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={dataSaida}
+                onChange={(event) => {
+                  setDataSaida(formatarDataInput(event.target.value));
+                  limparResultado();
+                }}
+                className={classeCampo(campoComErro("dataSaida"))}
+                placeholder="DD/MM/AAAA"
+                aria-invalid={campoComErro("dataSaida")}
+                aria-describedby={
+                  erro ? "decimo-terceiro-erro" : "decimo-terceiro-saida-ajuda"
+                }
+              />
+              <span id="decimo-terceiro-saida-ajuda" className="text-xs text-muted">
+                Rescisão ou fim do contrato em {TABELAS_ANO}. O 13º proporcional
+                entra no acerto, com INSS e IRRF sobre o bruto.
+              </span>
+            </label>
+          )}
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-start">
@@ -251,7 +419,7 @@ export function DecimoTerceiroForm() {
           type="submit"
           className="cursor-pointer rounded-lg bg-highlight px-4 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          Calcular 13º salário
+          Calcular 13º proporcional
         </button>
       </form>
 
@@ -271,27 +439,46 @@ export function DecimoTerceiroForm() {
               <span>{formatarMoeda(resultado.bruto)}</span>
             </div>
             <div className="flex justify-between text-lg font-semibold text-foreground">
-              <span>Total líquido no ano</span>
+              <span>
+                {resultado.modoPagamento === "acerto"
+                  ? "Líquido no acerto"
+                  : "Total líquido no ano"}
+              </span>
               <span className="text-highlight">
                 {formatarMoeda(resultado.liquido)}
               </span>
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <ParcelaCard
-              titulo="1ª parcela"
-              valor={resultado.primeiraParcela}
-              prazo={resultado.prazoPrimeiraParcela}
-              detalhe="Sem INSS nem IRRF"
-            />
-            <ParcelaCard
-              titulo="2ª parcela"
-              valor={resultado.segundaParcela}
-              prazo={resultado.prazoSegundaParcela}
-              detalhe="Com INSS e IRRF"
-            />
-          </div>
+          {resultado.modoPagamento === "acerto" ? (
+            <p className="rounded-lg border border-border bg-background p-4 text-sm text-muted">
+              Na saída, o 13º proporcional é pago de uma vez no acerto, com INSS
+              e IRRF sobre o valor bruto. Para o líquido completo da rescisão
+              (saldo, férias, FGTS etc.), use a{" "}
+              <Link
+                href="/calculadoras/rescisao"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                calculadora de rescisão
+              </Link>
+              .
+            </p>
+          ) : (
+            <div className="grid gap-3 sm:grid-cols-2">
+              <ParcelaCard
+                titulo="1ª parcela"
+                valor={resultado.primeiraParcela}
+                prazo={resultado.prazoPrimeiraParcela}
+                detalhe="Sem INSS nem IRRF"
+              />
+              <ParcelaCard
+                titulo="2ª parcela"
+                valor={resultado.segundaParcela}
+                prazo={resultado.prazoSegundaParcela}
+                detalhe="Com INSS e IRRF"
+              />
+            </div>
+          )}
 
           <BreakdownGroup title="Proventos" linhas={resultado.verbas} />
           <BreakdownGroup
@@ -319,7 +506,11 @@ export function DecimoTerceiroForm() {
               <span>- {formatarMoeda(resultado.totalDescontos)}</span>
             </div>
             <div className="mt-3 flex justify-between text-lg font-semibold text-foreground">
-              <span>Total líquido no ano</span>
+              <span>
+                {resultado.modoPagamento === "acerto"
+                  ? "Líquido no acerto"
+                  : "Total líquido no ano"}
+              </span>
               <span className="text-highlight">
                 {formatarMoeda(resultado.liquido)}
               </span>
@@ -328,7 +519,7 @@ export function DecimoTerceiroForm() {
 
           <CalculadoraResultadoAcoes
             texto={montarTextoBreakdownCalculadora({
-              tituloCalculadora: "Calculadora de 13º salário",
+              tituloCalculadora: "Calculadora de 13º salário proporcional",
               path: "/calculadoras/decimo-terceiro",
               tabelasAno: resultado.tabelasAno,
               extraSecoes: [
@@ -339,23 +530,35 @@ export function DecimoTerceiroForm() {
                       label: `13º bruto (${resultado.avos}/12 avos)`,
                       valor: formatarMoeda(resultado.bruto),
                     },
-                    {
-                      label: "1ª parcela",
-                      valor: formatarMoeda(resultado.primeiraParcela),
-                    },
-                    {
-                      label: "2ª parcela",
-                      valor: formatarMoeda(resultado.segundaParcela),
-                    },
-                  ],
-                },
-              ],
+                  ...(resultado.modoPagamento === "acerto"
+                    ? [
+                        {
+                          label: "Líquido no acerto",
+                          valor: formatarMoeda(resultado.liquido),
+                        },
+                      ]
+                    : [
+                        {
+                          label: "1ª parcela",
+                          valor: formatarMoeda(resultado.primeiraParcela),
+                        },
+                        {
+                          label: "2ª parcela",
+                          valor: formatarMoeda(resultado.segundaParcela),
+                        },
+                      ]),
+                ],
+              },
+            ],
               verbas: resultado.verbas,
               descontos: resultado.descontos,
               fgts: resultado.fgts,
               totalVerbas: resultado.totalVerbas,
               totalDescontos: resultado.totalDescontos,
-              liquidoLabel: "Total líquido no ano",
+              liquidoLabel:
+                resultado.modoPagamento === "acerto"
+                  ? "Líquido no acerto"
+                  : "Total líquido no ano",
               liquido: resultado.liquido,
             })}
           />

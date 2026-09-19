@@ -76,9 +76,9 @@ export const calculadoras: Calculadora[] = [
     href: calculadoraHref("decimo-terceiro"),
     hub: "trabalho",
     title: "13º salário",
-    description: "Calcule o décimo terceiro proporcional",
+    description: "13º proporcional por avos no ano",
     metaDescription:
-      "Calculadora de 13º salário: valor integral e proporcional a partir da data de admissão.",
+      "Calculadora de 13º salário proporcional: avos no ano civil, 1ª e 2ª parcelas ou líquido no acerto, com INSS e IRRF.",
     popular: true,
     icon: "calendar",
   },

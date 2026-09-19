@@ -13,6 +13,13 @@ Salário proporcional no mês civil: (salário ÷ dias do mês) × dias trabalha
 
 Indicar se o mês conta como avo (mais de 14 dias) para 13º e férias proporcionais. INSS e IRRF sobre o proporcional; FGTS 8% só como referência.
 
+## 13º proporcional (`/calculadoras/decimo-terceiro`)
+
+- Avos: mês com mais de 14 dias (Lei 4.090/1962). No emprego, admissão até 31/12; saída no ano, até a data de saída.
+- Modos: ano civil com admissão, saída no ano (pagamento em acerto, um líquido com INSS/IRRF) ou avos manuais (1–12).
+- No emprego: 1ª parcela metade do bruto sem INSS/IRRF; 2ª com descontos sobre o bruto inteiro (Lei 4.749/1965). Guias das parcelas.
+- Saída no ano: não simular 1ª/2ª de calendário; CTA para rescisão completa.
+
 ## Rescisão
 
 Tipos de rescisão:
