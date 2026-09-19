@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_EMAIL, CONTACT_MAILTO } from "../lib/site";
 
+const linkClass =
+  "cursor-pointer font-medium text-accent hover:underline";
+
 export const metadata: Metadata = {
   title: "Política de privacidade — Utiliso",
   description:
-    "Como o Utiliso trata dados pessoais, cookies de medição (Google Analytics) e suas escolhas de privacidade.",
+    "Como o Utiliso trata dados pessoais no site (calculadoras, guias, tabelas e utilitários), cookies de medição (Google Analytics) e o XML enviado ao validador de NF-e.",
 };
 
 export default function PrivacidadePage() {
@@ -25,18 +28,78 @@ export default function PrivacidadePage() {
           Quem somos
         </h2>
         <p>
-          O Utiliso é um portal de calculadoras trabalhistas e guias em
-          português. Não exigimos cadastro para usar as ferramentas.
+          O Utiliso é um portal brasileiro de calculadoras, tabelas, guias e
+          utilitários em português. Não exigimos cadastro nem login. Esta
+          política vale para todo o site: home, hubs,{" "}
+          <Link href="/calculadoras" className={linkClass}>
+            calculadoras
+          </Link>
+          ,{" "}
+          <Link href="/guias" className={linkClass}>
+            guias
+          </Link>
+          ,{" "}
+          <Link href="/tabelas" className={linkClass}>
+            tabelas
+          </Link>{" "}
+          e{" "}
+          <Link href="/utilitarios" className={linkClass}>
+            utilitários
+          </Link>
+          .
         </p>
 
         <h2 className="text-base font-medium text-foreground">
-          Dados das calculadoras
+          Calculadoras, guias e tabelas
         </h2>
         <p>
-          Os cálculos são feitos <strong className="text-foreground">no seu
-          navegador</strong>. Salário, datas e demais campos que você informa{" "}
+          Os cálculos (rescisão, salário líquido, férias, 13º, hora extra,
+          seguro-desemprego, IBS/CBS e demais ferramentas no navegador) são
+          feitos <strong className="text-foreground">no seu dispositivo</strong>
+          . Salário, datas e os demais campos que você informa{" "}
           <strong className="text-foreground">não são enviados</strong> aos
           nossos servidores nem ao Google Analytics.
+        </p>
+        <p>
+          Guias e tabelas são páginas de conteúdo. A leitura não exige
+          formulário nem envio de dados pessoais a nós.
+        </p>
+
+        <h2 className="text-base font-medium text-foreground">
+          Validador de NF-e (servidor)
+        </h2>
+        <p>
+          O{" "}
+          <Link href="/utilitarios/validador-nfe" className={linkClass}>
+            validador de NF-e
+          </Link>{" "}
+          é a exceção: o XML que você cola ou envia (até 5 MB) vai ao nosso
+          servidor para conferir o schema XSD oficial. Sem isso a validação
+          não roda no navegador.
+        </p>
+        <p>
+          Usamos o arquivo{" "}
+          <strong className="text-foreground">só naquela requisição</strong>
+          , para devolver o resultado.{" "}
+          <strong className="text-foreground">Não salvamos</strong> o XML em
+          banco, não criamos conta a partir dele e{" "}
+          <strong className="text-foreground">não enviamos</strong> o conteúdo
+          ao Google Analytics. O XML de uma nota pode ter dados fiscais e
+          pessoais (CNPJ, nomes, valores); envie só o necessário e, se puder,
+          use arquivo de homologação.
+        </p>
+        <p>
+          A hospedagem pode registrar logs técnicos da requisição (data,
+          endereço IP, status), sem o corpo do XML, para operação e segurança
+          do serviço.
+        </p>
+
+        <h2 className="text-base font-medium text-foreground">
+          Preferências no dispositivo
+        </h2>
+        <p>
+          Guardamos no seu navegador (localStorage) o tema claro/escuro e a
+          escolha do banner de cookies. Isso não identifica você junto a nós.
         </p>
 
         <h2 className="text-base font-medium text-foreground">
@@ -55,7 +118,8 @@ export default function PrivacidadePage() {
           Se você <strong className="text-foreground">recusar</strong>, não
           usamos cookie de identificação. O Google pode receber pings agregados
           sem identificar você, para estimar o volume de acesso no painel
-          (modelagem estatística).
+          (modelagem estatística). Não enviamos salário, datas nem XML de
+          NF-e ao Analytics.
         </p>
 
         <h2 className="text-base font-medium text-foreground">
@@ -77,7 +141,7 @@ export default function PrivacidadePage() {
             alterar sua preferência.
           </li>
           <li>
-            Você pode limpar cookies do navegador a qualquer momento nas
+            Você pode limpar cookies e dados do site a qualquer momento nas
             configurações do seu dispositivo.
           </li>
         </ul>
@@ -86,9 +150,15 @@ export default function PrivacidadePage() {
           Base legal e finalidade
         </h2>
         <p>
-          O tratamento de dados de medição se baseia no seu{" "}
+          A medição de tráfego se baseia no seu{" "}
           <strong className="text-foreground">consentimento</strong> (LGPD,
-          art. 7º, I), para fins de estatística de uso e melhoria do site.
+          art. 7º, I), para estatística de uso e melhoria do site.
+        </p>
+        <p>
+          O XML do validador de NF-e é tratado{" "}
+          <strong className="text-foreground">a seu pedido</strong>, para
+          prestar o serviço de conferência do schema (LGPD, art. 7º, V), e
+          descartado depois da resposta.
         </p>
 
         <h2 className="text-base font-medium text-foreground">Contato</h2>

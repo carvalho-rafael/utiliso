@@ -3,10 +3,13 @@ import Link from "next/link";
 import { TABELAS_ANO } from "../lib/calculadoras/tabelas-2026";
 import { CONTACT_EMAIL, CONTACT_MAILTO } from "../lib/site";
 
+const linkClass =
+  "cursor-pointer font-medium text-accent hover:underline";
+
 export const metadata: Metadata = {
   title: "Sobre — Utiliso",
   description:
-    "O Utiliso publica calculadoras e guias trabalhistas em português, com base na CLT e nas tabelas oficiais vigentes. Cálculo no navegador, sem cadastro.",
+    "O Utiliso publica calculadoras, tabelas, guias e utilitários em português. Cálculo no navegador, validador de NF-e no servidor, sem cadastro.",
 };
 
 export default function SobrePage() {
@@ -17,29 +20,58 @@ export default function SobrePage() {
           Sobre o Utiliso
         </h1>
         <p className="text-lg text-muted">
-          Calculadoras e guias trabalhistas em português, com base na CLT e nas
-          tabelas oficiais vigentes.
+          Calculadoras, tabelas, guias e utilitários em português, com base nas
+          normas oficiais vigentes.
         </p>
       </div>
 
       <section className="flex flex-col gap-4 text-sm text-muted">
         <h2 className="text-base font-medium text-foreground">Quem somos</h2>
         <p>
-          O Utiliso é um portal brasileiro de calculadoras trabalhistas e guias
-          em português. As ferramentas são gratuitas, não exigem cadastro e
-          servem a empregados, empregadores e profissionais de RH.
+          O Utiliso é um portal brasileiro de ferramentas gratuitas:{" "}
+          <Link href="/calculadoras" className={linkClass}>
+            calculadoras
+          </Link>
+          ,{" "}
+          <Link href="/tabelas" className={linkClass}>
+            tabelas
+          </Link>
+          ,{" "}
+          <Link href="/guias" className={linkClass}>
+            guias
+          </Link>{" "}
+          e{" "}
+          <Link href="/utilitarios" className={linkClass}>
+            utilitários
+          </Link>
+          . Não exigimos cadastro. O conteúdo trabalhista serve a empregados,
+          empregadores e RH; a reforma do consumo e o validador de NF-e também
+          a quem emite ou confere nota.
         </p>
 
         <h2 className="text-base font-medium text-foreground">
-          Como calculamos
+          Como as ferramentas funcionam
         </h2>
         <p>
-          Os cálculos rodam{" "}
-          <strong className="text-foreground">no seu navegador</strong>.
-          Salário, datas e os demais campos do formulário{" "}
+          As calculadoras (rescisão, salário líquido, férias, 13º, hora extra,
+          seguro-desemprego, IBS/CBS e as demais no navegador) rodam{" "}
+          <strong className="text-foreground">no seu dispositivo</strong>.
+          Salário, datas e os demais campos{" "}
           <strong className="text-foreground">não são enviados</strong> aos
           nossos servidores nem ao Google Analytics. Usamos a CLT e as tabelas
           oficiais de {TABELAS_ANO} (INSS, IRRF, FGTS e seguro-desemprego).
+        </p>
+        <p>
+          O{" "}
+          <Link href="/utilitarios/validador-nfe" className={linkClass}>
+            validador de NF-e
+          </Link>{" "}
+          envia o XML ao servidor só para conferir o schema XSD da Sefaz. O
+          arquivo não é salvo e não vai ao Analytics. Detalhe na{" "}
+          <Link href="/privacidade" className={linkClass}>
+            política de privacidade
+          </Link>
+          .
         </p>
 
         <h2 className="text-base font-medium text-foreground">Fontes</h2>
@@ -58,21 +90,24 @@ export default function SobrePage() {
           <li>
             FGTS: Lei 8.036/1990. Hora extra e demais verbas seguem a CLT.
           </li>
+          <li>
+            IBS e CBS: Lei Complementar nº 214/2025. O leiaute da NF-e segue o
+            pacote XSD da Sefaz (NT 2025.002-RTC).
+          </li>
         </ul>
         <p>
-          Quando o governo publica nova tabela, atualizamos as ferramentas, as{" "}
-          <Link
-            href="/tabelas"
-            className="cursor-pointer font-medium text-accent hover:underline"
-          >
+          Quando o governo publica nova tabela ou schema, atualizamos as
+          ferramentas, as{" "}
+          <Link href="/tabelas" className={linkClass}>
             tabelas
+          </Link>
+          , os{" "}
+          <Link href="/guias" className={linkClass}>
+            guias
           </Link>{" "}
           e os{" "}
-          <Link
-            href="/guias"
-            className="cursor-pointer font-medium text-accent hover:underline"
-          >
-            guias
+          <Link href="/utilitarios" className={linkClass}>
+            utilitários
           </Link>
           .
         </p>
@@ -81,19 +116,18 @@ export default function SobrePage() {
           Estimativa, não laudo
         </h2>
         <p>
-          O resultado é uma estimativa para o cenário informado. Não substitui
-          orientação de contador, advogado ou departamento pessoal. Acordo
-          coletivo, média de variáveis e o caso concreto podem alterar o valor.
+          O resultado das calculadoras é uma estimativa para o cenário
+          informado. Não substitui orientação de contador, advogado ou
+          departamento pessoal. Acordo coletivo, média de variáveis e o caso
+          concreto podem alterar o valor. O validador de NF-e confere o
+          leiaute do XML, não a autorização na Sefaz.
         </p>
 
         <h2 className="text-base font-medium text-foreground">Privacidade</h2>
         <p>
-          Não pedimos login. O uso de cookies de medição e, no futuro, de
-          anúncios está descrito na{" "}
-          <Link
-            href="/privacidade"
-            className="cursor-pointer font-medium text-accent hover:underline"
-          >
+          Não pedimos login. Cookies de medição, anúncios e o tratamento do XML
+          no validador estão na{" "}
+          <Link href="/privacidade" className={linkClass}>
             política de privacidade
           </Link>
           .
@@ -103,10 +137,7 @@ export default function SobrePage() {
         <p>
           Dúvidas sobre o site ou sobre as tabelas usadas podem ser enviadas
           para{" "}
-          <a
-            href={CONTACT_MAILTO}
-            className="cursor-pointer font-medium text-accent hover:underline"
-          >
+          <a href={CONTACT_MAILTO} className={linkClass}>
             {CONTACT_EMAIL}
           </a>
           .
@@ -114,23 +145,17 @@ export default function SobrePage() {
       </section>
 
       <div className="flex flex-wrap gap-4">
-        <Link
-          href="/calculadoras"
-          className="cursor-pointer text-sm font-medium text-accent hover:underline"
-        >
+        <Link href="/calculadoras" className={linkClass}>
           Ver calculadoras
         </Link>
-        <Link
-          href="/guias"
-          className="cursor-pointer text-sm font-medium text-accent hover:underline"
-        >
+        <Link href="/guias" className={linkClass}>
           Ver guias
         </Link>
-        <Link
-          href="/tabelas"
-          className="cursor-pointer text-sm font-medium text-accent hover:underline"
-        >
+        <Link href="/tabelas" className={linkClass}>
           Ver tabelas
+        </Link>
+        <Link href="/utilitarios" className={linkClass}>
+          Ver utilitários
         </Link>
       </div>
     </main>
