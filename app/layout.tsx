@@ -21,9 +21,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Utiliso — Calculadoras gratuitas",
+  title: "Utiliso — Calculadoras e ferramentas gratuitas",
   description:
-    "Calculadoras gratuitas para ajudar nas contas importantes do dia a dia.",
+    "Calculadoras e ferramentas gratuitas para ajudar nas contas importantes do dia a dia.",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
