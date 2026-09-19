@@ -15,6 +15,12 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 - `/calculadoras/decimo-terceiro`
 - `/calculadoras/hora-extra`
 - `/calculadoras/seguro-desemprego`
+- `/calculadoras/ibs-cbs`
+
+**Hubs temáticos:**
+
+- `/trabalho`
+- `/reforma-tributaria`
 
 **Guias:**
 
@@ -27,6 +33,7 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 - `/guias/pedido-de-demissao-o-que-recebo`
 - `/guias/pedi-demissao-preciso-cumprir-aviso`
 - `/guias/demissao-sem-justa-causa-o-que-recebo`
+- `/guias/ibs-cbs-nfe-2026`
 
 **Tabelas** (índice em `/tabelas`):
 
@@ -34,6 +41,7 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 - `/tabelas/irrf`
 - `/tabelas/salario-minimo`
 - `/tabelas/seguro-desemprego`
+- `/tabelas/ibs-cbs`
 
 Cada página tem título, meta description, H1 e texto único (como funciona, FAQ). Não publicar só o formulário — thin content não indexa.
 

@@ -1,1 +1,1 @@
-export type HubSlug = "trabalho";
+export type HubSlug = "trabalho" | "reforma-tributaria";

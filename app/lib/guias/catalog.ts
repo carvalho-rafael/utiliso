@@ -132,6 +132,21 @@ export const guias: Guia[] = [
     fonte:
       "CLT arts. 146, 147, 477 e 487; Lei 12.506/2011; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990, art. 18; Lei 7.998/1990",
   },
+  {
+    slug: "ibs-cbs-nfe-2026",
+    href: "/guias/ibs-cbs-nfe-2026",
+    hub: "reforma-tributaria",
+    title: "Como IBS e CBS aparecem na NF-e em 2026",
+    description: "Destaque informativo, XML e diferença para o total da nota",
+    metaDescription:
+      "Guia IBS e CBS na NF-e 2026: destaque informativo na transição, grupo por item na NT 2025.002, dispensa de recolhimento e diferença para a calculadora por fora.",
+    icon: "book",
+    vigencia:
+      "fatos geradores de 1º de janeiro a 31 de dezembro de 2026",
+    atualizadoEm: "2026-09-18",
+    fonte:
+      "Lei Complementar nº 214/2025 (arts. 343, 346 e 348); Nota Técnica 2025.002-RTC (NF-e/NFC-e)",
+  },
 ];
 
 export function getGuiaBySlug(slug: string): Guia | undefined {

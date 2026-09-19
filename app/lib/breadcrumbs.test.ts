@@ -35,4 +35,11 @@ describe("buildBreadcrumbs", () => {
       { label: "Trabalho" },
     ]);
   });
+
+  it("builds reforma tributaria hub trail", () => {
+    expect(buildBreadcrumbs("/reforma-tributaria")).toEqual([
+      { href: "/", label: "Início" },
+      { label: "Reforma tributária" },
+    ]);
+  });
 });

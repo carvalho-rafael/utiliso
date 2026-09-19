@@ -6,7 +6,8 @@ export type CalculatorIcon =
   | "beach"
   | "calendar"
   | "clock"
-  | "umbrella";
+  | "umbrella"
+  | "percent";
 
 export const CALCULADORAS_BASE = "/calculadoras";
 
@@ -91,6 +92,17 @@ export const calculadoras: Calculadora[] = [
       "Calculadora de seguro-desemprego: parcelas e valor após demissão sem justa causa, com tabela MTE 2026.",
     popular: false,
     icon: "umbrella",
+  },
+  {
+    slug: "ibs-cbs",
+    href: calculadoraHref("ibs-cbs"),
+    hub: "reforma-tributaria",
+    title: "IBS e CBS",
+    description: "Estime os tributos por fora sobre uma operação",
+    metaDescription:
+      "Calculadora de IBS e CBS 2026: alíquotas de teste da LC 214/2025 (0,9% CBS e 0,1% IBS) sobre o valor da operação.",
+    popular: false,
+    icon: "percent",
   },
 ];
 

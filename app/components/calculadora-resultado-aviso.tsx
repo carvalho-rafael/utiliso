@@ -5,7 +5,7 @@ const linkClass =
 
 type CalculadoraResultadoAvisoProps = {
   ano: number;
-  variant?: "inss-irrf" | "seguro";
+  variant?: "inss-irrf" | "seguro" | "ibs-cbs";
 };
 
 /** Aviso pós-resultado com links para as tabelas — sem bloco extra de fontes. */
@@ -21,6 +21,18 @@ export function CalculadoraResultadoAviso({
           tabela MTE {ano}
         </Link>{" "}
         (INPC). Não substitui contador, advogado ou departamento pessoal.
+      </p>
+    );
+  }
+
+  if (variant === "ibs-cbs") {
+    return (
+      <p className="mt-1 text-sm text-muted">
+        Estimativa com alíquotas de teste de {ano} (
+        <Link href="/tabelas/ibs-cbs" className={linkClass}>
+          tabela IBS/CBS
+        </Link>
+        ). Não substitui contador, advogado ou assessoria fiscal.
       </p>
     );
   }

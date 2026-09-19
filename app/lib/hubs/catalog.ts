@@ -21,6 +21,15 @@ export const hubs: Hub[] = [
     metaDescription:
       "Hub de trabalho CLT: calculadoras de rescisão e salário líquido, guias de demissão e férias, tabelas de INSS e IRRF 2026.",
   },
+  {
+    slug: "reforma-tributaria",
+    href: "/reforma-tributaria",
+    title: "Reforma tributária",
+    description:
+      "Calculadoras, guias e tabelas sobre IBS, CBS e a transição da reforma do consumo (LC 214/2025).",
+    metaDescription:
+      "Hub da reforma tributária: calculadora de IBS e CBS, guia da NF-e 2026, alíquotas de teste e tabelas oficiais.",
+  },
 ];
 
 export function getHubBySlug(slug: HubSlug): Hub | undefined {

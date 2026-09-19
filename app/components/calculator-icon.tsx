@@ -115,5 +115,23 @@ export function CalculatorIconGlyph({
           <path d="M12 3a9 9 0 0 0-9 9h18a9 9 0 0 0-9-9Z" />
         </svg>
       );
+    case "percent":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={className}
+          aria-hidden="true"
+        >
+          <path d="M19 5 5 19" />
+          <circle cx="7" cy="7" r="2" />
+          <circle cx="17" cy="17" r="2" />
+        </svg>
+      );
   }
 }

@@ -74,6 +74,19 @@ export const tabelas: Tabela[] = [
     fonte:
       "Tabela MTE/CODEFAT (Lei 7.998/1990), reajustada pelo INPC; Resolução CODEFAT nº 957/2022",
   },
+  {
+    slug: "ibs-cbs",
+    href: tabelaHref("ibs-cbs"),
+    hub: "reforma-tributaria",
+    title: "IBS e CBS",
+    description: "Alíquotas de teste de 2026 na reforma do consumo",
+    metaDescription:
+      "Tabela IBS e CBS 2026: alíquotas de teste de 0,9% (CBS) e 0,1% (IBS estadual) para fatos geradores em 2026, LC 214/2025.",
+    vigencia:
+      "fatos geradores de 1º de janeiro a 31 de dezembro de 2026",
+    atualizadoEm: "2026-09-18",
+    fonte: "Lei Complementar nº 214/2025 (arts. 343 e 346)",
+  },
 ];
 
 export function getTabelaBySlug(slug: string): Tabela | undefined {

@@ -72,3 +72,11 @@ Callout no resultado, por motivo:
 - **Sem justa causa:** “Calcular seguro-desemprego” → `/calculadoras/seguro-desemprego`.
 - **Pedido de demissão:** “O que você recebe no pedido de demissão” → `/guias/pedido-de-demissao-o-que-recebo`.
 - **Justa causa e acordo:** “Entenda o seguro-desemprego” → `/guias/seguro-desemprego`.
+
+## IBS/CBS na NF-e (`/guias/ibs-cbs-nfe-2026`)
+
+- Destaque informativo em 2026; IBS/CBS não somam ao preço da operação na transição.
+- Diferença entre “operação + tributos” da calculadora e total da DANFE.
+- Grupo por item na NT 2025.002 (sem manual de XML); PIS/Cofins/ICMS/ISS convivem no ano.
+- Recolhimento dispensado se acessórias cumpridas (LC 214/2025, art. 348, § 1º).
+- CTA: calculadora `/calculadoras/ibs-cbs`; link tabela `/tabelas/ibs-cbs`.

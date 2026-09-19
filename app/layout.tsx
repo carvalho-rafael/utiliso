@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Utiliso — Calculadoras gratuitas",
   description:
-    "Calculadoras trabalhistas gratuitas para ajudar nas contas importantes do dia a dia.",
+    "Calculadoras gratuitas para ajudar nas contas importantes do dia a dia.",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
