@@ -5,11 +5,11 @@ export default function Home() {
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-4 py-12">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-          Calcule sem complicação.
+          Resolva sem complicação.
         </h1>
         <p className="text-lg text-muted">
-          Calculadoras, tabelas e guias gratuitos organizados por tema para
-          ajudar nas contas e dúvidas do dia a dia.
+          Ferramentas, calculadoras, tabelas e guias gratuitos
+          para ajudar nas tarefas e dúvidas do dia a dia.
         </p>
       </div>
 

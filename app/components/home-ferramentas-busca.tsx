@@ -12,6 +12,25 @@ type ItemBusca = {
   description: string;
 };
 
+function SearchIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.3-4.3" />
+    </svg>
+  );
+}
+
 function GrupoResultados({
   titulo,
   items,
@@ -56,9 +75,10 @@ export function HomeFerramentasBusca() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="home-busca-ferramenta"
-          className="text-sm font-medium text-foreground"
+          className="flex items-center gap-2 text-sm font-medium text-foreground"
         >
-          Buscar ferramenta
+          <SearchIcon className="h-4 w-4 text-highlight" />
+          Pesquisar
         </label>
         <div className="overflow-hidden rounded-lg border border-border bg-surface focus-within:ring-2 focus-within:ring-accent">
           <input
@@ -66,7 +86,7 @@ export function HomeFerramentasBusca() {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Calculadoras, guias ou tabelas..."
+            placeholder="Busque por uma ferramenta ou assunto..."
             className="w-full border-0 bg-transparent px-4 py-3 text-foreground placeholder:text-muted focus-visible:outline-none"
             role="combobox"
             aria-expanded={isSearching}

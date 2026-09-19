@@ -19,7 +19,7 @@ describe("montarTextoBreakdownCalculadora", () => {
     expect(texto).toContain("Utiliso — Calculadora de salário líquido");
     expect(texto).toContain("Salário bruto: R$\u00a03.000,00");
     expect(texto).toContain("Salário líquido: R$\u00a02.800,00");
-    expect(texto).toContain("https://utiliso.com.br/calculadoras/salario-liquido");
+    expect(texto).toContain("https://www.utiliso.com.br/calculadoras/salario-liquido");
     expect(texto).toContain("Não substitui contador");
   });
 });
