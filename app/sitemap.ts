@@ -3,6 +3,10 @@ import {
   CALCULADORAS_BASE,
   calculadoras,
 } from "./lib/calculadoras/catalog";
+import {
+  UTILITARIOS_BASE,
+  utilitarios,
+} from "./lib/utilitarios/catalog";
 import { guias } from "./lib/guias/catalog";
 import { TABELAS_BASE, tabelas } from "./lib/tabelas/catalog";
 import { SITE_URL } from "./lib/site";
@@ -14,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...hubs.map((hub) => hub.href),
     CALCULADORAS_BASE,
     ...calculadoras.map((calculadora) => calculadora.href),
+    UTILITARIOS_BASE,
+    ...utilitarios.map((utilitario) => utilitario.href),
     "/guias",
     TABELAS_BASE,
     "/sobre",

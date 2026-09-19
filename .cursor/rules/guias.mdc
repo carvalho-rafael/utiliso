@@ -73,6 +73,14 @@ Callout no resultado, por motivo:
 - **Pedido de demissão:** “O que você recebe no pedido de demissão” → `/guias/pedido-de-demissao-o-que-recebo`.
 - **Justa causa e acordo:** “Entenda o seguro-desemprego” → `/guias/seguro-desemprego`.
 
+## IBS e CBS: conceitos (`/guias/ibs-e-cbs`)
+
+- CBS: Contribuição sobre Bens e Serviços (União); caminho para substituir PIS, Cofins e IPI na transição.
+- IBS: Imposto sobre Bens e Serviços (estados e municípios); caminho para substituir ICMS e ISS.
+- Diferença: competência e tributos antigos que cada um substitui; na mesma operação podem coexistir.
+- Por fora e não cumulatividade (LC 214/2025, art. 12); alíquotas de teste em 2026 na tabela.
+- CTA: calculadora `/calculadoras/ibs-cbs`; links `/tabelas/ibs-cbs` e `/guias/ibs-cbs-nfe-2026`.
+
 ## IBS/CBS na NF-e (`/guias/ibs-cbs-nfe-2026`)
 
 - Destaque informativo em 2026; IBS/CBS não somam ao preço da operação na transição.

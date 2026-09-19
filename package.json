@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@next/third-parties": "^16.3.4",
+    "libxmljs2": "^0.37.0",
     "next": "16.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

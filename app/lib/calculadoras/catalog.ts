@@ -50,6 +50,17 @@ export const calculadoras: Calculadora[] = [
     icon: "money",
   },
   {
+    slug: "dias-trabalhados",
+    href: calculadoraHref("dias-trabalhados"),
+    hub: "trabalho",
+    title: "Dias trabalhados",
+    description: "Salário proporcional por dias no mês",
+    metaDescription:
+      "Calculadora de dias trabalhados: conte os dias no mês civil e estime o salário proporcional com INSS e IRRF.",
+    popular: false,
+    icon: "calendar",
+  },
+  {
     slug: "ferias",
     href: calculadoraHref("ferias"),
     hub: "trabalho",

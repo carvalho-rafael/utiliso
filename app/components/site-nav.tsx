@@ -16,6 +16,8 @@ export function SiteNav() {
   const isCalculadoras =
     pathname === "/calculadoras" || pathname.startsWith("/calculadoras/");
   const isGuias = pathname === "/guias" || pathname.startsWith("/guias/");
+  const isUtilitarios =
+    pathname === "/utilitarios" || pathname.startsWith("/utilitarios/");
   const isTrabalho =
     pathname === "/trabalho" || pathname.startsWith("/trabalho/");
   const isReformaTributaria =
@@ -51,6 +53,12 @@ export function SiteNav() {
       </span>
       <Link href="/guias" className={navLinkClass(isGuias)}>
         Guias
+      </Link>
+      <span className={separatorClass} aria-hidden="true">
+        |
+      </span>
+      <Link href="/utilitarios" className={navLinkClass(isUtilitarios)}>
+        Utilitários
       </Link>
       <span className={separatorClass} aria-hidden="true">
         |

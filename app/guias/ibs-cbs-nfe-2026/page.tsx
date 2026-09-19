@@ -63,7 +63,11 @@ export default function IbsCbsNfe2026GuiaPage() {
           <Link href="/tabelas/ibs-cbs" className={linkClass}>
             tabela IBS/CBS
           </Link>
-          , arts. 343 e 346).
+          , arts. 343 e 346). Se ainda não conhece os conceitos, leia o{" "}
+          <Link href="/guias/ibs-e-cbs" className={linkClass}>
+            guia IBS e CBS: o que são e qual a diferença
+          </Link>
+          .
         </p>
         <p>
           Na nota fiscal eletrônica (modelo 55), esses tributos passam a ser
@@ -344,6 +348,9 @@ export default function IbsCbsNfe2026GuiaPage() {
       <div className="flex flex-col gap-3 border-t border-border pt-6">
         <p className="text-sm text-muted">Ferramentas relacionadas:</p>
         <div className="flex flex-wrap gap-4">
+          <Link href="/guias/ibs-e-cbs" className={linkClass}>
+            IBS e CBS: o que são
+          </Link>
           <Link href="/calculadoras/ibs-cbs" className={linkClass}>
             Calculadora de IBS e CBS
           </Link>

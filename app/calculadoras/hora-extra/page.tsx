@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CalculadoraPainel } from "../../components/calculadora-painel";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { TABELAS_ANO } from "../../lib/calculadoras/tabelas-2026";
 import { HoraExtraForm } from "./hora-extra-form";
@@ -27,7 +28,9 @@ export default function HoraExtraPage() {
         </p>
       </div>
 
-      <HoraExtraForm />
+      <CalculadoraPainel titulo={`Calculadora de ${calculadora.title}`}>
+        <HoraExtraForm />
+      </CalculadoraPainel>
 
       <section className="flex flex-col gap-4 text-sm text-muted">
         <h2 className="text-base font-medium text-foreground">

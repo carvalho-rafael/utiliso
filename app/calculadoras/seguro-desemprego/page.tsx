@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CalculadoraPainel } from "../../components/calculadora-painel";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import {
   SEGURO_FAIXA1_LIMITE,
@@ -28,7 +29,9 @@ export default function SeguroDesempregoPage() {
         </p>
       </div>
 
-      <SeguroDesempregoForm />
+      <CalculadoraPainel titulo={`Calculadora de ${calculadora.title}`}>
+        <SeguroDesempregoForm />
+      </CalculadoraPainel>
 
       <section className="flex flex-col gap-4 text-sm text-muted">
         <h2 className="text-base font-medium text-foreground">

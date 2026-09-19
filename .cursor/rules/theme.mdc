@@ -17,7 +17,8 @@ Claro e escuro com toggle no header. Preferência em `localStorage.theme` (`ligh
 | `border` | bordas de cards e inputs |
 | `accent` (azul) | links, foco, nav ativa |
 | `highlight` (âmbar) | CTA, ênfase, seções populares |
-| `danger` | alertas, justa causa |
+| `danger` | alertas, resultado inválido |
+| `success` (verde) | resultado válido (validador) |
 
 ## Regras
 

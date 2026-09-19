@@ -7,6 +7,12 @@ alwaysApply: true
 
 Resultados o mais fiéis possível à CLT e às tabelas vigentes (INSS, IRRF, FGTS, adicional de H.E., etc.). Tabelas e alíquotas devem ser fáceis de atualizar quando o ano/calendário mudar.
 
+## Dias trabalhados
+
+Salário proporcional no mês civil: (salário ÷ dias do mês) × dias trabalhados no intervalo (inclusive), alinhado ao saldo de salário na rescisão. Mesmo mês nas duas datas; períodos em meses distintos exigem cálculo mês a mês.
+
+Indicar se o mês conta como avo (mais de 14 dias) para 13º e férias proporcionais. INSS e IRRF sobre o proporcional; FGTS 8% só como referência.
+
 ## Rescisão
 
 Tipos de rescisão:

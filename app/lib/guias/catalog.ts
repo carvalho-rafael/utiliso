@@ -133,6 +133,19 @@ export const guias: Guia[] = [
       "CLT arts. 146, 147, 477 e 487; Lei 12.506/2011; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990, art. 18; Lei 7.998/1990",
   },
   {
+    slug: "ibs-e-cbs",
+    href: "/guias/ibs-e-cbs",
+    hub: "reforma-tributaria",
+    title: "IBS e CBS: o que são e qual a diferença?",
+    description: "Conceitos, competência e reforma do consumo",
+    metaDescription:
+      "Guia IBS e CBS: o que são Contribuição e Imposto sobre Bens e Serviços, diferença entre federal e estadual/municipal e relação com PIS, Cofins, ICMS e ISS.",
+    icon: "book",
+    vigencia: "conforme a LC 214/2025 e cronograma de transição",
+    atualizadoEm: "2026-09-19",
+    fonte: "Lei Complementar nº 214/2025 (reforma do consumo)",
+  },
+  {
     slug: "ibs-cbs-nfe-2026",
     href: "/guias/ibs-cbs-nfe-2026",
     hub: "reforma-tributaria",

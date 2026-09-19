@@ -1,6 +1,7 @@
 import { getCalculadoraBySlug } from "./calculadoras/catalog";
 import { getGuiaBySlug } from "./guias/catalog";
 import { getTabelaBySlug } from "./tabelas/catalog";
+import { getUtilitarioBySlug } from "./utilitarios/catalog";
 
 export type BreadcrumbItem = {
   href?: string;
@@ -65,6 +66,16 @@ export function buildBreadcrumbs(pathname: string): BreadcrumbItem[] {
       break;
     case "reforma-tributaria":
       items.push({ label: "Reforma tributária" });
+      break;
+    case "utilitarios":
+      if (parts.length === 1) {
+        items.push({ label: "Utilitários" });
+      } else if (slug) {
+        items.push({ href: "/utilitarios", label: "Utilitários" });
+        items.push({
+          label: getUtilitarioBySlug(slug)?.title ?? slugToLabel(slug),
+        });
+      }
       break;
     default:
       break;

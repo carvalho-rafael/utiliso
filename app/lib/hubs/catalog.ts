@@ -1,6 +1,7 @@
 import { calculadoras } from "../calculadoras/catalog";
 import { guias } from "../guias/catalog";
 import { tabelas } from "../tabelas/catalog";
+import { utilitarios } from "../utilitarios/catalog";
 import type { HubSlug } from "./types";
 
 export type Hub = {
@@ -46,4 +47,8 @@ export function guiasPorHub(slug: HubSlug) {
 
 export function tabelasPorHub(slug: HubSlug) {
   return tabelas.filter((item) => item.hub === slug);
+}
+
+export function utilitariosPorHub(slug: HubSlug) {
+  return utilitarios.filter((item) => item.hub === slug);
 }

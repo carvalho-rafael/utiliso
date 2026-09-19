@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CalculadoraPainel } from "../../components/calculadora-painel";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { IBS_CBS_ANO } from "../../lib/calculadoras/ibs-cbs";
 import { IbsCbsForm } from "./ibs-cbs-form";
@@ -24,7 +25,9 @@ export default function IbsCbsPage() {
         </p>
       </div>
 
-      <IbsCbsForm />
+      <CalculadoraPainel titulo={`Calculadora de ${calculadora.title}`}>
+        <IbsCbsForm />
+      </CalculadoraPainel>
 
       <section className="flex flex-col gap-4 text-sm text-muted">
         <h2 className="text-base font-medium text-foreground">
@@ -95,9 +98,15 @@ export default function IbsCbsPage() {
               Qual a diferença entre IBS e CBS?
             </dt>
             <dd>
-              A CBS é federal e substitui PIS, Cofins e parte do IPI. O IBS é
-              compartilhado entre estados e municípios e substituirá ICMS e ISS
-              na vigência plena do novo sistema.
+              A CBS é federal; o IBS é de estados e municípios. Cada um substitui
+              um conjunto diferente de tributos antigos na transição. Veja o{" "}
+              <Link
+                href="/guias/ibs-e-cbs"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                guia IBS e CBS: o que são e qual a diferença
+              </Link>
+              .
             </dd>
           </div>
           <div>

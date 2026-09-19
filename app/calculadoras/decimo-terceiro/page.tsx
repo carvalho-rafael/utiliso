@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CalculadoraPainel } from "../../components/calculadora-painel";
 import { getCalculadoraBySlug } from "../../lib/calculadoras/catalog";
 import { DecimoTerceiroForm } from "./decimo-terceiro-form";
 
@@ -23,7 +24,9 @@ export default function DecimoTerceiroPage() {
         </p>
       </div>
 
-      <DecimoTerceiroForm />
+      <CalculadoraPainel titulo={`Calculadora de ${calculadora.title}`}>
+        <DecimoTerceiroForm />
+      </CalculadoraPainel>
 
       <section className="flex flex-col gap-4 text-sm text-muted">
         <h2 className="text-base font-medium text-foreground">

@@ -108,7 +108,14 @@ export default function TabelaIbsCbsPage() {
         <p>
           O destaque na nota fiscal é informativo; o recolhimento em {IBS_CBS_ANO}{" "}
           fica dispensado se cumpridas as obrigações acessórias (art. 348, § 1º).
-          Entenda como isso aparece na NF-e no{" "}
+          Conceitos no{" "}
+          <Link
+            href="/guias/ibs-e-cbs"
+            className="cursor-pointer font-medium text-accent hover:underline"
+          >
+            guia IBS e CBS: o que são
+          </Link>
+          ; na NF-e, o{" "}
           <Link
             href="/guias/ibs-cbs-nfe-2026"
             className="cursor-pointer font-medium text-accent hover:underline"
