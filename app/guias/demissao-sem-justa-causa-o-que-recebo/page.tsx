@@ -117,13 +117,25 @@ export default function DemissaoSemJustaCausaGuiaPage() {
           </li>
           <li>
             <strong className="text-foreground">Saque de 100% do saldo</strong>{" "}
-            + a multa, na Caixa, com a chave de movimentação da rescisão;
+            + a multa, na Caixa, com a chave de movimentação da rescisão — essa
+            é a regra do{" "}
+            <strong className="text-foreground">saque-rescisão</strong>{" "}
+            (modalidade padrão);
           </li>
           <li>
             Há FGTS também sobre o 13º proporcional e sobre o aviso indenizado
             (8%).
           </li>
         </ul>
+        <p>
+          Quem aderiu ao{" "}
+          <strong className="text-foreground">saque-aniversário</strong> não
+          saca o saldo integral na rescisão: só a multa de 40%. O restante
+          permanece na conta FGTS (saques-aniversário futuros ou outras
+          hipóteses legais). Pedir volta ao saque-rescisão só vale a partir do
+          25º mês; se a demissão cair nesse intervalo, continua a regra do
+          aniversário.
+        </p>
         <p>
           O valor oficial é o da conta FGTS, não a estimativa da calculadora.
         </p>
@@ -258,6 +270,15 @@ export default function DemissaoSemJustaCausaGuiaPage() {
                 guia do aviso no pedido de demissão
               </Link>
               .
+            </dd>
+          </div>
+          <div>
+            <dt className="font-medium text-foreground">
+              Estou no saque-aniversário. Consigo sacar o FGTS na demissão?
+            </dt>
+            <dd>
+              Não o saldo integral. Só a multa de 40%. O restante fica na conta
+              FGTS até um saque-aniversário ou outra hipótese legal.
             </dd>
           </div>
           <div>

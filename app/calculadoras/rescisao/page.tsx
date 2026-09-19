@@ -160,11 +160,13 @@ export default function RescisaoPage() {
               Posso sacar o FGTS na rescisão?
             </dt>
             <dd>
-              Na demissão sem justa causa, sim (saldo + multa de 40%). No
-              acordo, saque de até 80% e multa de 20%. Pedido de demissão e
-              justa causa, em regra, não permitem saque. A estimativa soma 8%
-              mensal, 8% sobre o 13º e 8% sobre o aviso indenizado — o valor
-              oficial é o da conta FGTS.
+              Na demissão sem justa causa, no saque-rescisão (padrão) sim:
+              saldo + multa de 40%. Quem está no saque-aniversário saca só a
+              multa; o saldo permanece na conta. No acordo, saque de até 80% e
+              multa de 20% (também só a multa no saque-aniversário). Pedido de
+              demissão e justa causa, em regra, não permitem saque. A
+              estimativa soma 8% mensal, 8% sobre o 13º e 8% sobre o aviso
+              indenizado — o valor oficial é o da conta FGTS.
             </dd>
           </div>
           <div>

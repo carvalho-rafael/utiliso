@@ -61,7 +61,7 @@ Conteúdo em **pt-BR**, uma URL por guia (`/guias/<slug>`). Índice em `/guias`.
 
 - Verbas: saldo, 13º, férias + 1/3, aviso indenizado (se não trabalhado).
 - Aviso do empregador: 30 dias + 3 por ano, até 90 (Lei 12.506/2011).
-- FGTS: saque de 100% + multa 40% (fora do líquido).
+- FGTS: saque de 100% + multa 40% no saque-rescisão (padrão); no saque-aniversário, só a multa (fora do líquido).
 - Seguro-desemprego: pode ter direito; não entra no líquido.
 - CTA: calculadora de rescisão; link para calculadora/guia de seguro.
 

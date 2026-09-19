@@ -692,9 +692,9 @@ export type SeguroDesempregoInfo = {
 export function getFgtsSaqueNota(motivo: MotivoRescisao): string {
   switch (motivo) {
     case "sem_justa_causa":
-      return "Na demissão sem justa causa é possível sacar o saldo da conta e a multa de 40%. Saldo e multa não entram no líquido da rescisão.";
+      return "Na demissão sem justa causa, no saque-rescisão (padrão) é possível sacar o saldo e a multa de 40%. No saque-aniversário, só a multa. Saldo e multa não entram no líquido da rescisão.";
     case "acordo":
-      return "No acordo (art. 484-A), o saque é de até 80% do saldo e a multa é de 20%. Saldo e multa não entram no líquido da rescisão.";
+      return "No acordo (art. 484-A), no saque-rescisão o saque é de até 80% do saldo e a multa é de 20%. No saque-aniversário, só a multa. Saldo e multa não entram no líquido da rescisão.";
     case "pedido_demissao":
       return "No pedido de demissão, em regra não há saque do FGTS nem multa. O saldo estimado não entra no líquido da rescisão.";
     case "com_justa_causa":

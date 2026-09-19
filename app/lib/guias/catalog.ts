@@ -75,7 +75,7 @@ export const guias: Guia[] = [
     vigencia: "conforme as Leis 4.090/1962 e 4.749/1965",
     atualizadoEm: "2026-09-15",
     fonte:
-      "Lei 4.090/1962; Lei 4.749/1965; Decreto 57.155/1965; CLT art. 145",
+      "Lei 4.090/1962; Lei 4.749/1965; Decreto 10.854/2021",
   },
   {
     slug: "segunda-parcela-decimo-terceiro",
@@ -89,7 +89,7 @@ export const guias: Guia[] = [
     vigencia: "conforme as Leis 4.090/1962 e 4.749/1965",
     atualizadoEm: "2026-09-15",
     fonte:
-      "Lei 4.090/1962; Lei 4.749/1965; Decreto 57.155/1965; Portaria Interministerial MPS/MF nº 13/2026; Lei 15.270/2025",
+      "Lei 4.090/1962; Lei 4.749/1965; Decreto 10.854/2021; Portaria Interministerial MPS/MF nº 13/2026; Lei 15.270/2025",
   },
   {
     slug: "pedido-de-demissao-o-que-recebo",
@@ -128,9 +128,9 @@ export const guias: Guia[] = [
       "Guia da demissão sem justa causa: saldo, 13º, férias, aviso prévio, multa de 40% do FGTS, saque e seguro-desemprego.",
     icon: "briefcase",
     vigencia: "conforme a CLT em vigor",
-    atualizadoEm: "2026-09-12",
+    atualizadoEm: "2026-09-19",
     fonte:
-      "CLT arts. 146, 147, 477 e 487; Lei 12.506/2011; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990, art. 18; Lei 7.998/1990",
+      "CLT arts. 146, 147, 477 e 487; Lei 12.506/2011; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990, arts. 18 e 20-A; Lei 7.998/1990",
   },
   {
     slug: "ibs-e-cbs",

@@ -90,7 +90,8 @@ export default function DecimoTerceiroPage() {
           </li>
           <li>
             <strong className="text-foreground">Adiantamento nas férias:</strong>{" "}
-            a 1ª parcela pode ser paga junto com as férias (CLT art. 145) — veja
+            a 1ª parcela pode ser paga junto com as férias se pedida em
+            janeiro (Lei 4.749/1965, art. 2º) — veja
             a{" "}
             <Link
               href="/calculadoras/ferias"

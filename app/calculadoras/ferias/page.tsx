@@ -77,7 +77,7 @@ export default function FeriasPage() {
           <li>
             <strong className="text-foreground">13º salário:</strong> a 1ª
             parcela (metade do salário) pode ser paga junto com as férias se
-            pedida em janeiro (Lei 4.749/1965; CLT art. 145) — sem INSS nem
+            pedida em janeiro (Lei 4.749/1965, art. 2º) — sem INSS nem
             IRRF nesta parcela. Veja o{" "}
             <Link
               href="/guias/primeira-parcela-decimo-terceiro"
