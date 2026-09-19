@@ -1,3 +1,5 @@
+import type { EditorialFonteRef } from "../editorial/fontes-oficiais";
+import { fo } from "../editorial/fontes-oficiais";
 import type { HubSlug } from "../hubs/types";
 
 export type GuiaIcon = "book" | "briefcase";
@@ -17,8 +19,8 @@ export type Guia = {
    * Atualizar só quando conteúdo, fonte ou valores mudarem — não a cada deploy.
    */
   atualizadoEm: string;
-  /** Ato/órgão oficial de referência. */
-  fonte: string;
+  /** Ato/órgão oficial de referência (links em `app/lib/editorial/fontes-oficiais.ts`). */
+  fonte: readonly EditorialFonteRef[];
 };
 
 export const guias: Guia[] = [
@@ -33,8 +35,7 @@ export const guias: Guia[] = [
     icon: "book",
     vigencia: "a partir de 11 de janeiro de 2026 (tabela MTE)",
     atualizadoEm: "2026-09-12",
-    fonte:
-      "Lei 7.998/1990; tabela MTE/CODEFAT reajustada pelo INPC; Resolução CODEFAT nº 957/2022",
+    fonte: [fo.lei7998, fo.tabelaMteCodefatInpc, fo.codefat957],
   },
   {
     slug: "calculo-inss",
@@ -47,7 +48,7 @@ export const guias: Guia[] = [
     icon: "book",
     vigencia: "a partir de janeiro de 2026",
     atualizadoEm: "2026-09-12",
-    fonte: "Portaria Interministerial MPS/MF nº 13/2026",
+    fonte: [fo.portariaMpsMf13_2026],
   },
   {
     slug: "ferias-proporcionais",
@@ -60,8 +61,12 @@ export const guias: Guia[] = [
     icon: "book",
     vigencia: "conforme a CLT em vigor",
     atualizadoEm: "2026-09-14",
-    fonte:
-      "CLT arts. 130, 146 e 147; CF art. 7º, XVII; Súmula 171 do TST; Lei 8.212/1991, art. 28, § 9º",
+    fonte: [
+      fo.clt130_146_147,
+      fo.cfArt7_XVII,
+      fo.sumula171Tst,
+      fo.lei8212_art28_9,
+    ],
   },
   {
     slug: "primeira-parcela-decimo-terceiro",
@@ -74,8 +79,7 @@ export const guias: Guia[] = [
     icon: "book",
     vigencia: "conforme as Leis 4.090/1962 e 4.749/1965",
     atualizadoEm: "2026-09-15",
-    fonte:
-      "Lei 4.090/1962; Lei 4.749/1965; Decreto 10.854/2021",
+    fonte: [fo.lei4090, fo.lei4749, fo.decreto10854_2021],
   },
   {
     slug: "segunda-parcela-decimo-terceiro",
@@ -88,8 +92,13 @@ export const guias: Guia[] = [
     icon: "book",
     vigencia: "conforme as Leis 4.090/1962 e 4.749/1965",
     atualizadoEm: "2026-09-15",
-    fonte:
-      "Lei 4.090/1962; Lei 4.749/1965; Decreto 10.854/2021; Portaria Interministerial MPS/MF nº 13/2026; Lei 15.270/2025",
+    fonte: [
+      fo.lei4090,
+      fo.lei4749,
+      fo.decreto10854_2021,
+      fo.portariaMpsMf13_2026,
+      fo.lei15270,
+    ],
   },
   {
     slug: "pedido-de-demissao-o-que-recebo",
@@ -102,8 +111,13 @@ export const guias: Guia[] = [
     icon: "briefcase",
     vigencia: "conforme a CLT em vigor",
     atualizadoEm: "2026-09-15",
-    fonte:
-      "CLT arts. 146, 147, 477 e 487; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990; Lei 7.998/1990",
+    fonte: [
+      fo.clt146_147_477_487,
+      fo.sumula171Tst,
+      fo.lei4090,
+      fo.lei8036,
+      fo.lei7998,
+    ],
   },
   {
     slug: "pedi-demissao-preciso-cumprir-aviso",
@@ -116,7 +130,7 @@ export const guias: Guia[] = [
     icon: "briefcase",
     vigencia: "conforme a CLT em vigor",
     atualizadoEm: "2026-09-15",
-    fonte: "CLT arts. 477, 487 e 488; Lei 12.506/2011",
+    fonte: [fo.clt477_487_488, fo.lei12506],
   },
   {
     slug: "demissao-sem-justa-causa-o-que-recebo",
@@ -129,8 +143,14 @@ export const guias: Guia[] = [
     icon: "briefcase",
     vigencia: "conforme a CLT em vigor",
     atualizadoEm: "2026-09-19",
-    fonte:
-      "CLT arts. 146, 147, 477 e 487; Lei 12.506/2011; Súmula 171 do TST; Lei 4.090/1962; Lei 8.036/1990, arts. 18 e 20-A; Lei 7.998/1990",
+    fonte: [
+      fo.clt146_147_477_487,
+      fo.lei12506,
+      fo.sumula171Tst,
+      fo.lei4090,
+      fo.lei8036_arts18_20A,
+      fo.lei7998,
+    ],
   },
   {
     slug: "ibs-e-cbs",
@@ -143,7 +163,7 @@ export const guias: Guia[] = [
     icon: "book",
     vigencia: "conforme a LC 214/2025 e cronograma de transição",
     atualizadoEm: "2026-09-19",
-    fonte: "Lei Complementar nº 214/2025 (reforma do consumo)",
+    fonte: [fo.lc214],
   },
   {
     slug: "ibs-cbs-nfe-2026",
@@ -157,8 +177,7 @@ export const guias: Guia[] = [
     vigencia:
       "fatos geradores de 1º de janeiro a 31 de dezembro de 2026",
     atualizadoEm: "2026-09-18",
-    fonte:
-      "Lei Complementar nº 214/2025 (arts. 343, 346 e 348); Nota Técnica 2025.002-RTC (NF-e/NFC-e)",
+    fonte: [fo.lc214_arts343_346_348, fo.nt2025_002_rtc],
   },
 ];
 

@@ -1,3 +1,5 @@
+import type { EditorialFonteRef } from "../editorial/fontes-oficiais";
+import { fo } from "../editorial/fontes-oficiais";
 import type { HubSlug } from "../hubs/types";
 
 export const TABELAS_BASE = "/tabelas";
@@ -20,8 +22,8 @@ export type Tabela = {
    * Atualizar só quando números, fonte ou texto relevante mudarem — não a cada deploy.
    */
   atualizadoEm: string;
-  /** Ato oficial / órgão (ex.: Portaria, Receita, MTE). */
-  fonte: string;
+  /** Ato oficial / órgão (links em `app/lib/editorial/fontes-oficiais.ts`). */
+  fonte: readonly EditorialFonteRef[];
 };
 
 export const tabelas: Tabela[] = [
@@ -35,7 +37,7 @@ export const tabelas: Tabela[] = [
       "Tabela INSS 2026: alíquotas de 7,5% a 14%, faixas salariais e teto de R$ 8.475,55 para empregados CLT.",
     vigencia: "a partir de janeiro de 2026",
     atualizadoEm: "2026-09-12",
-    fonte: "Portaria Interministerial MPS/MF nº 13/2026",
+    fonte: [fo.portariaMpsMf13_2026],
   },
   {
     slug: "irrf",
@@ -47,7 +49,7 @@ export const tabelas: Tabela[] = [
       "Tabela IRRF 2026: faixas de imposto de renda retido na fonte, alíquotas de 7,5% a 27,5% e desconto simplificado.",
     vigencia: "a partir de janeiro de 2026",
     atualizadoEm: "2026-09-12",
-    fonte: "Tabela mensal da Receita Federal; redutor da Lei 15.270/2025",
+    fonte: [fo.tabelaIrrfReceita, fo.lei15270],
   },
   {
     slug: "salario-minimo",
@@ -59,7 +61,7 @@ export const tabelas: Tabela[] = [
       "Salário mínimo 2026: R$ 1.621,00 nacional, vigência a partir de janeiro e relação com INSS e seguro-desemprego.",
     vigencia: "a partir de 1º de janeiro de 2026",
     atualizadoEm: "2026-09-12",
-    fonte: "Salário mínimo nacional fixado para 2026",
+    fonte: [fo.decreto12797_2026],
   },
   {
     slug: "seguro-desemprego",
@@ -71,8 +73,7 @@ export const tabelas: Tabela[] = [
       "Tabela seguro-desemprego 2026: piso, teto, faixas de 80% e reajuste pelo INPC após demissão sem justa causa.",
     vigencia: "a partir de 11 de janeiro de 2026",
     atualizadoEm: "2026-09-12",
-    fonte:
-      "Tabela MTE/CODEFAT (Lei 7.998/1990), reajustada pelo INPC; Resolução CODEFAT nº 957/2022",
+    fonte: [fo.tabelaMteCodefatLei7998, fo.codefat957],
   },
   {
     slug: "ibs-cbs",
@@ -85,7 +86,7 @@ export const tabelas: Tabela[] = [
     vigencia:
       "fatos geradores de 1º de janeiro a 31 de dezembro de 2026",
     atualizadoEm: "2026-09-18",
-    fonte: "Lei Complementar nº 214/2025 (arts. 343 e 346)",
+    fonte: [fo.lc214_arts343_346],
   },
 ];
 

@@ -16,7 +16,7 @@ Cada página de tabela deve exibir:
 |---|---|---|
 | **Vigência** | Quando a tabela do governo passou a valer | `tabela.vigencia` + subtítulo |
 | **Atualizado em** | Quando a página foi revisada no Utiliso | `tabela.atualizadoEm` via `EditorialMeta` / `TabelaMeta` |
-| **Fonte** | Ato/órgão oficial | `tabela.fonte` via `EditorialFonte` / `TabelaFonte` |
+| **Fonte** | Ato/órgão oficial (links) | `tabela.fonte` via `EditorialFonte` / `TabelaFonte`; URLs em `app/lib/editorial/fontes-oficiais.ts` |
 
 Também: H1 com o ano, tabela HTML a partir das constantes de cálculo, FAQ curto, aviso de estimativa, CTA para a calculadora relacionada.
 
