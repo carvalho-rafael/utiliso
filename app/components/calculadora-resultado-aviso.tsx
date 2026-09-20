@@ -4,8 +4,8 @@ const linkClass =
   "cursor-pointer font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 type CalculadoraResultadoAvisoProps = {
-  ano: number;
-  variant?: "inss-irrf" | "seguro" | "ibs-cbs";
+  ano?: number;
+  variant?: "inss-irrf" | "seguro" | "ibs-cbs" | "clt";
 };
 
 /** Aviso pós-resultado com links para as tabelas — sem bloco extra de fontes. */
@@ -13,6 +13,15 @@ export function CalculadoraResultadoAviso({
   ano,
   variant = "inss-irrf",
 }: CalculadoraResultadoAvisoProps) {
+  if (variant === "clt") {
+    return (
+      <p className="mt-1 text-sm text-muted">
+        Estimativa com regras da CLT e da Lei 605/1949 (DSR). Não substitui
+        contador, advogado ou departamento pessoal.
+      </p>
+    );
+  }
+
   if (variant === "seguro") {
     return (
       <p className="mt-1 text-sm text-muted">

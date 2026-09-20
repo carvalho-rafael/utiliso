@@ -61,6 +61,17 @@ export const calculadoras: Calculadora[] = [
     icon: "calendar",
   },
   {
+    slug: "desconto-por-falta",
+    href: calculadoraHref("desconto-por-falta"),
+    hub: "trabalho",
+    title: "Desconto por falta",
+    description: "Estime o desconto de faltas injustificadas e DSR",
+    metaDescription:
+      "Calculadora de desconto por falta injustificada: valor do dia (salário ÷ 30), perda de DSR por semana e salário após desconto.",
+    popular: false,
+    icon: "calendar",
+  },
+  {
     slug: "ferias",
     href: calculadoraHref("ferias"),
     hub: "trabalho",

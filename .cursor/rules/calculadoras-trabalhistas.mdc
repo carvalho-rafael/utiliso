@@ -13,6 +13,13 @@ Salário proporcional no mês civil: (salário ÷ dias do mês) × dias trabalha
 
 Indicar se o mês conta como avo (mais de 14 dias) para 13º e férias proporcionais. INSS e IRRF sobre o proporcional; FGTS 8% só como referência.
 
+## Desconto por falta (`/calculadoras/desconto-por-falta`)
+
+- Mensalista: valor do dia = salário ÷ 30 (Lei 605/1949, art. 7º, § 2º). Não confundir com dias do mês civil (dias trabalhados / saldo na rescisão).
+- Falta injustificada: desconto do dia; DSR = 1 dia por semana com falta (art. 6º Lei 605; Decreto 27.048/1949, art. 11). Várias faltas na mesma semana → 1 DSR.
+- Formulário: ao aumentar faltas, semanas com falta volta para 1 (várias faltas na mesma semana); o usuário ajusta se faltou em semanas distintas.
+- Sem INSS/IRRF no resultado; aviso variant `clt`. CTA para salário líquido se o usuário quiser encargos.
+
 ## 13º proporcional (`/calculadoras/decimo-terceiro`)
 
 - Avos: mês com mais de 14 dias (Lei 4.090/1962). No emprego, admissão até 31/12; saída no ano, até a data de saída.

@@ -75,6 +75,10 @@ export const fo = {
     href:
       "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm",
   },
+  lei605: {
+    label: "Lei 605/1949 (repouso semanal remunerado)",
+    href: "https://www.planalto.gov.br/ccivil_03/leis/l0605.htm",
+  },
   lei8036: {
     label: "Lei 8.036/1990",
     href: "https://www.planalto.gov.br/ccivil_03/leis/l8036.htm",
