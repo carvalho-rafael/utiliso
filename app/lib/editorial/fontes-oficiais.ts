@@ -53,6 +53,10 @@ export const fo = {
     label: "Súmula 171 do TST",
     href: "https://www.tst.jus.br/sumulas-de-jurisprudencia",
   },
+  sumula27Tst: {
+    label: "Súmula 27 do TST",
+    href: "https://www.tst.jus.br/sumulas-de-jurisprudencia",
+  },
   lei8212_art28_9: {
     label: "Lei 8.212/1991, art. 28, § 9º",
     href: "https://www.planalto.gov.br/ccivil_03/leis/l8212.htm#art28",

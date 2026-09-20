@@ -20,6 +20,13 @@ Indicar se o mês conta como avo (mais de 14 dias) para 13º e férias proporcio
 - Formulário: ao aumentar faltas, semanas com falta volta para 1 (várias faltas na mesma semana); o usuário ajusta se faltou em semanas distintas.
 - Sem INSS/IRRF no resultado; aviso variant `clt`. CTA para salário líquido se o usuário quiser encargos.
 
+## DSR sobre comissões (`/calculadoras/dsr-sobre-comissoes`)
+
+- Só comissões do mês (não salário fixo mensalista). Súmula 27 TST; Lei 605/1949.
+- Fórmula: (comissões ÷ dias úteis) × dias de DSR (domingos + feriados), igual ao DSR da hora extra.
+- Defaults no formulário: 25 dias úteis, 5 dias de DSR; usuário ajusta o calendário.
+- Sem INSS/IRRF; aviso variant `clt`. Links para salário líquido e hora extra.
+
 ## 13º proporcional (`/calculadoras/decimo-terceiro`)
 
 - Avos: mês com mais de 14 dias (Lei 4.090/1962). No emprego, admissão até 31/12; saída no ano, até a data de saída.

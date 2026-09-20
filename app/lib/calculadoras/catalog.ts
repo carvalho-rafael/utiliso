@@ -106,6 +106,17 @@ export const calculadoras: Calculadora[] = [
     icon: "clock",
   },
   {
+    slug: "dsr-sobre-comissoes",
+    href: calculadoraHref("dsr-sobre-comissoes"),
+    hub: "trabalho",
+    title: "DSR sobre comissões",
+    description: "Estime o repouso remunerado sobre comissões do mês",
+    metaDescription:
+      "Calculadora de DSR sobre comissões: média diária das comissões × domingos e feriados do mês (Súmula 27 TST).",
+    popular: false,
+    icon: "money",
+  },
+  {
     slug: "seguro-desemprego",
     href: calculadoraHref("seguro-desemprego"),
     hub: "trabalho",
