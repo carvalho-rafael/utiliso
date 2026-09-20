@@ -21,6 +21,8 @@ export default function DecimoTerceiroPage() {
         <p className="text-lg text-muted">
           Conte os avos no ano civil, estime o 13º proporcional e veja as duas
           parcelas no emprego ou o líquido no acerto quando há saída no ano.
+          Também calcula 13º proporcional para admitidos ou desligados durante o
+          ano.
         </p>
       </div>
 
@@ -38,7 +40,15 @@ export default function DecimoTerceiroPage() {
             dias ou mais no período conta como 1/12 do 13º (Lei 4.090/1962).
             No emprego, o período vai da admissão (ou 1º de janeiro) até 31 de
             dezembro; na saída no ano, até a data de rescisão ou fim do
-            contrato.
+            contrato. Admitidos ou desligados no meio do ano usam só os meses
+            com avo — veja o{" "}
+            <Link
+              href="/guias/decimo-terceiro-proporcional"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              guia do 13º proporcional
+            </Link>
+            .
           </li>
           <li>
             <strong className="text-foreground">1ª parcela:</strong> metade do
@@ -180,15 +190,23 @@ export default function DecimoTerceiroPage() {
               Fui demitido, uso esta calculadora?
             </dt>
             <dd>
-              Para 13º proporcional na rescisão, use a{" "}
+              Para o 13º proporcional isolado (avos até a saída), esta
+              calculadora no modo “saída no ano”. Para o acerto completo (saldo,
+              férias, aviso etc.), use a{" "}
               <Link
                 href="/calculadoras/rescisao"
                 className="cursor-pointer font-medium text-accent hover:underline"
               >
                 calculadora de rescisão
               </Link>
-              . As regras de pagamento e tributação são as mesmas, mas o valor
-              proporcional depende da data de saída.
+              . Regras e avos no{" "}
+              <Link
+                href="/guias/decimo-terceiro-proporcional"
+                className="cursor-pointer font-medium text-accent hover:underline"
+              >
+                guia do 13º proporcional
+              </Link>
+              .
             </dd>
           </div>
           <div>

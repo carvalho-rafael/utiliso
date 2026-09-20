@@ -236,9 +236,16 @@ export default function IbsCbsNfe2026GuiaPage() {
 
         <p>
           A NFC-e (modelo 65) segue lógica semelhante de leiaute para quem está
-          no regime normal e no cronograma de obrigatoriedade. Simples Nacional,
-          MEI e casos especiais exigem análise própria — este guia foca a NF-e
-          de regime normal na transição.
+          no regime normal e no cronograma de obrigatoriedade. Para{" "}
+          <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
+            Simples Nacional
+          </Link>
+          ,{" "}
+          <Link href="/guias/ibs-cbs-mei" className={linkClass}>
+            MEI
+          </Link>{" "}
+          e outros casos especiais, veja os guias dedicados — este texto foca a
+          NF-e de regime normal na transição.
         </p>
 
         <h2 className="text-base font-medium text-foreground">
@@ -350,6 +357,12 @@ export default function IbsCbsNfe2026GuiaPage() {
         <div className="flex flex-wrap gap-4">
           <Link href="/guias/ibs-e-cbs" className={linkClass}>
             IBS e CBS: o que são
+          </Link>
+          <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
+            IBS e CBS no Simples Nacional
+          </Link>
+          <Link href="/guias/ibs-cbs-mei" className={linkClass}>
+            IBS e CBS para o MEI
           </Link>
           <Link href="/calculadoras/ibs-cbs" className={linkClass}>
             Calculadora de IBS e CBS

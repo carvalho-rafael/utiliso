@@ -263,7 +263,11 @@ export default function FeriasProporcionaisGuiaPage() {
             <dd>
               Não necessariamente. O 13º conta meses no ano civil, a partir de
               janeiro (ou da admissão, se for no mesmo ano). As férias contam
-              meses no período aquisitivo, a partir da data de admissão.
+              meses no período aquisitivo, a partir da data de admissão. Veja o{" "}
+              <Link href="/guias/decimo-terceiro-proporcional" className={linkClass}>
+                guia do 13º proporcional
+              </Link>
+              .
             </dd>
           </div>
           <div>

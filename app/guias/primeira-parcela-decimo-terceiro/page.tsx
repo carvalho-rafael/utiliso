@@ -143,6 +143,10 @@ export default function PrimeiraParcelaDecimoGuiaPage() {
           duas parcelas de calendário. Use a{" "}
           <Link href="/calculadoras/rescisao" className={linkClass}>
             calculadora de rescisão
+          </Link>{" "}
+          ou o{" "}
+          <Link href="/guias/decimo-terceiro-proporcional" className={linkClass}>
+            guia do 13º proporcional
           </Link>
           . Se a 1ª parcela já tinha sido paga, a empresa abate esse
           adiantamento no acerto — a calculadora estima o 13º proporcional
@@ -231,6 +235,9 @@ export default function PrimeiraParcelaDecimoGuiaPage() {
             className={linkClass}
           >
             Segunda parcela do 13º salário
+          </Link>
+          <Link href="/guias/decimo-terceiro-proporcional" className={linkClass}>
+            13º salário proporcional
           </Link>
           <Link href="/calculadoras/ferias" className={linkClass}>
             Calculadora de férias

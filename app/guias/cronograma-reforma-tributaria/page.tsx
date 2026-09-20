@@ -269,9 +269,16 @@ export default function CronogramaReformaTributariaGuiaPage() {
           (ADCT, art. 129). O IBS passa a operar com alíquotas de referência
           plenas, fixadas para estados e municípios (LC 214, art. 365). A CBS
           permanece como tributo federal de consumo no modelo IVA. Setores com
-          regimes específicos (combustíveis, financeiro, Simples Nacional, ZFM
-          etc.) seguem regras próprias na LC 214 — este guia descreve o eixo
-          geral da transição.
+          regimes específicos (combustíveis, financeiro,{" "}
+          <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
+            Simples Nacional
+          </Link>
+          ,{" "}
+          <Link href="/guias/ibs-cbs-mei" className={linkClass}>
+            MEI
+          </Link>
+          , ZFM etc.) seguem regras próprias na LC 214 — este guia descreve o
+          eixo geral da transição.
         </p>
 
         <h2 className="text-base font-medium text-foreground">
@@ -329,9 +336,16 @@ export default function CronogramaReformaTributariaGuiaPage() {
               Este cronograma vale para MEI e Simples Nacional?
             </dt>
             <dd>
-              A LC 214 traz regimes diferenciados e transições específicas. Este
-              guia resume o calendário constitucional geral; enquadramento da
-              empresa exige análise caso a caso.
+              O calendário constitucional vale para todos, mas MEI e Simples
+              têm regras próprias de recolhimento e crédito. Leia o{" "}
+              <Link href="/guias/ibs-cbs-mei" className={linkClass}>
+                guia do MEI
+              </Link>{" "}
+              e o{" "}
+              <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
+                guia do Simples Nacional
+              </Link>
+              .
             </dd>
           </div>
           <div>
@@ -357,6 +371,12 @@ export default function CronogramaReformaTributariaGuiaPage() {
           </Link>
           <Link href="/guias/ibs-cbs-nfe-2026" className={linkClass}>
             IBS e CBS na NF-e em {IBS_CBS_ANO}
+          </Link>
+          <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
+            IBS e CBS no Simples Nacional
+          </Link>
+          <Link href="/guias/ibs-cbs-mei" className={linkClass}>
+            IBS e CBS para o MEI
           </Link>
           <Link href="/calculadoras/ibs-cbs" className={linkClass}>
             Calculadora de IBS e CBS

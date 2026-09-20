@@ -129,6 +129,10 @@ export default function SegundaParcelaDecimoGuiaPage() {
           duas parcelas de calendário. Use a{" "}
           <Link href="/calculadoras/rescisao" className={linkClass}>
             calculadora de rescisão
+          </Link>{" "}
+          ou o{" "}
+          <Link href="/guias/decimo-terceiro-proporcional" className={linkClass}>
+            guia do 13º proporcional
           </Link>
           . Se a 1ª já tinha sido paga, a empresa abate o adiantamento no
           acerto.
@@ -210,6 +214,9 @@ export default function SegundaParcelaDecimoGuiaPage() {
             className={linkClass}
           >
             Primeira parcela do 13º salário
+          </Link>
+          <Link href="/guias/decimo-terceiro-proporcional" className={linkClass}>
+            13º salário proporcional
           </Link>
           <Link href="/guias/calculo-inss" className={linkClass}>
             Guia do cálculo do INSS

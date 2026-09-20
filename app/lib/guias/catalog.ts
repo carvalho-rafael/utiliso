@@ -101,6 +101,25 @@ export const guias: Guia[] = [
     ],
   },
   {
+    slug: "decimo-terceiro-proporcional",
+    href: "/guias/decimo-terceiro-proporcional",
+    hub: "trabalho",
+    title: "13º salário proporcional",
+    description: "Avos no ano civil, fórmula e quando há direito",
+    metaDescription:
+      "Guia do 13º salário proporcional: como contar avos no ano civil (mais de 14 dias), fórmula, 1ª e 2ª parcelas x acerto na rescisão e direito na justa causa.",
+    icon: "book",
+    vigencia: "conforme as Leis 4.090/1962 e 4.749/1965",
+    atualizadoEm: "2026-09-20",
+    fonte: [
+      fo.lei4090,
+      fo.lei4749,
+      fo.decreto10854_2021,
+      fo.portariaMpsMf13_2026,
+      fo.lei15270,
+    ],
+  },
+  {
     slug: "pedido-de-demissao-o-que-recebo",
     href: "/guias/pedido-de-demissao-o-que-recebo",
     hub: "trabalho",
@@ -197,6 +216,37 @@ export const guias: Guia[] = [
       fo.lc214_arts361_366,
       fo.lc214_art409,
     ],
+  },
+  {
+    slug: "ibs-cbs-simples-nacional",
+    href: "/guias/ibs-cbs-simples-nacional",
+    hub: "reforma-tributaria",
+    title: "IBS e CBS no Simples Nacional: o que muda",
+    description: "DAS, crédito do comprador e opção pelo regime regular",
+    metaDescription:
+      "Guia IBS e CBS no Simples Nacional: recolhimento no DAS, crédito do art. 23 da LC 123, opção pelo regime regular (LC 214, art. 41) e limite de receita para IBS no Simples.",
+    icon: "book",
+    vigencia: "LC 214/2025 e LC 123/2006 (redação dada pela LC 214/2025)",
+    atualizadoEm: "2026-09-20",
+    fonte: [
+      fo.lc214_art41,
+      fo.lc123_art23,
+      fo.lc123_art13A,
+      fo.lc214_art47,
+    ],
+  },
+  {
+    slug: "ibs-cbs-mei",
+    href: "/guias/ibs-cbs-mei",
+    hub: "reforma-tributaria",
+    title: "IBS e CBS para o MEI: o que muda",
+    description: "Valor fixo mensal, nota fiscal e crédito para quem compra",
+    metaDescription:
+      "Guia IBS e CBS para MEI: parcela fixa no DAS (Anexo VII da LC 123), declaração anual, por que em geral não gera crédito e exceções dos arts. 169 e 171 da LC 214.",
+    icon: "book",
+    vigencia: "LC 123/2006, art. 18-A (redação dada pela LC 214/2025)",
+    atualizadoEm: "2026-09-20",
+    fonte: [fo.lc123_art18A, fo.lc214_arts169_171, fo.lc214_art47],
   },
 ];
 

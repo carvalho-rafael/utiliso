@@ -8,6 +8,8 @@ const CLT =
   "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm";
 const LC214 =
   "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm";
+const LC123 =
+  "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm";
 
 /** Catálogo reutilizável — importe como `fo` nos catálogos de guias e tabelas. */
 export const fo = {
@@ -114,6 +116,34 @@ export const fo = {
   lc214_art409: {
     label: "Lei Complementar nº 214/2025, art. 409 (Imposto Seletivo)",
     href: `${LC214}#art409`,
+  },
+  lc123: {
+    label: "Lei Complementar nº 123/2006 (Simples Nacional e MEI)",
+    href: LC123,
+  },
+  lc123_art18A: {
+    label: "LC 123/2006, art. 18-A (redação da LC 214/2025)",
+    href: `${LC123}#art18a`,
+  },
+  lc123_art13A: {
+    label: "LC 123/2006, art. 13-A (redação da LC 214/2025)",
+    href: `${LC123}#art13a`,
+  },
+  lc123_art23: {
+    label: "LC 123/2006, art. 23 (redação da LC 214/2025)",
+    href: `${LC123}#art23`,
+  },
+  lc214_art41: {
+    label: "Lei Complementar nº 214/2025, art. 41",
+    href: `${LC214}#art41`,
+  },
+  lc214_art47: {
+    label: "Lei Complementar nº 214/2025, art. 47",
+    href: `${LC214}#art47`,
+  },
+  lc214_arts169_171: {
+    label: "Lei Complementar nº 214/2025, arts. 169 e 171",
+    href: `${LC214}#art169`,
   },
   nt2025_002_rtc: {
     label: "Nota Técnica 2025.002-RTC (NF-e/NFC-e)",
