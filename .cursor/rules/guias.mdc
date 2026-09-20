@@ -79,7 +79,13 @@ Callout no resultado, por motivo:
 - IBS: Imposto sobre Bens e Serviços (estados e municípios); caminho para substituir ICMS e ISS.
 - Diferença: competência e tributos antigos que cada um substitui; na mesma operação podem coexistir.
 - Por fora e não cumulatividade (LC 214/2025, art. 12); alíquotas de teste em 2026 na tabela.
-- CTA: calculadora `/calculadoras/ibs-cbs`; links `/tabelas/ibs-cbs` e `/guias/ibs-cbs-nfe-2026`.
+- CTA: calculadora `/calculadoras/ibs-cbs`; links `/tabelas/ibs-cbs`, `/guias/cronograma-reforma-tributaria` e `/guias/ibs-cbs-nfe-2026`.
+
+## Cronograma da reforma (`/guias/cronograma-reforma-tributaria`)
+
+- Linha do tempo 2026-2033: teste (ADCT art. 125), CBS/IS e fim de PIS/Cofins/IPI (arts. 126-127), redução de ICMS/ISS 9/10 a 6/10 (art. 128), extinção em 2033 (art. 129); LC 214 arts. 342-349, 361-366, 409.
+- Alíquotas plenas de CBS/IBS: resolução do Senado (ADCT art. 130) — não inventar percentuais futuros na calculadora/tabela de 2026.
+- CTA: `/guias/ibs-e-cbs`, `/guias/ibs-cbs-nfe-2026`, `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`.
 
 ## IBS/CBS na NF-e (`/guias/ibs-cbs-nfe-2026`)
 
@@ -87,4 +93,4 @@ Callout no resultado, por motivo:
 - Diferença entre “operação + tributos” da calculadora e total da DANFE.
 - Grupo por item na NT 2025.002 (sem manual de XML); PIS/Cofins/ICMS/ISS convivem no ano.
 - Recolhimento dispensado se acessórias cumpridas (LC 214/2025, art. 348, § 1º).
-- CTA: calculadora `/calculadoras/ibs-cbs`; link tabela `/tabelas/ibs-cbs`.
+- CTA: calculadora `/calculadoras/ibs-cbs`; links `/tabelas/ibs-cbs` e `/guias/cronograma-reforma-tributaria`.

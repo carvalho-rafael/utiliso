@@ -98,6 +98,23 @@ export const fo = {
     label: "Lei Complementar nº 214/2025 (arts. 343, 346 e 348)",
     href: `${LC214}#art343`,
   },
+  ec132_adct124_130: {
+    label: "EC 132/2023 (ADCT, arts. 124 a 130)",
+    href:
+      "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc132.htm",
+  },
+  lc214_arts342_349: {
+    label: "Lei Complementar nº 214/2025 (arts. 342 a 349)",
+    href: `${LC214}#art342`,
+  },
+  lc214_arts361_366: {
+    label: "Lei Complementar nº 214/2025 (arts. 361 a 366)",
+    href: `${LC214}#art361`,
+  },
+  lc214_art409: {
+    label: "Lei Complementar nº 214/2025, art. 409 (Imposto Seletivo)",
+    href: `${LC214}#art409`,
+  },
   nt2025_002_rtc: {
     label: "Nota Técnica 2025.002-RTC (NF-e/NFC-e)",
     href: "https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=BMPFMBoln3w=",

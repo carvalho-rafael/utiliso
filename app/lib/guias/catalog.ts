@@ -179,6 +179,25 @@ export const guias: Guia[] = [
     atualizadoEm: "2026-09-18",
     fonte: [fo.lc214_arts343_346_348, fo.nt2025_002_rtc],
   },
+  {
+    slug: "cronograma-reforma-tributaria",
+    href: "/guias/cronograma-reforma-tributaria",
+    hub: "reforma-tributaria",
+    title: "Cronograma da nova reforma tributária",
+    description: "Datas de 2026 a 2033: CBS, IBS, PIS, ICMS e extinção",
+    metaDescription:
+      "Cronograma da reforma tributária 2026-2033: fase de teste, CBS e Imposto Seletivo em 2027, redução de ICMS e ISS até a extinção em 2033 (EC 132 e LC 214).",
+    icon: "book",
+    vigencia: "EC 132/2023 (ADCT, arts. 124 a 133) e LC 214/2025",
+    atualizadoEm: "2026-09-19",
+    fonte: [
+      fo.ec132_adct124_130,
+      fo.lc214,
+      fo.lc214_arts342_349,
+      fo.lc214_arts361_366,
+      fo.lc214_art409,
+    ],
+  },
 ];
 
 export function getGuiaBySlug(slug: string): Guia | undefined {

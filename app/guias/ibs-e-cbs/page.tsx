@@ -307,6 +307,9 @@ export default function IbsECbsGuiaPage() {
           <Link href="/guias/ibs-cbs-nfe-2026" className={linkClass}>
             IBS e CBS na NF-e em {IBS_CBS_ANO}
           </Link>
+          <Link href="/guias/cronograma-reforma-tributaria" className={linkClass}>
+            Cronograma da reforma tributária
+          </Link>
           <Link href="/reforma-tributaria" className={linkClass}>
             Hub Reforma tributária
           </Link>
