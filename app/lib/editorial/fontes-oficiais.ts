@@ -57,6 +57,14 @@ export const fo = {
     label: "Súmula 27 do TST",
     href: "https://www.tst.jus.br/sumulas-de-jurisprudencia",
   },
+  sumula428Tst: {
+    label: "Súmula 428 do TST",
+    href: "https://www.tst.jus.br/sumulas-de-jurisprudencia",
+  },
+  clt244: {
+    label: "CLT art. 244 (sobreaviso e prontidão)",
+    href: `${CLT}#art244`,
+  },
   lei8212_art28_9: {
     label: "Lei 8.212/1991, art. 28, § 9º",
     href: "https://www.planalto.gov.br/ccivil_03/leis/l8212.htm#art28",
@@ -140,6 +148,10 @@ export const fo = {
   lc123_art23: {
     label: "LC 123/2006, art. 23 (redação da LC 214/2025)",
     href: `${LC123}#art23`,
+  },
+  lc214_art12: {
+    label: "Lei Complementar nº 214/2025, art. 12",
+    href: `${LC214}#art12`,
   },
   lc214_art41: {
     label: "Lei Complementar nº 214/2025, art. 41",

@@ -236,7 +236,11 @@ export default function IbsCbsNfe2026GuiaPage() {
 
         <p>
           A NFC-e (modelo 65) segue lógica semelhante de leiaute para quem está
-          no regime normal e no cronograma de obrigatoriedade. Para{" "}
+          no{" "}
+          <Link href="/guias/ibs-cbs-regime-normal" className={linkClass}>
+            regime normal
+          </Link>{" "}
+          e no cronograma de obrigatoriedade. Para{" "}
           <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
             Simples Nacional
           </Link>
@@ -357,6 +361,9 @@ export default function IbsCbsNfe2026GuiaPage() {
         <div className="flex flex-wrap gap-4">
           <Link href="/guias/ibs-e-cbs" className={linkClass}>
             IBS e CBS: o que são
+          </Link>
+          <Link href="/guias/ibs-cbs-regime-normal" className={linkClass}>
+            IBS e CBS no regime normal
           </Link>
           <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
             IBS e CBS no Simples Nacional

@@ -35,6 +35,13 @@ Conteúdo em **pt-BR**, uma URL por guia (`/guias/<slug>`). Índice em `/guias`.
 - Na calculadora, “indenizado” no pedido é desconto, não verba.
 - CTA: calculadora de rescisão; verbas no guia do pedido.
 
+## Saldo de salário (`/guias/saldo-de-salario`)
+
+- Proporcional: (salário ÷ dias do mês civil) × dias corridos no intervalo (inclusive), mesmo mês; alinhado à rescisão e à calculadora de dias trabalhados.
+- Mini calculadora no guia (só bruto); INSS/IRRF na calculadora de dias trabalhados ou rescisão. Não confundir com desconto por falta (÷ 30).
+- Avos: mais de 14 dias no intervalo → mês conta para 13º/férias proporcionais (links nos guias correspondentes).
+- CTA: `/calculadoras/dias-trabalhados`, `/calculadoras/rescisao`.
+
 ## Férias proporcionais (`/guias/ferias-proporcionais`)
 
 - Verba do período aquisitivo incompleto na rescisão: (salário ÷ 12) × avos + 1/3.
@@ -88,27 +95,36 @@ Callout no resultado, por motivo:
 - IBS: Imposto sobre Bens e Serviços (estados e municípios); caminho para substituir ICMS e ISS.
 - Diferença: competência e tributos antigos que cada um substitui; na mesma operação podem coexistir.
 - Por fora e não cumulatividade (LC 214/2025, art. 12); alíquotas de teste em 2026 na tabela.
-- CTA: calculadora `/calculadoras/ibs-cbs`; links `/tabelas/ibs-cbs`, `/guias/cronograma-reforma-tributaria`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei` e `/guias/ibs-cbs-nfe-2026`.
+- CTA: calculadora `/calculadoras/ibs-cbs`; links `/tabelas/ibs-cbs`, `/guias/cronograma-reforma-tributaria`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei` e `/guias/ibs-cbs-nfe-2026`.
+
+## IBS e CBS no regime normal (`/guias/ibs-cbs-regime-normal`)
+
+- Quem apura: Lucro Real, Lucro Presumido e demais fora do Simples/MEI; LC 214 chama regime regular (art. 41 em contraste com o Simples).
+- Destaque por fora (art. 12, § 2º, I), crédito na cadeia; diferente do DAS.
+- Crédito B2B; compra do Simples sem opção regular → crédito limitado (art. 23 LC 123) — link Simples.
+- 2026: alíquotas de teste, convivência com PIS/Cofins/ICMS/ISS; NF-e informativa; recolhimento dispensado se acessórias cumpridas (art. 348) — links NF-e e cronograma.
+- Calculadora: por fora, sem crédito/NCM/split; alíquotas plenas só com resolução do Senado (ADCT art. 130).
+- CTA: `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`, `/guias/ibs-e-cbs`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei`, `/guias/ibs-cbs-nfe-2026`, `/guias/cronograma-reforma-tributaria`.
 
 ## Cronograma da reforma (`/guias/cronograma-reforma-tributaria`)
 
 - Linha do tempo 2026-2033: teste (ADCT art. 125), CBS/IS e fim de PIS/Cofins/IPI (arts. 126-127), redução de ICMS/ISS 9/10 a 6/10 (art. 128), extinção em 2033 (art. 129); LC 214 arts. 342-349, 361-366, 409.
 - Alíquotas plenas de CBS/IBS: resolução do Senado (ADCT art. 130) — não inventar percentuais futuros na calculadora/tabela de 2026.
-- CTA: `/guias/ibs-e-cbs`, `/guias/ibs-cbs-nfe-2026`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei`, `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`.
+- CTA: `/guias/ibs-e-cbs`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-nfe-2026`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei`, `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`.
 
 ## IBS e CBS no Simples Nacional (`/guias/ibs-cbs-simples-nacional`)
 
 - Regra padrão: IBS/CBS no DAS; art. 41 LC 214 (regime regular x Simples).
 - Crédito do comprador B2B: art. 23 LC 123; art. 47, § 9º LC 214.
 - Opção pelo regime regular (art. 41, §§ 3º-5º); limite R$ 3,6 mi para IBS no Simples (art. 13-A LC 123).
-- CTA: `/guias/ibs-e-cbs`, `/guias/ibs-cbs-mei`, `/guias/cronograma-reforma-tributaria`, `/calculadoras/ibs-cbs`.
+- CTA: `/guias/ibs-e-cbs`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-mei`, `/guias/cronograma-reforma-tributaria`, `/calculadoras/ibs-cbs`.
 
 ## IBS e CBS para o MEI (`/guias/ibs-cbs-mei`)
 
 - Valor fixo mensal (Anexo VII LC 123, art. 18-A); sem apuração por fora.
 - Em geral não gera crédito pleno; exceções arts. 169 e 171 LC 214.
 - Declaração anual art. 25-B LC 123.
-- CTA: `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-e-cbs`, `/guias/cronograma-reforma-tributaria`.
+- CTA: `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-e-cbs`, `/guias/cronograma-reforma-tributaria`.
 
 ## IBS/CBS na NF-e (`/guias/ibs-cbs-nfe-2026`)
 
@@ -116,4 +132,4 @@ Callout no resultado, por motivo:
 - Diferença entre “operação + tributos” da calculadora e total da DANFE.
 - Grupo por item na NT 2025.002 (sem manual de XML); PIS/Cofins/ICMS/ISS convivem no ano.
 - Recolhimento dispensado se acessórias cumpridas (LC 214/2025, art. 348, § 1º).
-- CTA: calculadora `/calculadoras/ibs-cbs`; links `/tabelas/ibs-cbs`, `/guias/cronograma-reforma-tributaria`, `/guias/ibs-cbs-simples-nacional` e `/guias/ibs-cbs-mei`.
+- CTA: calculadora `/calculadoras/ibs-cbs`; links `/tabelas/ibs-cbs`, `/guias/cronograma-reforma-tributaria`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-simples-nacional` e `/guias/ibs-cbs-mei`.

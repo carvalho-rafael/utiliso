@@ -369,6 +369,9 @@ export default function CronogramaReformaTributariaGuiaPage() {
           <Link href="/guias/ibs-e-cbs" className={linkClass}>
             IBS e CBS: o que são
           </Link>
+          <Link href="/guias/ibs-cbs-regime-normal" className={linkClass}>
+            IBS e CBS no regime normal
+          </Link>
           <Link href="/guias/ibs-cbs-nfe-2026" className={linkClass}>
             IBS e CBS na NF-e em {IBS_CBS_ANO}
           </Link>

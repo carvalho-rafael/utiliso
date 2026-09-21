@@ -106,6 +106,17 @@ export const calculadoras: Calculadora[] = [
     icon: "clock",
   },
   {
+    slug: "sobreaviso",
+    href: calculadoraHref("sobreaviso"),
+    hub: "trabalho",
+    title: "Sobreaviso",
+    description: "Estime sobreaviso e prontidão no mês",
+    metaDescription:
+      "Calculadora de sobreaviso e prontidão: 1/3 e 2/3 da hora normal (CLT art. 244, Súmula 428 TST), com INSS e IRRF.",
+    popular: false,
+    icon: "clock",
+  },
+  {
     slug: "dsr-sobre-comissoes",
     href: calculadoraHref("dsr-sobre-comissoes"),
     hub: "trabalho",

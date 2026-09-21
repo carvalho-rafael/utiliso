@@ -16,6 +16,7 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 - `/calculadoras/ferias`
 - `/calculadoras/decimo-terceiro`
 - `/calculadoras/hora-extra`
+- `/calculadoras/sobreaviso`
 - `/calculadoras/dsr-sobre-comissoes`
 - `/calculadoras/seguro-desemprego`
 - `/calculadoras/ibs-cbs`
@@ -31,6 +32,7 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 - `/guias/seguro-desemprego`
 - `/guias/calculo-inss`
 - `/guias/ferias-proporcionais`
+- `/guias/saldo-de-salario`
 - `/guias/primeira-parcela-decimo-terceiro`
 - `/guias/segunda-parcela-decimo-terceiro`
 - `/guias/decimo-terceiro-proporcional`
@@ -38,6 +40,7 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 - `/guias/pedi-demissao-preciso-cumprir-aviso`
 - `/guias/demissao-sem-justa-causa-o-que-recebo`
 - `/guias/ibs-e-cbs`
+- `/guias/ibs-cbs-regime-normal`
 - `/guias/ibs-cbs-nfe-2026`
 - `/guias/cronograma-reforma-tributaria`
 - `/guias/ibs-cbs-simples-nacional`

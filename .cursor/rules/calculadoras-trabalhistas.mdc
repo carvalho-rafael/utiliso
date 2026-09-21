@@ -20,6 +20,12 @@ Indicar se o mês conta como avo (mais de 14 dias) para 13º e férias proporcio
 - Formulário: ao aumentar faltas, semanas com falta volta para 1 (várias faltas na mesma semana); o usuário ajusta se faltou em semanas distintas.
 - Sem INSS/IRRF no resultado; aviso variant `clt`. CTA para salário líquido se o usuário quiser encargos.
 
+## Sobreaviso (`/calculadoras/sobreaviso`)
+
+- Sobreaviso: 1/3 da hora normal × horas (CLT art. 244, § 2º, por analogia — Súmula 428 TST). Prontidão: 2/3 × horas (§ 3º).
+- Hora normal = salário ÷ jornada mensal (mesmos divisores da hora extra). Regime: sobreaviso, prontidão ou ambos.
+- Horas trabalhadas no chamado: fora do motor — CTA hora extra. INSS/IRRF sobre o acréscimo; FGTS 8% referência. Sem DSR no motor (dobro em repouso: só FAQ).
+
 ## DSR sobre comissões (`/calculadoras/dsr-sobre-comissoes`)
 
 - Só comissões do mês (não salário fixo mensalista). Súmula 27 TST; Lei 605/1949.

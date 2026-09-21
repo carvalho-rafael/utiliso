@@ -69,6 +69,19 @@ export const guias: Guia[] = [
     ],
   },
   {
+    slug: "saldo-de-salario",
+    href: "/guias/saldo-de-salario",
+    hub: "trabalho",
+    title: "Saldo de salário",
+    description: "Fórmula, dias do mês civil e exemplo interativo",
+    metaDescription:
+      "Guia do saldo de salário: salário proporcional por dias do mês civil na rescisão ou admissão, diferença para desconto por falta e mini calculadora.",
+    icon: "book",
+    vigencia: "conforme a CLT em vigor",
+    atualizadoEm: "2026-09-20",
+    fonte: [fo.clt477_487_488],
+  },
+  {
     slug: "primeira-parcela-decimo-terceiro",
     href: "/guias/primeira-parcela-decimo-terceiro",
     hub: "trabalho",
@@ -183,6 +196,24 @@ export const guias: Guia[] = [
     vigencia: "conforme a LC 214/2025 e cronograma de transição",
     atualizadoEm: "2026-09-19",
     fonte: [fo.lc214],
+  },
+  {
+    slug: "ibs-cbs-regime-normal",
+    href: "/guias/ibs-cbs-regime-normal",
+    hub: "reforma-tributaria",
+    title: "IBS e CBS no regime normal: apuração e crédito",
+    description: "Quem apura à parte, destaque por fora e transição em 2026",
+    metaDescription:
+      "Guia IBS e CBS no regime normal (regime regular da LC 214): Lucro Real e Presumido, destaque por fora, crédito na cadeia, NF-e em 2026 e diferença para Simples e MEI.",
+    icon: "book",
+    vigencia: "LC 214/2025 (regime regular de IBS e CBS)",
+    atualizadoEm: "2026-09-20",
+    fonte: [
+      fo.lc214,
+      fo.lc214_art12,
+      fo.lc214_art41,
+      fo.lc214_arts343_346_348,
+    ],
   },
   {
     slug: "ibs-cbs-nfe-2026",

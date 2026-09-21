@@ -60,8 +60,16 @@ export default function IbsCbsPage() {
           </li>
           <li>
             <strong className="text-foreground">O que não entra:</strong> crédito
-            de IBS/CBS, Imposto Seletivo, split payment e regras por NCM. Para
-            operação item a item com memória legal, use a{" "}
+            de IBS/CBS, Imposto Seletivo, split payment e regras por NCM. A
+            ferramenta simula o{" "}
+            <Link
+              href="/guias/ibs-cbs-regime-normal"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              regime normal (regime regular)
+            </Link>
+            ; Simples e MEI seguem outras regras. Para operação item a item com
+            memória legal, use a{" "}
             <a
               href="https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/calculadora"
               className="cursor-pointer font-medium text-accent hover:underline"

@@ -101,8 +101,12 @@ export default function DiasTrabalhadosPage() {
             </dt>
             <dd>
               Sim, quando o saldo refere-se a um intervalo dentro do último mês
-              trabalhado. Na rescisão completa, outras verbas (13º, férias,
-              aviso) entram à parte — use a{" "}
+              trabalhado. Veja o{" "}
+              <Link href="/guias/saldo-de-salario" className={linkClass}>
+                guia do saldo de salário
+              </Link>{" "}
+              com exemplo interativo. Na rescisão completa, outras verbas (13º,
+              férias, aviso) entram à parte — use a{" "}
               <Link href="/calculadoras/rescisao" className={linkClass}>
                 calculadora de rescisão
               </Link>

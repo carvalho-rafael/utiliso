@@ -310,6 +310,9 @@ export default function IbsECbsGuiaPage() {
           <Link href="/guias/cronograma-reforma-tributaria" className={linkClass}>
             Cronograma da reforma tributária
           </Link>
+          <Link href="/guias/ibs-cbs-regime-normal" className={linkClass}>
+            IBS e CBS no regime normal
+          </Link>
           <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
             IBS e CBS no Simples Nacional
           </Link>

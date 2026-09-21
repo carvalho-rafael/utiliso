@@ -62,7 +62,11 @@ export default function DemissaoSemJustaCausaGuiaPage() {
         <ul className="list-disc space-y-2 pl-5">
           <li>
             <strong className="text-foreground">Saldo de salário</strong> — os
-            dias trabalhados no mês do desligamento;
+            dias trabalhados no mês do desligamento (
+            <Link href="/guias/saldo-de-salario" className={linkClass}>
+              como calcular
+            </Link>
+            );
           </li>
           <li>
             <strong className="text-foreground">13º proporcional</strong> — 1/12
@@ -322,6 +326,9 @@ export default function DemissaoSemJustaCausaGuiaPage() {
         <div className="flex flex-wrap gap-4">
           <Link href="/calculadoras/rescisao" className={linkClass}>
             Calculadora de rescisão
+          </Link>
+          <Link href="/guias/saldo-de-salario" className={linkClass}>
+            Guia do saldo de salário
           </Link>
           <Link href={SEGURO_DESEMPREGO_CALCULADORA_HREF} className={linkClass}>
             Calculadora de seguro-desemprego

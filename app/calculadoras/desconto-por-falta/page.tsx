@@ -103,8 +103,11 @@ export default function DescontoPorFaltaPage() {
             <dd>
               Para o mensalista, a lei trata o mês como 30 diárias nos
               descontos por falta. Já o saldo de salário na admissão ou rescisão
-              pode usar os dias do mês civil — por isso existe a calculadora de
-              dias trabalhados.
+              usa os dias do mês civil — veja o{" "}
+              <Link href="/guias/saldo-de-salario" className={linkClass}>
+                guia do saldo de salário
+              </Link>{" "}
+              e a calculadora de dias trabalhados.
             </dd>
           </div>
           <div>

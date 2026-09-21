@@ -71,8 +71,11 @@ export default function IbsCbsSimplesNacionalGuiaPage() {
           tributos já unificados na LC 123/2006.
         </p>
         <p>
-          Isso é diferente de uma empresa no regime normal, que destaca, credita
-          e recolhe IBS e CBS conforme a LC 214. A{" "}
+          Isso é diferente de uma empresa no{" "}
+          <Link href="/guias/ibs-cbs-regime-normal" className={linkClass}>
+            regime normal
+          </Link>
+          , que destaca, credita e recolhe IBS e CBS conforme a LC 214. A{" "}
           <Link href="/calculadoras/ibs-cbs" className={linkClass}>
             calculadora de IBS e CBS
           </Link>{" "}
@@ -228,6 +231,9 @@ export default function IbsCbsSimplesNacionalGuiaPage() {
       <div className="flex flex-col gap-3 border-t border-border pt-6">
         <p className="text-sm text-muted">Ferramentas relacionadas:</p>
         <div className="flex flex-wrap gap-4">
+          <Link href="/guias/ibs-cbs-regime-normal" className={linkClass}>
+            IBS e CBS no regime normal
+          </Link>
           <Link href="/guias/ibs-cbs-mei" className={linkClass}>
             IBS e CBS para o MEI
           </Link>

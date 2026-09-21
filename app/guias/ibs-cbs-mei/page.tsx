@@ -229,6 +229,9 @@ export default function IbsCbsMeiGuiaPage() {
           <Link href="/guias/ibs-cbs-simples-nacional" className={linkClass}>
             IBS e CBS no Simples Nacional
           </Link>
+          <Link href="/guias/ibs-cbs-regime-normal" className={linkClass}>
+            IBS e CBS no regime normal
+          </Link>
           <Link href="/guias/ibs-e-cbs" className={linkClass}>
             IBS e CBS: o que são
           </Link>
