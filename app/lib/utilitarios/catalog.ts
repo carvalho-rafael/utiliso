@@ -20,10 +20,10 @@ export const utilitarios: Utilitario[] = [
     slug: "validador-nfe",
     href: utilitarioHref("validador-nfe"),
     hub: "reforma-tributaria",
-    title: "Validador de NF-e",
-    description: "Confira se o XML está conforme o schema 4.00",
+    title: "Validador XML NF-e grátis - Schema 4.00",
+    description: "Valide gratuitamente o XML da Nota Fiscal Eletrônica contra o schema 4.00 modelo 55 e identifique erros de estrutura antes do envio.",
     metaDescription:
-      "Validador de NF-e online: verifique XML de nota fiscal eletrônica (nfeProc, NFe ou enviNFe) contra o pacote PL_010_V1.30.",
+      "Validador de XML NF-e online: valide gratuitamente o XML da Nota Fiscal Eletrônica contra o schema 4.00 modelo 55 e identifique erros de estrutura antes do envio.",
   },
 ];
 

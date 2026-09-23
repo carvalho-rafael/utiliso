@@ -19,11 +19,11 @@ export default function ValidadorNfePage() {
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-4 pb-12 pt-6">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-          Validador de NF-e
+          Validador de XML NF-e
         </h1>
         <p className="text-lg text-muted">
-          Verifique se o XML da nota fiscal eletrônica está conforme o schema
-          oficial (modelo 55, versão 4.00).
+        Valide gratuitamente o XML da Nota Fiscal Eletrônica contra o schema 4.00 (modelo 55)
+        e identifique erros de estrutura antes do envio.
         </p>
       </div>
 
