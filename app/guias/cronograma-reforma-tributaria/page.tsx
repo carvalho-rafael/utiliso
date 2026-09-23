@@ -366,6 +366,9 @@ export default function CronogramaReformaTributariaGuiaPage() {
       <div className="flex flex-col gap-3 border-t border-border pt-6">
         <p className="text-sm text-muted">Ferramentas relacionadas:</p>
         <div className="flex flex-wrap gap-4">
+          <Link href="/guias/reforma-tributaria-2027" className={linkClass}>
+            O que muda em 2027
+          </Link>
           <Link href="/guias/ibs-e-cbs" className={linkClass}>
             IBS e CBS: o que são
           </Link>

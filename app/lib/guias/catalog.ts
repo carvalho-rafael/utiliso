@@ -249,6 +249,24 @@ export const guias: Guia[] = [
     ],
   },
   {
+    slug: "reforma-tributaria-2027",
+    href: "/guias/reforma-tributaria-2027",
+    hub: "reforma-tributaria",
+    title: "O que muda na reforma tributária em 2027",
+    description:
+      "CBS, fim de PIS/Cofins, Imposto Seletivo e IBS simbólico",
+    metaDescription:
+      "Guia reforma tributária 2027: CBS na alíquota de referência, extinção de PIS e Cofins, Imposto Seletivo, IBS 0,05% + 0,05%, ICMS e ISS integrais — regime normal, Simples e MEI.",
+    icon: "book",
+    vigencia: "a partir de 1º de janeiro de 2027 (ADCT, arts. 126 e 127)",
+    atualizadoEm: "2026-09-23",
+    fonte: [
+      fo.ec132_adct124_130,
+      fo.lc214_arts342_349,
+      fo.lc214_art409,
+    ],
+  },
+  {
     slug: "ibs-cbs-simples-nacional",
     href: "/guias/ibs-cbs-simples-nacional",
     hub: "reforma-tributaria",
