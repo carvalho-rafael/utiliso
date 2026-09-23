@@ -169,6 +169,10 @@ export const fo = {
     label: "Nota Técnica 2025.002-RTC (NF-e/NFC-e)",
     href: "https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=BMPFMBoln3w=",
   },
+  it2025_002_v160: {
+    label: "Informe Técnico 2025.002 v.1.60 (tabelas cClassTrib e CST)",
+    href: "https://dfe-portal.svrs.rs.gov.br/DFE/ClassificacaoTributaria",
+  },
   tabelaIrrfReceita: {
     label: "Tabela mensal da Receita Federal",
     href:

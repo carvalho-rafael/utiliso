@@ -50,6 +50,7 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 **Utilitários** (índice em `/utilitarios`):
 
 - `/utilitarios/validador-nfe`
+- `/utilitarios/consulta-cclasstrib-cst`
 
 **Tabelas** (índice em `/tabelas`):
 

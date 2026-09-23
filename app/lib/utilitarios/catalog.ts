@@ -25,6 +25,16 @@ export const utilitarios: Utilitario[] = [
     metaDescription:
       "Validador de XML NF-e online: valide gratuitamente o XML da Nota Fiscal Eletrônica contra o schema 4.00 modelo 55 e identifique erros de estrutura antes do envio.",
   },
+  {
+    slug: "consulta-cclasstrib-cst",
+    href: utilitarioHref("consulta-cclasstrib-cst"),
+    hub: "reforma-tributaria",
+    title: "Consulta cClassTrib e CST (IBS/CBS)",
+    description:
+      "Busque códigos de classificação tributária e CST do IBS e da CBS na tabela do Informe Técnico 2025.002.",
+    metaDescription:
+      "Consulta cClassTrib e CST do IBS e CBS: busque códigos da tabela oficial do Informe Técnico 2025.002 v.1.60 para NF-e na reforma tributária.",
+  },
 ];
 
 export function getUtilitarioBySlug(slug: string): Utilitario | undefined {

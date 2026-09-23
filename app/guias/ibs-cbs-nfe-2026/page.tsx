@@ -141,7 +141,14 @@ export default function IbsCbsNfe2026GuiaPage() {
           <li>
             <strong className="text-foreground">Classificação</strong> — códigos
             de situação tributária e de classificação do IBS/CBS (CST e
-            cClassTrib), conforme tabelas oficiais;
+            cClassTrib), conforme tabelas oficiais (
+            <Link
+              href="/utilitarios/consulta-cclasstrib-cst"
+              className={linkClass}
+            >
+              consulta cClassTrib e CST
+            </Link>
+            );
           </li>
           <li>
             <strong className="text-foreground">Base de cálculo</strong> — valor
