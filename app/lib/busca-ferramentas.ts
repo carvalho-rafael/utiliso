@@ -1,9 +1,11 @@
 import { calculadoras, type Calculadora } from "./calculadoras/catalog";
 import { guias, type Guia } from "./guias/catalog";
 import { tabelas, type Tabela } from "./tabelas/catalog";
+import { utilitarios, type Utilitario } from "./utilitarios/catalog";
 
 export type BuscaFerramentasResultado = {
   calculadoras: Calculadora[];
+  utilitarios: Utilitario[];
   guias: Guia[];
   tabelas: Tabela[];
 };
@@ -29,6 +31,12 @@ export function buscarFerramentas(query: string): BuscaFerramentasResultado {
       (calculadora) =>
         `${calculadora.title} ${calculadora.description} ${calculadora.metaDescription} ${calculadora.slug}`,
     ),
+    utilitarios: filtrarPorTexto(
+      utilitarios,
+      query,
+      (utilitario) =>
+        `${utilitario.title} ${utilitario.description} ${utilitario.metaDescription} ${utilitario.slug}`,
+    ),
     guias: filtrarPorTexto(
       guias,
       query,
@@ -49,6 +57,7 @@ export function totalBuscaFerramentas(
 ): number {
   return (
     resultado.calculadoras.length +
+    resultado.utilitarios.length +
     resultado.guias.length +
     resultado.tabelas.length
   );

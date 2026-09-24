@@ -22,4 +22,18 @@ describe("buscarFerramentas", () => {
       resultado.guias.some((g) => g.slug === "pedido-de-demissao-o-que-recebo"),
     ).toBe(true);
   });
+
+  it("finds utilitarios", () => {
+    const validador = buscarFerramentas("validador");
+    expect(
+      validador.utilitarios.some((u) => u.slug === "validador-nfe"),
+    ).toBe(true);
+
+    const cclasstrib = buscarFerramentas("cclasstrib");
+    expect(
+      cclasstrib.utilitarios.some(
+        (u) => u.slug === "consulta-cclasstrib-cst",
+      ),
+    ).toBe(true);
+  });
 });
