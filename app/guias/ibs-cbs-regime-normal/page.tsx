@@ -174,11 +174,15 @@ export default function IbsCbsRegimeNormalGuiaPage() {
           </Link>{" "}
           aplica as alíquotas de teste sobre um valor informado,{" "}
           <strong className="text-foreground">por fora</strong>, como no regime
-          regular. Ela pode simular reduções percentuais genéricas, mas{" "}
-          <strong className="text-foreground">não</strong> substitui apuração
-          real: não há crédito de entrada, NCM, CST, split payment nem Imposto
-          Seletivo. Serve para entender a conta básica; o SPED, o crédito e o
-          recolhimento exigem sistema e assessoria.
+          regular. Para ver débito menos créditos informados das compras, use a{" "}
+          <Link href="/calculadoras/credito-ibs-cbs" className={linkClass}>
+            calculadora de crédito de IBS e CBS
+          </Link>
+          . Elas podem simular reduções percentuais genéricas, mas{" "}
+          <strong className="text-foreground">não</strong> substituem apuração
+          real: não há NCM, CST, split payment nem Imposto Seletivo. Serve para
+          entender a conta básica; o SPED e o recolhimento exigem sistema e
+          assessoria.
         </p>
 
         <h2 className="text-base font-medium text-foreground">

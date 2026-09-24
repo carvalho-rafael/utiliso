@@ -149,6 +149,17 @@ export const calculadoras: Calculadora[] = [
     popular: false,
     icon: "percent",
   },
+  {
+    slug: "credito-ibs-cbs",
+    href: calculadoraHref("credito-ibs-cbs"),
+    hub: "reforma-tributaria",
+    title: "Crédito de IBS e CBS",
+    description: "Simule débito da saída menos créditos de entrada",
+    metaDescription:
+      "Calculadora de crédito de IBS e CBS 2026: débito por fora com alíquotas de teste menos créditos informados das compras, no regime regular.",
+    popular: false,
+    icon: "percent",
+  },
 ];
 
 export const calculadorasPopulares = calculadoras.filter(

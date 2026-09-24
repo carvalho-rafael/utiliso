@@ -60,8 +60,15 @@ export default function IbsCbsPage() {
           </li>
           <li>
             <strong className="text-foreground">O que não entra:</strong> crédito
-            de IBS/CBS, Imposto Seletivo, split payment e regras por NCM. A
-            ferramenta simula o{" "}
+            de IBS/CBS (use a{" "}
+            <Link
+              href="/calculadoras/credito-ibs-cbs"
+              className="cursor-pointer font-medium text-accent hover:underline"
+            >
+              calculadora de crédito
+            </Link>
+            ), Imposto Seletivo, split payment e regras por NCM. A ferramenta
+            simula o{" "}
             <Link
               href="/guias/ibs-cbs-regime-normal"
               className="cursor-pointer font-medium text-accent hover:underline"
