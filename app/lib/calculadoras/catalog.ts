@@ -106,6 +106,17 @@ export const calculadoras: Calculadora[] = [
     icon: "clock",
   },
   {
+    slug: "adicional-noturno",
+    href: calculadoraHref("adicional-noturno"),
+    hub: "trabalho",
+    title: "Adicional noturno",
+    description: "Estime o adicional e a hora reduzida no mês",
+    metaDescription:
+      "Calculadora de adicional noturno: 20% urbano (CLT art. 73), 25% rural, hora reduzida 52min30, DSR, INSS e IRRF.",
+    popular: false,
+    icon: "clock",
+  },
+  {
     slug: "sobreaviso",
     href: calculadoraHref("sobreaviso"),
     hub: "trabalho",

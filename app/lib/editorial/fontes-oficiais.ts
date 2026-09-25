@@ -65,6 +65,18 @@ export const fo = {
     label: "CLT art. 244 (sobreaviso e prontidão)",
     href: `${CLT}#art244`,
   },
+  clt73: {
+    label: "CLT art. 73 (adicional noturno)",
+    href: `${CLT}#art73`,
+  },
+  lei5889_art7: {
+    label: "Lei 5.889/1973, art. 7º (trabalho rural noturno)",
+    href: "https://www.planalto.gov.br/ccivil_03/leis/l5889.htm#art7",
+  },
+  sumula60Tst: {
+    label: "Súmula 60 do TST",
+    href: "https://www.tst.jus.br/sumulas-de-jurisprudencia",
+  },
   lei8212_art28_9: {
     label: "Lei 8.212/1991, art. 28, § 9º",
     href: "https://www.planalto.gov.br/ccivil_03/leis/l8212.htm#art28",
@@ -131,6 +143,10 @@ export const fo = {
   },
   lc214_art409: {
     label: "Lei Complementar nº 214/2025, art. 409 (Imposto Seletivo)",
+    href: `${LC214}#art409`,
+  },
+  lc214_arts409_422: {
+    label: "Lei Complementar nº 214/2025 (arts. 409 a 422, Imposto Seletivo)",
     href: `${LC214}#art409`,
   },
   lc123: {

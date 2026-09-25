@@ -88,9 +88,11 @@ export default function ReformaTributaria2027GuiaPage() {
           </li>
           <li>
             Entra o{" "}
-            <strong className="text-foreground">Imposto Seletivo</strong> (LC
-            214, art. 409) sobre bens e serviços prejudiciais à saúde ou ao meio
-            ambiente.
+            <Link href="/guias/imposto-seletivo-2027" className={linkClass}>
+              Imposto Seletivo
+            </Link>{" "}
+            (LC 214, art. 409) sobre bens e serviços prejudiciais à saúde ou ao
+            meio ambiente.
           </li>
           <li>
             O <strong className="text-foreground">IBS</strong> fica em{" "}
@@ -277,6 +279,9 @@ export default function ReformaTributaria2027GuiaPage() {
       <div className="flex flex-col gap-3 border-t border-border pt-6">
         <p className="text-sm text-muted">Ferramentas relacionadas:</p>
         <div className="flex flex-wrap gap-4">
+          <Link href="/guias/imposto-seletivo-2027" className={linkClass}>
+            Imposto Seletivo em 2027
+          </Link>
           <Link href="/guias/cronograma-reforma-tributaria" className={linkClass}>
             Cronograma da reforma tributária
           </Link>

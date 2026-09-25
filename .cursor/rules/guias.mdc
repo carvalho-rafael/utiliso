@@ -110,14 +110,23 @@ Callout no resultado, por motivo:
 
 - Linha do tempo 2026-2033: teste (ADCT art. 125), CBS/IS e fim de PIS/Cofins/IPI (arts. 126-127), redução de ICMS/ISS 9/10 a 6/10 (art. 128), extinção em 2033 (art. 129); LC 214 arts. 342-349, 361-366, 409.
 - Alíquotas plenas de CBS/IBS: resolução do Senado (ADCT art. 130) — não inventar percentuais futuros na calculadora/tabela de 2026.
-- CTA: `/guias/ibs-e-cbs`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-nfe-2026`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei`, `/guias/reforma-tributaria-2027`, `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`.
+- CTA: `/guias/ibs-e-cbs`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-nfe-2026`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei`, `/guias/reforma-tributaria-2027`, `/guias/imposto-seletivo-2027`, `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`.
 
 ## Reforma tributária em 2027 (`/guias/reforma-tributaria-2027`)
 
 - Marco comum: CBS na alíquota de referência (−0,1 p.p., LC 214 art. 347); extinção PIS/Cofins; IPI a zero (exc. ZFM); Imposto Seletivo (art. 409); IBS 0,05% + 0,05% (art. 344); ICMS/ISS integrais até 2029.
 - Alíquota de referência: resolução do Senado (ADCT art. 130) — não inventar percentual; calculadora só para teste de 2026.
 - Três blocos curtos: regime normal (fim do teste e CBS plena); Simples (DAS, fatia federal); MEI (valor fixo Anexo VII).
-- CTA: `/guias/cronograma-reforma-tributaria`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei`, `/guias/ibs-cbs-nfe-2026`, `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`.
+- CTA: `/guias/cronograma-reforma-tributaria`, `/guias/imposto-seletivo-2027`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei`, `/guias/ibs-cbs-nfe-2026`, `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`.
+
+## Imposto Seletivo em 2027 (`/guias/imposto-seletivo-2027`)
+
+- O que é: tributo extrafederal da União (LC 214, art. 409; CF art. 153, VIII); extrafiscal; não é IBS nem CBS.
+- Início: 1º de janeiro de 2027 com CBS de referência (ADCT, art. 126, I, b).
+- Anexo XVII: veículos, embarcações/aeronaves, fumígenos, bebidas alcoólicas e açucaradas, bens minerais, concursos de prognósticos e fantasy sport.
+- Fato gerador e base: arts. 412 e 414; alíquotas em lei ordinária (art. 422) — não inventar percentuais; teto 0,25% para minerais extraídos; escalonamento fumígenos/alcoólicas/açucaradas 2029–2033.
+- Calculadora Utiliso: só teste IBS/CBS de 2026, não IS.
+- CTA: `/guias/reforma-tributaria-2027`, `/guias/cronograma-reforma-tributaria`, `/guias/ibs-e-cbs`, `/guias/ibs-cbs-regime-normal`, `/guias/ibs-cbs-simples-nacional`, `/guias/ibs-cbs-mei`, `/guias/ibs-cbs-nfe-2026`, `/calculadoras/ibs-cbs`, `/tabelas/ibs-cbs`.
 
 ## IBS e CBS no Simples Nacional (`/guias/ibs-cbs-simples-nacional`)
 

@@ -328,7 +328,11 @@ export default function CronogramaReformaTributariaGuiaPage() {
               A cobrança está prevista a partir de 2027, junto com a CBS em
               alíquota de referência (ADCT, art. 126, I, b; LC 214, art. 409).
               Incide sobre bens e serviços prejudiciais à saúde ou ao meio
-              ambiente, com lista e alíquotas na lei.
+              ambiente, com lista e alíquotas na lei. Detalhes no{" "}
+              <Link href="/guias/imposto-seletivo-2027" className={linkClass}>
+                guia Imposto Seletivo em 2027
+              </Link>
+              .
             </dd>
           </div>
           <div>
@@ -368,6 +372,9 @@ export default function CronogramaReformaTributariaGuiaPage() {
         <div className="flex flex-wrap gap-4">
           <Link href="/guias/reforma-tributaria-2027" className={linkClass}>
             O que muda em 2027
+          </Link>
+          <Link href="/guias/imposto-seletivo-2027" className={linkClass}>
+            Imposto Seletivo em 2027
           </Link>
           <Link href="/guias/ibs-e-cbs" className={linkClass}>
             IBS e CBS: o que são

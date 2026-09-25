@@ -130,8 +130,15 @@ export default function HoraExtraPage() {
             </dt>
             <dd>
               Não. Horas extras noturnas podem ter adicional de 20% sobre a hora
-              normal (CLT art. 73), além do adicional de hora extra. Consulte o
-              departamento pessoal para combinações específicas.
+              normal (CLT art. 73), além do adicional de hora extra. Use a{" "}
+              <Link
+                href="/calculadoras/adicional-noturno"
+                className={linkClass}
+              >
+                calculadora de adicional noturno
+              </Link>{" "}
+              para o trabalho no período noturno; consulte o DP para combinações
+              no holerite.
             </dd>
           </div>
           <div>

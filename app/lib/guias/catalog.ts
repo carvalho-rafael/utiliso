@@ -267,6 +267,20 @@ export const guias: Guia[] = [
     ],
   },
   {
+    slug: "imposto-seletivo-2027",
+    href: "/guias/imposto-seletivo-2027",
+    hub: "reforma-tributaria",
+    title: "Imposto Seletivo em 2027: o que é e quem paga",
+    description:
+      "Extrafiscal, Anexo XVII, alíquotas em lei ordinária e relação com CBS/IBS",
+    metaDescription:
+      "Guia Imposto Seletivo 2027: o que é o IS da LC 214, bens e serviços do Anexo XVII, início da cobrança com a CBS de referência, base de cálculo e alíquotas sem percentual inventado.",
+    icon: "book",
+    vigencia: "a partir de 1º de janeiro de 2027 (ADCT, art. 126, I, b)",
+    atualizadoEm: "2026-09-24",
+    fonte: [fo.ec132_adct124_130, fo.lc214_arts409_422],
+  },
+  {
     slug: "ibs-cbs-simples-nacional",
     href: "/guias/ibs-cbs-simples-nacional",
     hub: "reforma-tributaria",
