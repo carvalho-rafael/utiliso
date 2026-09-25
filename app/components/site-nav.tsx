@@ -23,6 +23,7 @@ export function SiteNav() {
   const isReformaTributaria =
     pathname === "/reforma-tributaria" ||
     pathname.startsWith("/reforma-tributaria/");
+  const isWeb = pathname === "/web" || pathname.startsWith("/web/");
   const isSobre = pathname === "/sobre";
 
   return (
@@ -41,6 +42,12 @@ export function SiteNav() {
         className={navLinkClass(isReformaTributaria)}
       >
         Reforma
+      </Link>
+      <span className={separatorClass} aria-hidden="true">
+        |
+      </span>
+      <Link href="/web" className={navLinkClass(isWeb)}>
+        Web
       </Link>
       <span className={separatorClass} aria-hidden="true">
         |

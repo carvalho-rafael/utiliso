@@ -67,6 +67,9 @@ export function buildBreadcrumbs(pathname: string): BreadcrumbItem[] {
     case "reforma-tributaria":
       items.push({ label: "Reforma tributária" });
       break;
+    case "web":
+      items.push({ label: "Web" });
+      break;
     case "utilitarios":
       if (parts.length === 1) {
         items.push({ label: "Utilitários" });

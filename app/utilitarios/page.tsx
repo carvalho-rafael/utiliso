@@ -17,8 +17,8 @@ export default function UtilitariosPage() {
           Utilitários
         </h1>
         <p className="text-lg text-muted">
-          Ferramentas práticas para validar documentos e apoiar a reforma
-          tributária — sem cadastro.
+          Ferramentas práticas para validar documentos, publicar sites e apoiar
+          tarefas do dia a dia — sem cadastro.
         </p>
       </div>
 

@@ -27,6 +27,7 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 
 - `/trabalho`
 - `/reforma-tributaria`
+- `/web`
 
 **Guias:**
 
@@ -54,6 +55,7 @@ Uma URL própria por ferramenta e por guia, para indexação no Google:
 
 - `/utilitarios/validador-nfe`
 - `/utilitarios/consulta-cclasstrib-cst`
+- `/utilitarios/criar-favicon`
 
 **Tabelas** (índice em `/tabelas`):
 
@@ -75,7 +77,7 @@ Páginas em `/tabelas/<slug>` são conteúdo financeiro (YMYL). Cada uma deve te
 
 Campos em `app/lib/tabelas/catalog.ts`; UI em `EditorialMeta` / `EditorialFonte` (aliases `TabelaMeta` / `TabelaFonte`). Não misturar vigência com data de revisão.
 
-A home lista calculadoras, tabelas, guias e utilitários. Nav: `Trabalho | Reforma | Calculadoras | Guias | Utilitários | Sobre`. Rodapé: link para `/privacidade` e reabrir preferências de cookies.
+A home lista calculadoras, tabelas, guias e utilitários. Nav: `Trabalho | Reforma | Web | Calculadoras | Guias | Utilitários | Sobre`. Rodapé: link para `/privacidade` e reabrir preferências de cookies.
 
 ## Analytics (GA4)
 

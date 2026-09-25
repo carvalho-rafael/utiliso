@@ -31,6 +31,15 @@ export const hubs: Hub[] = [
     metaDescription:
       "Hub da reforma tributária: calculadora de IBS e CBS, guia da NF-e 2026, alíquotas de teste e tabelas oficiais.",
   },
+  {
+    slug: "web",
+    href: "/web",
+    title: "Web",
+    description:
+      "Utilitários para publicar e manter um site: favicon, ícones e tarefas do front-end.",
+    metaDescription:
+      "Hub Web: ferramentas gratuitas para favicon, ícones de site e utilitários para desenvolvedores e donos de site.",
+  },
 ];
 
 export function getHubBySlug(slug: HubSlug): Hub | undefined {

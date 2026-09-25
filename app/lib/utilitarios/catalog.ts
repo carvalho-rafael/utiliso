@@ -35,6 +35,16 @@ export const utilitarios: Utilitario[] = [
     metaDescription:
       "Consulta cClassTrib e CST do IBS e CBS: busque códigos da tabela oficial do Informe Técnico 2025.002 v.1.60 para NF-e na reforma tributária.",
   },
+  {
+    slug: "criar-favicon",
+    href: utilitarioHref("criar-favicon"),
+    hub: "web",
+    title: "Criar favicon a partir de PNG",
+    description:
+      "Gere favicon.ico, ícones 16–512 px e apple-touch-icon a partir de uma imagem PNG — download de cada arquivo.",
+    metaDescription:
+      "Gerador de favicon online: envie um PNG e baixe favicon.ico, favicon-32x32, apple-touch-icon e ícones Android Chrome, tudo no navegador.",
+  },
 ];
 
 export function getUtilitarioBySlug(slug: string): Utilitario | undefined {

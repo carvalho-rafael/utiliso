@@ -31,7 +31,7 @@ export function buildLlmsTxt(): string {
   const body = [
     "# Utiliso",
     "",
-    "> Calculadoras, tabelas, guias e utilitários gratuitos em português para trabalho (CLT) e reforma tributária (IBS e CBS).",
+    "> Calculadoras, tabelas, guias e utilitários gratuitos em português para trabalho (CLT), reforma tributária (IBS e CBS) e ferramentas Web.",
     "",
     "Os resultados das calculadoras são estimativas e não substituem contador, advogado ou departamento pessoal. O cálculo das calculadoras roda no navegador. Tabelas e guias indicam a vigência da norma e a fonte oficial.",
     "",

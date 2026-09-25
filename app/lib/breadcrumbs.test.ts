@@ -42,4 +42,11 @@ describe("buildBreadcrumbs", () => {
       { label: "Reforma tributária" },
     ]);
   });
+
+  it("builds web hub trail", () => {
+    expect(buildBreadcrumbs("/web")).toEqual([
+      { href: "/", label: "Início" },
+      { label: "Web" },
+    ]);
+  });
 });
