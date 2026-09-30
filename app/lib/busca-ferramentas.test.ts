@@ -35,5 +35,10 @@ describe("buscarFerramentas", () => {
         (u) => u.slug === "consulta-cclasstrib-cst",
       ),
     ).toBe(true);
+
+    const caracteres = buscarFerramentas("caracteres");
+    expect(
+      caracteres.utilitarios.some((u) => u.slug === "contar-caracteres"),
+    ).toBe(true);
   });
 });

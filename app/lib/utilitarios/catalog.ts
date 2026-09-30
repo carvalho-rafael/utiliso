@@ -45,6 +45,16 @@ export const utilitarios: Utilitario[] = [
     metaDescription:
       "Gerador de favicon online: envie um PNG e baixe favicon.ico, favicon-32x32, apple-touch-icon e ícones Android Chrome, tudo no navegador.",
   },
+  {
+    slug: "contar-caracteres",
+    href: utilitarioHref("contar-caracteres"),
+    hub: "web",
+    title: "Contar caracteres",
+    description:
+      "Conte caracteres, palavras e linhas do seu texto na hora — útil para bio, título e limites de campo.",
+    metaDescription:
+      "Contador de caracteres online: veja total de caracteres (com e sem espaços), palavras e linhas. Tudo no navegador, sem cadastro.",
+  },
 ];
 
 export function getUtilitarioBySlug(slug: string): Utilitario | undefined {
