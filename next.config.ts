@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["libxmljs2"],
+  outputFileTracingIncludes: {
+    "/api/utilitarios/validador-nfe": [
+      "./node_modules/libxmljs2/**/*",
+      "./app/lib/utilitarios/nfe/xsd/**/*",
+    ],
+  },
   async redirects() {
     return [
       {
