@@ -130,6 +130,10 @@ export default function SobrePage() {
           <Link href="/privacidade" className={linkClass}>
             política de privacidade
           </Link>
+          . Fontes, testes, arredondamento e limites dos resultados estão na{" "}
+          <Link href="/metodologia" className={linkClass}>
+            metodologia
+          </Link>
           .
         </p>
 

@@ -26,6 +26,13 @@ export function SiteFooter() {
           Privacidade
         </Link>
         <span aria-hidden="true">·</span>
+        <Link
+          href="/metodologia"
+          className="cursor-pointer font-medium text-accent hover:underline"
+        >
+          Metodologia
+        </Link>
+        <span aria-hidden="true">·</span>
         <button
           type="button"
           onClick={openCookieSettings}

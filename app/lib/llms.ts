@@ -117,6 +117,12 @@ export function buildLlmsTxt(): string {
         note: "Cookies, Google Analytics e o XML enviado ao validador de NF-e.",
       },
       {
+        title: "Metodologia",
+        href: "/metodologia",
+        note:
+          "Fontes oficiais, testes das calculadoras, arredondamento, atualização de tabelas e limites dos resultados.",
+      },
+      {
         title: "Sitemap",
         href: "/sitemap.xml",
         note: "Todas as URLs indexáveis do site.",

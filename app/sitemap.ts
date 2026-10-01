@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     TABELAS_BASE,
     "/sobre",
     "/privacidade",
+    "/metodologia",
     ...guias.map((guia) => guia.href),
     ...tabelas.map((tabela) => tabela.href),
   ];
