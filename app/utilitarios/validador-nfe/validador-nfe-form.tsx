@@ -173,28 +173,35 @@ export function ValidadorNfeForm() {
 
           {resultado.ok ? (
             <p className="text-sm text-success" role="status">
-              O XML está <strong className="font-medium">conforme</strong> o
-              schema XSD selecionado.
+              A estrutura do arquivo bate com o schema XSD usado nesta validação.
             </p>
           ) : (
             <div className="flex flex-col gap-3">
               <p className="text-sm text-danger" role="status">
-                O XML <strong className="font-medium">não está válido</strong>{" "}
-                para o schema.
+                Encontramos {resultado.erros.length === 1 ? "um problema" : `${resultado.erros.length} problemas`} no leiaute. Corrija as ocorrências abaixo antes de enviar à Sefaz.
               </p>
-              <ul className="flex max-h-80 flex-col gap-2 overflow-y-auto text-sm text-muted">
+              <ul className="flex max-h-80 flex-col gap-2 overflow-y-auto text-sm">
                 {resultado.erros.map((item, index) => (
                   <li
                     key={`${item.linha ?? 0}-${item.coluna ?? 0}-${index}`}
-                    className="rounded-md border border-danger/30 bg-background px-3 py-2 font-mono text-xs text-foreground"
+                    className="rounded-md border border-danger/30 bg-background px-3 py-2 text-foreground"
                   >
-                    {item.linha ? (
-                      <span className="text-danger">
-                        Linha {item.linha}
-                        {item.coluna ? `, coluna ${item.coluna}` : ""}:{" "}
-                      </span>
+                    {(item.linha ?? item.coluna) ? (
+                      <p className="text-xs font-medium text-danger">
+                        {item.linha ? `Linha ${item.linha}` : null}
+                        {item.linha && item.coluna ? ", " : null}
+                        {item.coluna ? `coluna ${item.coluna}` : null}
+                      </p>
                     ) : null}
-                    {item.mensagem}
+                    <p className="mt-1 text-sm text-foreground">{item.mensagem}</p>
+                    {item.mensagemTecnica ? (
+                      <details className="mt-2 text-xs text-muted">
+                        <summary className="cursor-pointer font-medium text-accent hover:underline">
+                          Mensagem técnica
+                        </summary>
+                        <p className="mt-1 font-mono break-all">{item.mensagemTecnica}</p>
+                      </details>
+                    ) : null}
                   </li>
                 ))}
               </ul>

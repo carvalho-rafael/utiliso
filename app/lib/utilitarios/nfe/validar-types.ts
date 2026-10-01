@@ -2,6 +2,8 @@ import type { TipoDocumentoNfe } from "./constants";
 
 export type ValidacaoNfeErro = {
   mensagem: string;
+  /** Original do libxml, quando a mensagem foi traduzida. */
+  mensagemTecnica?: string;
   linha?: number;
   coluna?: number;
 };

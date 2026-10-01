@@ -13,9 +13,20 @@ import {
   NFE_XSD_PACOTE,
   SCHEMA_POR_RAIZ,
 } from "./constants";
+import { humanizarMensagemErroXml } from "./humanizar-erro-libxml";
 import type { ValidacaoNfeErro, ValidacaoNfeResultado } from "./validar-types";
 
 export type { ValidacaoNfeErro, ValidacaoNfeResultado } from "./validar-types";
+
+function erroDeTexto(raw: string, linha?: number, coluna?: number): ValidacaoNfeErro {
+  const { mensagem, mensagemTecnica } = humanizarMensagemErroXml(raw);
+  return {
+    mensagem,
+    ...(mensagemTecnica ? { mensagemTecnica } : {}),
+    ...(linha && linha > 0 ? { linha } : {}),
+    ...(coluna && coluna > 0 ? { coluna } : {}),
+  };
+}
 
 function diretorioSchemas(): string {
   return path.join(
@@ -26,14 +37,10 @@ function diretorioSchemas(): string {
 }
 
 function formatarErroLibxml(error: libxmljs.ValidationError): ValidacaoNfeErro {
-  const mensagem = error.message?.trim() || String(error);
+  const raw = error.message?.trim() || String(error);
   const linha = error.line ?? undefined;
   const coluna = error.column ?? undefined;
-  return {
-    mensagem,
-    linha: linha && linha > 0 ? linha : undefined,
-    coluna: coluna && coluna > 0 ? coluna : undefined,
-  };
+  return erroDeTexto(raw, linha, coluna);
 }
 
 function detectarRaizDocumento(doc: libxmljs.Document): RaizNfeDetectada | null {
@@ -86,12 +93,12 @@ export function validarXmlNfe(xml: string): ValidacaoNfeResultado {
   try {
     doc = libxmljs.parseXml(trimmed);
   } catch (error) {
-    const mensagem =
+    const raw =
       error instanceof Error ? error.message : "XML malformado ou inválido.";
     return {
       ok: false,
       pacote,
-      erros: [{ mensagem }],
+      erros: [erroDeTexto(raw)],
     };
   }
 
@@ -105,7 +112,7 @@ export function validarXmlNfe(xml: string): ValidacaoNfeResultado {
       pacote,
       erros: [
         {
-          mensagem: `Elemento raiz não reconhecido. Envie XML com raiz ${nomes} no namespace da NF-e.`,
+          mensagem: `Este XML não começa com ${nomes} no namespace da NF-e. Eventos, NFC-e (modelo 65) e outros documentos usam outro leiaute.`,
         },
       ],
     };
@@ -142,7 +149,10 @@ export function validarXmlNfe(xml: string): ValidacaoNfeResultado {
 
   const erros = (doc.validationErrors ?? []).map(formatarErroLibxml);
   if (erros.length === 0) {
-    erros.push({ mensagem: "O XML não passou na validação do schema." });
+    erros.push({
+      mensagem:
+        "O XML não passou na conferência do leiaute, mas o validador não retornou detalhes. Tente validar de novo ou confira o arquivo completo.",
+    });
   }
 
   return {

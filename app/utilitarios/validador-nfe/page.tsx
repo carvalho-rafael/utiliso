@@ -25,8 +25,7 @@ export default function ValidadorNfePage() {
           Validador de XML NF-e
         </h1>
         <p className="text-lg text-muted">
-          Valide gratuitamente o XML da Nota Fiscal Eletrônica contra o schema
-          4.00 (modelo 55) e identifique erros de estrutura antes do envio.
+         Valide gratuitamente o XML da NF-e modelo 55 contra o schema 4.00 e identifique erros de estrutura antes do envio à Sefaz.
         </p>
       </div>
 
