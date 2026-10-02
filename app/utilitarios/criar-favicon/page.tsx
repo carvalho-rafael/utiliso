@@ -91,6 +91,9 @@ export default function CriarFaviconPage() {
         <Link href="/web" className={linkClass}>
           Hub Web
         </Link>
+        <Link href="/utilitarios/formatar-json" className={linkClass}>
+          Formatar JSON
+        </Link>
         <Link href="/utilitarios" className={linkClass}>
           Todos os utilitários
         </Link>

@@ -27,7 +27,7 @@ Página de valores oficiais vigentes (YMYL), com vigência, data de revisão edi
 _Avoid_: planilha, alíquota (como tipo de página)
 
 **Utilitário**:
-Página que não é cálculo de folha nem de tributo sobre operação: validar NF-e, consultar cClassTrib/CST, criar favicon, contar caracteres.
+Página que não é cálculo de folha nem de tributo sobre operação: validar NF-e, consultar cClassTrib/CST, criar favicon, contar caracteres, formatar e validar JSON.
 _Avoid_: Calculadora, ferramenta (como tipo canônico), tool
 
 **Público**:

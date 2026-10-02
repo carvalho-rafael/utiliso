@@ -55,6 +55,16 @@ export const utilitarios: Utilitario[] = [
     metaDescription:
       "Contador de caracteres online: veja total de caracteres (com e sem espaços), palavras e linhas. Tudo no navegador, sem cadastro.",
   },
+  {
+    slug: "formatar-json",
+    href: utilitarioHref("formatar-json"),
+    hub: "web",
+    title: "Formatar e validar JSON",
+    description:
+      "Cole um JSON, valide a sintaxe e formate ou minifique no navegador.",
+    metaDescription:
+      "Formatador e validador de JSON online: valide, indente e minifique sem enviar o conteúdo ao servidor.",
+  },
 ];
 
 export function getUtilitarioBySlug(slug: string): Utilitario | undefined {

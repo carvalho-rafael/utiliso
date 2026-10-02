@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalculadoraPainel } from "../../components/calculadora-painel";
 import { getUtilitarioBySlug } from "../../lib/utilitarios/catalog";
-import { ContarCaracteresForm } from "./contar-caracteres-form";
+import { FormatarJsonForm } from "./formatar-json-form";
 
-const utilitario = getUtilitarioBySlug("contar-caracteres")!;
+const utilitario = getUtilitarioBySlug("formatar-json")!;
 
 const linkClass =
   "cursor-pointer font-medium text-accent hover:underline";
@@ -14,21 +14,21 @@ export const metadata: Metadata = {
   description: utilitario.metaDescription,
 };
 
-export default function ContarCaracteresPage() {
+export default function FormatarJsonPage() {
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-4 pb-12 pt-6">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-          Contar caracteres
+          Formatar e validar JSON
         </h1>
         <p className="text-lg text-muted">
-          Veja na hora quantos caracteres, palavras e linhas o seu texto tem —
-          útil para bio, título e limites de campo.
+          Cole um JSON, veja se a sintaxe está correta e formate ou minifique
+          com um clique — útil para APIs, configs e depuração.
         </p>
       </div>
 
-      <CalculadoraPainel titulo="Contar caracteres">
-        <ContarCaracteresForm />
+      <CalculadoraPainel titulo="Formatar e validar JSON">
+        <FormatarJsonForm />
       </CalculadoraPainel>
 
       <section className="flex flex-col gap-4 text-sm text-muted">
@@ -37,21 +37,21 @@ export default function ContarCaracteresPage() {
         </h2>
         <ul className="list-disc space-y-2 pl-5">
           <li>
-            Os totais atualizam enquanto você digita ou cola o texto — não
-            precisa clicar em calcular.
+            A validação roda enquanto você digita ou cola o texto; o status
+            indica se o JSON é válido ou onde a sintaxe falha.
           </li>
           <li>
-            <strong className="text-foreground">Caracteres</strong> contam
-            grafemas (o que aparece na tela): letras, números, símbolos e emoji
-            composto contam como um.
+            <strong className="text-foreground">Formatar</strong> reescreve o
+            campo com indentação (2 ou 4 espaços).{" "}
+            <strong className="text-foreground">Minificar</strong> remove
+            espaços e quebras extras.
           </li>
           <li>
-            <strong className="text-foreground">Palavras</strong> são trechos
-            separados por espaço em branco; linhas seguem as quebras de linha do
-            texto.
+            Só vale JSON padrão (RFC 8252): chaves e strings entre aspas
+            duplas, sem comentários nem vírgula após o último item.
           </li>
           <li>
-            Tudo roda no seu navegador; o texto{" "}
+            Tudo roda no seu navegador; o JSON{" "}
             <strong className="text-foreground">não é enviado</strong> ao
             servidor nem ao Google Analytics.
           </li>
@@ -63,35 +63,36 @@ export default function ContarCaracteresPage() {
         <dl className="flex flex-col gap-4">
           <div>
             <dt className="font-medium text-foreground">
-              É o mesmo que o limite do Twitter ou do Instagram?
+              Aceita vírgula no final ou JSON5?
             </dt>
             <dd className="mt-1">
-              Cada rede pode usar regras próprias (URL encurtada, menções,
-              etc.). Use este contador como referência rápida do tamanho do
-              texto que você colou aqui.
+              Não. O validador usa o mesmo parser do navegador (
+              <code className="text-foreground">JSON.parse</code>), que não
+              aceita vírgula trailing, comentários nem chaves sem aspas.
             </dd>
           </div>
           <div>
             <dt className="font-medium text-foreground">
-              Por que “caracteres sem espaços”?
+              E se a mesma chave aparecer duas vezes?
             </dt>
             <dd className="mt-1">
-              Alguns formulários pedem o tamanho sem contar espaços. Mostramos
-              os dois totais para você não precisar apagar os espaços na mão.
+              O JSON pode ser analisado, mas o valor da última chave repetida
+              prevalece — comportamento padrão do{" "}
+              <code className="text-foreground">JSON.parse</code>.
             </dd>
           </div>
           <div>
             <dt className="font-medium text-foreground">
-              O que conta como palavra?
+              Posso validar contra um schema (JSON Schema)?
             </dt>
             <dd className="mt-1">
-              Sequências de letras ou números separadas por espaço, tab ou
-              quebra de linha. Texto só com espaços não tem palavras.
+              Esta ferramenta só verifica sintaxe. Para regras de campos e
+              tipos, use um validador de schema à parte.
             </dd>
           </div>
           <div>
             <dt className="font-medium text-foreground">
-              Meu texto fica salvo no Utiliso?
+              Meu JSON fica salvo no Utiliso?
             </dt>
             <dd className="mt-1">
               Não. Sem cadastro, o conteúdo permanece só na sua sessão no
@@ -108,8 +109,8 @@ export default function ContarCaracteresPage() {
         <Link href="/web" className={linkClass}>
           Hub Web
         </Link>
-        <Link href="/utilitarios/formatar-json" className={linkClass}>
-          Formatar JSON
+        <Link href="/utilitarios/contar-caracteres" className={linkClass}>
+          Contar caracteres
         </Link>
         <Link href="/utilitarios/criar-favicon" className={linkClass}>
           Criar favicon

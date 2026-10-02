@@ -40,5 +40,15 @@ describe("buscarFerramentas", () => {
     expect(
       caracteres.utilitarios.some((u) => u.slug === "contar-caracteres"),
     ).toBe(true);
+
+    const json = buscarFerramentas("json");
+    expect(
+      json.utilitarios.some((u) => u.slug === "formatar-json"),
+    ).toBe(true);
+
+    const formatar = buscarFerramentas("formatar");
+    expect(
+      formatar.utilitarios.some((u) => u.slug === "formatar-json"),
+    ).toBe(true);
   });
 });

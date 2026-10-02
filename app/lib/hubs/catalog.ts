@@ -36,9 +36,9 @@ export const hubs: Hub[] = [
     href: "/web",
     title: "Web",
     description:
-      "Utilitários para publicar e manter um site: favicon, ícones e tarefas do front-end.",
+      "Utilitários para publicar e manter um site: favicon, ícones, JSON e tarefas do front-end.",
     metaDescription:
-      "Hub Web: ferramentas gratuitas para favicon, ícones de site e utilitários para desenvolvedores e donos de site.",
+      "Hub Web: ferramentas gratuitas para favicon, ícones de site, formatar JSON e utilitários para desenvolvedores e donos de site.",
   },
 ];
 
