@@ -62,6 +62,47 @@ describe("processarJson", () => {
     expect(resultado.linha).toBe(1);
     expect(resultado.coluna).toBe(2);
   });
+
+  it("preserva inteiro maior que Number.MAX_SAFE_INTEGER", () => {
+    const entrada = '{"id":9007199254740993}';
+    const resultado = processarJson(entrada, 2);
+    expect(resultado?.ok).toBe(true);
+    if (!resultado || !resultado.ok) return;
+    expect(resultado.minificado).toBe(entrada);
+    expect(resultado.formatado).toBe(`{
+  "id": 9007199254740993
+}`);
+  });
+
+  it("preserva inteiro inseguro dentro de array", () => {
+    const entrada = "[9007199254740993]";
+    const resultado = processarJson(entrada, 2);
+    expect(resultado?.ok).toBe(true);
+    if (!resultado || !resultado.ok) return;
+    expect(resultado.minificado).toBe(entrada);
+    expect(resultado.formatado).toBe(`[
+  9007199254740993
+]`);
+  });
+
+  it("preserva literal não finito como 1e309", () => {
+    const entrada = '{"big":1e309}';
+    const resultado = processarJson(entrada);
+    expect(resultado?.ok).toBe(true);
+    if (!resultado || !resultado.ok) return;
+    expect(resultado.minificado).toBe(entrada);
+  });
+
+  it("mantém inteiro no limite seguro sem alterar", () => {
+    const entrada = '{"id":9007199254740991}';
+    const resultado = processarJson(entrada, 2);
+    expect(resultado?.ok).toBe(true);
+    if (!resultado || !resultado.ok) return;
+    expect(resultado.minificado).toBe(entrada);
+    expect(resultado.formatado).toBe(`{
+  "id": 9007199254740991
+}`);
+  });
 });
 
 describe("diagnosticSintaxeJson", () => {

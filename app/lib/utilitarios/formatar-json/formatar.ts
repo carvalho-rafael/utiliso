@@ -64,6 +64,33 @@ function mensagemErroJson(texto: string, cause: unknown): FormatacaoJson {
   return { ok: false, erro: "JSON inválido." };
 }
 
+type JsonReviverContext = { source?: string };
+
+function numeroPrecisaLexemaOriginal(value: number): boolean {
+  if (!Number.isFinite(value)) {
+    return true;
+  }
+  return Number.isInteger(value) && !Number.isSafeInteger(value);
+}
+
+function reviverPreservarNumeros(
+  _key: string,
+  value: unknown,
+  context?: JsonReviverContext,
+): unknown {
+  if (typeof value !== "number" || !numeroPrecisaLexemaOriginal(value)) {
+    return value;
+  }
+
+  const source = context?.source;
+  const rawJSON = (JSON as { rawJSON?: (text: string) => unknown }).rawJSON;
+  if (typeof source !== "string" || typeof rawJSON !== "function") {
+    return value;
+  }
+
+  return rawJSON(source);
+}
+
 /**
  * Valida o texto e, se for JSON válido, devolve versões formatada e minificada.
  * Retorna `null` quando a entrada está vazia (apenas espaços em branco).
@@ -98,7 +125,7 @@ export function processarJson(
   }
 
   try {
-    const valor = JSON.parse(trimmed) as unknown;
+    const valor = JSON.parse(trimmed, reviverPreservarNumeros) as unknown;
     const espacos = " ".repeat(indentacao);
     const formatado = JSON.stringify(valor, null, espacos);
     const minificado = JSON.stringify(valor);
