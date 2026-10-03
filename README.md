@@ -30,4 +30,6 @@ Abra [http://localhost:3000](http://localhost:3000).
 | `npm run lint` | ESLint |
 | `npm test` | testes (Vitest) |
 
+Em PRs e pushes na `main`, o GitHub Actions roda `npm test` (workflow em `.github/workflows/ci.yml`).
+
 `NEXT_PUBLIC_GA_MEASUREMENT_ID` liga o Google Analytics 4. Sem a variável, o app usa o ID padrão do projeto.

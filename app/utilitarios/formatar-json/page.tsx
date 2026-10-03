@@ -47,7 +47,7 @@ export default function FormatarJsonPage() {
             espaços e quebras extras.
           </li>
           <li>
-            Só vale JSON padrão (RFC 8252): chaves e strings entre aspas
+            Só vale JSON padrão (RFC 8259): chaves e strings entre aspas
             duplas, sem comentários nem vírgula após o último item.
           </li>
           <li>
